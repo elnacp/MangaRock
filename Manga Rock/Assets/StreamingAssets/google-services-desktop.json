@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "631016846235",
+    "firebase_url": "https://manga-rock-bd-default-rtdb.firebaseio.com",
+    "project_id": "manga-rock-bd",
+    "storage_bucket": "manga-rock-bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631016846235:android:addd1e25fa9ef31a33273e",
+        "android_client_info": {
+          "package_name": "com.MangaRock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631016846235-s8dpcmjs77htv2chub1tuf4qkb5l1gq5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbRb-xYBjA8_FXC68Vqq5Lf9vTGpmDnNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631016846235-s8dpcmjs77htv2chub1tuf4qkb5l1gq5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
