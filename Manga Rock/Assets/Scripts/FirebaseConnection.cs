@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Firestore;
-using Firebase.Database;
 using UnityEngine.UI;
 
 
 public class FirebaseConnection : MonoBehaviour
 {
 
-    DatabaseReference reference;
+    //DatabaseReference reference;
     [SerializeField] InputField username_txt;
     [SerializeField] InputField email_txt;
     [SerializeField] InputField nameToGet;
@@ -22,7 +21,7 @@ public class FirebaseConnection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        reference = FirebaseDatabase.DefaultInstance.RootReference;
+        //reference = FirebaseDatabase.DefaultInstance.RootReference;
 
         db = FirebaseFirestore.DefaultInstance;
     }
