@@ -14,6 +14,8 @@ public class LoginController : MonoBehaviour
     [SerializeField] SlideLogin loginPanel;
     [SerializeField] SlidePanel registerPanel;
     [SerializeField] SlidePanel recoverPassordPanel;
+
+    [SerializeField] Text message;
     
 
     [SerializeField] FirebaseController controller;
@@ -41,7 +43,29 @@ public class LoginController : MonoBehaviour
         {
             //Show error
             Debug.Log("Sorry error occure");
+
+            EditMessage(0);
+            message.text = "Error: parece que te has equivocado en el correo electrónico o en la contraseña. Prueba de nuevo";
         }      
+    }
+
+    private void EditMessage(int num)
+    {
+        switch(num)
+        {
+            case 0:
+                message.text = "Error: parece que te has equivocado en el correo electrónico o en la contraseña. Prueba de nuevo";
+                message.color = Color.red;
+                break;
+            case 1:
+                message.text = "El usuario se ha creado con exito";
+                message.color = Color.black;
+                break;
+            case 2:
+                message.text = "Se ha enviado un correo a tu cuenta para recuperar la contraseña";
+                message.color = Color.black;
+                break;
+        }
     }
 
     public void OpenRegister()
