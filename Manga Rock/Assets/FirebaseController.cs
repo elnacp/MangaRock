@@ -15,16 +15,18 @@ public class FirebaseController : MonoBehaviour
         db = FirebaseFirestore.DefaultInstance;
     }
 
-    public void UserLogIn(string name)
+    public bool UserLogIn(string email, string password)
     {
 
-        db.Collection("Users").WhereEqualTo("email", name).GetSnapshotAsync().ContinueWith((task) =>
+        bool exit = false;
+
+        db.Collection("Users").WhereEqualTo("email", email).GetSnapshotAsync().ContinueWith((task) =>
         {
             if(task.IsCompleted)
             {
                 if(task.Result.Count == 0)
                 {
-                    Debug.Log("No existe");
+                    exit = false;
                 }
 
                 foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
@@ -33,6 +35,7 @@ public class FirebaseController : MonoBehaviour
                     foreach (KeyValuePair<string, object> pair in user)
                     {
                         Debug.Log(("{0}:{1}", pair.Key, pair.Value));
+                        exit = true;
                     }
                 }
             }
@@ -41,6 +44,8 @@ public class FirebaseController : MonoBehaviour
                 Debug.Log("Error");
             }
         });
+
+        return exit;
     }
 
 

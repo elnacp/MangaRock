@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+
 public class LoginController : MonoBehaviour
 {
 
-    [SerializeField] Text email;
-    [SerializeField] Text password;
+    [SerializeField] InputField email;
+    [SerializeField] InputField password;
 
     [SerializeField] FirebaseController controller;
 
@@ -20,7 +21,21 @@ public class LoginController : MonoBehaviour
 
     public void LogIn()
     {
-        controller.UserLogIn(email.text);
+        string _email = email.text;
+        string _password = password.text;
+
+        bool exist = controller.UserLogIn(_email,_password);
+        if( exist )
+        {
+            //Change scene
+            Debug.Log("Change scene");
+        }
+        else
+        {
+            //Show error
+            Debug.Log("Sorry error occure");
+        }
+       
     }
 
     
