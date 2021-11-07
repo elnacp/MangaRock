@@ -1726,6 +1726,8 @@ GameObject:
   - component: {fileID: 1880014922}
   - component: {fileID: 1880014921}
   - component: {fileID: 1880014923}
+  - component: {fileID: 1880014925}
+  - component: {fileID: 1880014924}
   m_Layer: 5
   m_Name: "Iniciar Sessi\xF3n"
   m_TagString: Untagged
@@ -1755,10 +1757,10 @@ RectTransform:
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.60674495}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 485}
+  m_SizeDelta: {x: 0, y: 485}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1880014921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1804,7 +1806,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880014919}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eff15c41bf5c8ce4a846eaaf9edda6b4, type: 3}
   m_Name: 
@@ -1812,6 +1814,38 @@ MonoBehaviour:
   email: {fileID: 0}
   password: {fileID: 0}
   controller: {fileID: 772613641}
+--- !u!114 &1880014924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880014919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba29fe4c19a1d24c8d53366bddf8f4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loginpanel: {fileID: 1880014919}
+--- !u!95 &1880014925
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880014919}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fa1c41d8f3ec1ae44bb3cab857e53061, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1898386981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1846,7 +1880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -15.000076, y: -248.28}
+  m_AnchoredPosition: {x: -15.000061, y: -248.28}
   m_SizeDelta: {x: -30, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1898386983
@@ -2316,6 +2350,34 @@ PrefabInstance:
     - target: {fileID: 1302548403047968200, guid: 799a751a1446e0140a1ffb68f8910908, type: 3}
       propertyPath: m_Transition
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302548403047968200, guid: 799a751a1446e0140a1ffb68f8910908, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302548403047968200, guid: 799a751a1446e0140a1ffb68f8910908, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302548403047968200, guid: 799a751a1446e0140a1ffb68f8910908, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1880014924}
+    - target: {fileID: 1302548403047968200, guid: 799a751a1446e0140a1ffb68f8910908, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302548403047968200, guid: 799a751a1446e0140a1ffb68f8910908, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowHideMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302548403047968200, guid: 799a751a1446e0140a1ffb68f8910908, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SlideLogin, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302548403047968200, guid: 799a751a1446e0140a1ffb68f8910908, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2325427901659663564, guid: 799a751a1446e0140a1ffb68f8910908, type: 3}
       propertyPath: m_Name
