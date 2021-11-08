@@ -38,7 +38,7 @@ public class FirebaseController : MonoBehaviour
     public void UserLogIn(string email, string password)
     {
         
-        db.Collection("Users").WhereEqualTo("email", email).GetSnapshotAsync().ContinueWith((task) =>
+        db.Collection("Users").WhereEqualTo("email", email).WhereEqualTo("contraseña", password).GetSnapshotAsync().ContinueWith((task) =>
         {
             if(task.IsCompleted)
             {
@@ -54,6 +54,7 @@ public class FirebaseController : MonoBehaviour
                     {
                         Debug.Log(("{0}:{1}", pair.Key, pair.Value));                        
                     }*/
+
                     exitonlogin = true;
                    
                 }
