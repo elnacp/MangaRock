@@ -2,41 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Firestore;
+using UnityEngine.UI;
 
 public class FirebaseController : MonoBehaviour
 {
 
     FirebaseFirestore db;
     Dictionary<string, object> user;
+    [SerializeField] LoginController uicontroller;
 
+    private bool error = false;
+    private bool exitonlogin = false;
+   
     // Start is called before the first frame update
     void Start()
     {
-        db = FirebaseFirestore.DefaultInstance;
+        db = FirebaseFirestore.DefaultInstance;   
     }
 
-    public bool UserLogIn(string email, string password)
+    private void Update()
     {
+        if(error)
+        {
+            uicontroller.ErrorLogin();
+            error = false;
+        }
+        if(exitonlogin)
+        {
+            uicontroller.ExitonLogin();
+            exitonlogin = false;
+        }
 
-        bool exit = false;
+    }
 
+    public void UserLogIn(string email, string password)
+    {
+        
         db.Collection("Users").WhereEqualTo("email", email).GetSnapshotAsync().ContinueWith((task) =>
         {
             if(task.IsCompleted)
             {
                 if(task.Result.Count == 0)
                 {
-                    exit = false;
+                    error = true;
                 }
 
                 foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
-                {                 
-                    user = documentSnapshot.ToDictionary();
+                {
+                    /*user = documentSnapshot.ToDictionary();
                     foreach (KeyValuePair<string, object> pair in user)
                     {
-                        Debug.Log(("{0}:{1}", pair.Key, pair.Value));
-                        exit = true;
-                    }
+                        Debug.Log(("{0}:{1}", pair.Key, pair.Value));                        
+                    }*/
+                    exitonlogin = true;
+                   
                 }
             }
             else
@@ -45,8 +64,9 @@ public class FirebaseController : MonoBehaviour
             }
         });
 
-        return exit;
     }
+
+    
 
 
 }

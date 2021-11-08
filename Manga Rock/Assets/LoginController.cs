@@ -15,17 +15,58 @@ public class LoginController : MonoBehaviour
     [SerializeField] SlidePanel registerPanel;
     [SerializeField] SlidePanel recoverPassordPanel;
 
-    [SerializeField] Text message;
-    
-
     [SerializeField] FirebaseController controller;
 
     [SerializeField] Button back;
+
+    [SerializeField] GameObject loading;
+    private bool loadingisOn = false;
+    private float speed = 800f;
+    [SerializeField] Text message;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         back.gameObject.SetActive(false);
+        message.text = "";
+        loadingStop();
+    }
+
+    private void Update()
+    {
+        if(loadingisOn)
+        {
+            message.text = "";
+            loadingOn();
+        }     
+    }
+
+    public void ErrorLogin()
+    {
+        loadingStop();
+        loadingisOn = false;
+        message.text = "";
+        message.text = "Error: Ha habido un error al iniciar sesión, comprueba el correo electrónico o la contraseña e intentalo de nuevo";
+        message.color = Color.red;
+    }
+
+    public void ExitonLogin()
+    {
+        //Change scen
+        loadingisOn = false;
+        Debug.Log("Exit on login");
+    }
+
+    public void loadingOn()
+    {
+        loading.SetActive(true);
+        loading.GetComponent<RectTransform>().Rotate(0f, 0f, speed * Time.deltaTime);
+    }
+
+    public void loadingStop()
+    {
+        loading.SetActive(false);
     }
 
     public void LogIn()
@@ -33,47 +74,18 @@ public class LoginController : MonoBehaviour
         string _email = email.text;
         string _password = password.text;
 
-        bool exist = controller.UserLogIn(_email,_password);
-        if( exist )
-        {
-            //Change scene
-            Debug.Log("Change scene");
-        }
-        else
-        {
-            //Show error
-            Debug.Log("Sorry error occure");
-
-            EditMessage(0);
-            message.text = "Error: parece que te has equivocado en el correo electrónico o en la contraseña. Prueba de nuevo";
-        }      
+        loadingisOn = true;
+        controller.UserLogIn(_email,_password);
+             
     }
 
-    private void EditMessage(int num)
-    {
-        switch(num)
-        {
-            case 0:
-                message.text = "Error: parece que te has equivocado en el correo electrónico o en la contraseña. Prueba de nuevo";
-                message.color = Color.red;
-                break;
-            case 1:
-                message.text = "El usuario se ha creado con exito";
-                message.color = Color.black;
-                break;
-            case 2:
-                message.text = "Se ha enviado un correo a tu cuenta para recuperar la contraseña";
-                message.color = Color.black;
-                break;
-        }
-    }
 
     public void OpenRegister()
     {
         StartCoroutine(GoToRegister());
     }
 
-    public void CloseForm()
+    public void BackButton()
     {
         StartCoroutine(GoBackToLogin());
     }
