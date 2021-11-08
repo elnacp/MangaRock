@@ -15,13 +15,12 @@ public class LoginController : MonoBehaviour
     [SerializeField] SlidePanel registerPanel;
     [SerializeField] SlidePanel recoverPassordPanel;
 
-    [SerializeField] FirebaseController controller;
+    [SerializeField] FirebaseController firebase_controller;
 
     [SerializeField] Button back;
 
     [SerializeField] GameObject loading;
     private bool loadingisOn = false;
-    private float speed = 800f;
     [SerializeField] Text message;
     
 
@@ -30,55 +29,39 @@ public class LoginController : MonoBehaviour
     {
         back.gameObject.SetActive(false);
         message.text = "";
-        loadingStop();
+        loading.SetActive(false);
+        
     }
 
     private void Update()
     {
-        if(loadingisOn)
-        {
-            message.text = "";
-            loadingOn();
-        }     
+           
     }
 
     public void ErrorLogin()
     {
-        loadingStop();
-        loadingisOn = false;
+        loading.SetActive(false);
         message.text = "";
         message.text = "Error: Ha habido un error al iniciar sesión, comprueba el correo electrónico o la contraseña e intentalo de nuevo";
         message.color = Color.red;
     }
 
-    public void ExitonLogin()
+    public void ExitOnLogin()
     {
-        //Change scen
-        loadingisOn = false;
-        Debug.Log("Exit on login");
+        //Change scene
+        //loading.SetActive(false);
     }
-
-    public void loadingOn()
-    {
-        loading.SetActive(true);
-        loading.GetComponent<RectTransform>().Rotate(0f, 0f, speed * Time.deltaTime);
-    }
-
-    public void loadingStop()
-    {
-        loading.SetActive(false);
-    }
-
+   
     public void LogIn()
     {
         string _email = email.text;
         string _password = password.text;
 
-        loadingisOn = true;
-        controller.UserLogIn(_email,_password);
+        loading.SetActive(true);
+        message.text = "";
+        firebase_controller.UserLogIn(_email,_password);
              
     }
-
 
     public void OpenRegister()
     {

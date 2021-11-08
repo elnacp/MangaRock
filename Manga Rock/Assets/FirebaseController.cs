@@ -13,7 +13,14 @@ public class FirebaseController : MonoBehaviour
 
     private bool error = false;
     private bool exitonlogin = false;
-   
+
+    private bool exitNoEmail = false;
+    private bool usernameNoexist = false;
+
+    private string username;
+    private string email;
+    private string password;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,8 +36,18 @@ public class FirebaseController : MonoBehaviour
         }
         if(exitonlogin)
         {
-            uicontroller.ExitonLogin();
+            uicontroller.ExitOnLogin();
             exitonlogin = false;
+        }
+        if(exitNoEmail)
+        {
+            UsernameValidation();
+            exitNoEmail = false;
+        }
+        if(usernameNoexist)
+        {
+            RegisterUser();
+            usernameNoexist = false;
         }
 
     }
@@ -49,14 +66,7 @@ public class FirebaseController : MonoBehaviour
 
                 foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
                 {
-                    /*user = documentSnapshot.ToDictionary();
-                    foreach (KeyValuePair<string, object> pair in user)
-                    {
-                        Debug.Log(("{0}:{1}", pair.Key, pair.Value));                        
-                    }*/
-
-                    exitonlogin = true;
-                   
+                    exitonlogin = true;               
                 }
             }
             else
@@ -67,7 +77,71 @@ public class FirebaseController : MonoBehaviour
 
     }
 
-    
+    public void UserRegister(string username, string email, string password)
+    {
+
+        this.username = username;
+        this.email = email;
+        this.password = password;
+
+        EmailValidation();
+
+    }
+
+    public void EmailValidation()
+    {
+        db.Collection("Users").WhereEqualTo("email", email).GetSnapshotAsync().ContinueWith((task) =>
+        {
+            if (task.IsCompleted)
+            {
+                if (task.Result.Count == 0)
+                {
+                    exitNoEmail = true;
+                }
+                else
+                {
+                    //Error message
+                    Debug.Log("Email exist");
+                }
+            }
+            else
+            {
+                Debug.Log("Error");
+            }
+        });
+    }
+
+    public void UsernameValidation()
+    {
+        db.Collection("Users").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith((task) =>
+        {
+            if (task.IsCompleted)
+            {
+                if (task.Result.Count == 0)
+                {
+                    usernameNoexist = true;
+                }
+                else
+                {
+                    //Error message
+                    Debug.Log("Username exist");
+                }
+            }
+            else
+            {
+                Debug.Log("Error");
+            }
+        });
+    }
+
+    public void RegisterUser()
+    {
+        Debug.Log("Register User");
+    }
+
+
+
+
 
 
 }
