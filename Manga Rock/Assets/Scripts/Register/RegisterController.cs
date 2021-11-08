@@ -90,5 +90,17 @@ public class RegisterController : MonoBehaviour
         message.text = "Error: Error las dos contraseñas no coinciden.";
     }
 
+    public void ErrorMailExist()
+    {
+        loading.SetActive(false);
+        message.text = "Error: El email que estas usando ya existe en otra cuenta.";
+    }
+
+    public void ErrorUsernameExist()
+    {
+        loading.SetActive(false);
+        message.text = "Error: El usuario que estas usando ya existe, prueba hacer uso de otro.";
+    }
+
 
 }

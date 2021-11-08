@@ -10,9 +10,13 @@ public class FirebaseController : MonoBehaviour
     FirebaseFirestore db;
     Dictionary<string, object> user;
     [SerializeField] LoginController uicontroller;
+    [SerializeField] RegisterController registercontroller;
 
     private bool error = false;
     private bool exitonlogin = false;
+
+    private bool errorEmail = false;
+    private bool errorUsername = false;
 
     private bool exitNoEmail = false;
     private bool usernameNoexist = false;
@@ -34,20 +38,34 @@ public class FirebaseController : MonoBehaviour
             uicontroller.ErrorLogin();
             error = false;
         }
+
         if(exitonlogin)
         {
             uicontroller.ExitOnLogin();
             exitonlogin = false;
         }
+
         if(exitNoEmail)
         {
             UsernameValidation();
             exitNoEmail = false;
         }
+  
         if(usernameNoexist)
         {
             RegisterUser();
             usernameNoexist = false;
+        }
+
+        if(errorEmail)
+        {
+            registercontroller.ErrorMailExist();
+            errorEmail = false;
+        }
+        if (errorUsername)
+        {
+            registercontroller.ErrorUsernameExist();
+            errorUsername = false;
         }
 
     }
@@ -101,7 +119,8 @@ public class FirebaseController : MonoBehaviour
                 else
                 {
                     //Error message
-                    Debug.Log("Email exist");
+                    errorEmail = true;
+
                 }
             }
             else
@@ -125,6 +144,7 @@ public class FirebaseController : MonoBehaviour
                 {
                     //Error message
                     Debug.Log("Username exist");
+                    errorUsername = true;
                 }
             }
             else
