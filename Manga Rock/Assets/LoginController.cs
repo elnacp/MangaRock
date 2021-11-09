@@ -17,6 +17,8 @@ public class LoginController : MonoBehaviour
 
     [SerializeField] FirebaseController firebase_controller;
 
+    [SerializeField] RegisterController registerController;
+
     [SerializeField] Button back;
 
     [SerializeField] GameObject loading;
@@ -65,16 +67,26 @@ public class LoginController : MonoBehaviour
 
     public void OpenRegister()
     {
+        ResetLogin();
         StartCoroutine(GoToRegister());
     }
 
     public void BackButton()
     {
         StartCoroutine(GoBackToLogin());
+        registerController.ResetInputField();
+    }
+
+    public void ReturnFromRegister()
+    {
+        message.text = "Se ha creado tu cuenta con exito! Prueba a loggearte";
+        message.color = Color.black;
+        registerController.ResetInputField();
     }
 
     public void OpenRecoverPassword()
     {
+        ResetLogin();
         StartCoroutine(GoToRecoverPassword());
     }
 
@@ -112,6 +124,14 @@ public class LoginController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         loginPanel.ShowHideMenu();
         back.gameObject.SetActive(false);
+    }
+
+    public void ResetLogin()
+    {
+        email.text = "";
+        password.text = "";
+        message.text = "";
+        loading.SetActive(false);
     }
     
 }

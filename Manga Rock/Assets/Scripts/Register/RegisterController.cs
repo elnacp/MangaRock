@@ -102,5 +102,18 @@ public class RegisterController : MonoBehaviour
         message.text = "Error: El usuario que estas usando ya existe, prueba hacer uso de otro.";
     }
 
+    public void ExitRegister()
+    {
+        loading.SetActive(false);
+        message.text = "";
+    }
+
+    public void ResetInputField()
+    {
+        username.text = "";
+        email.text = "";
+        password.text = "";
+        other_password.text = "";
+    }
 
 }

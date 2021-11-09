@@ -9,7 +9,7 @@ public class FirebaseController : MonoBehaviour
 
     FirebaseFirestore db;
     Dictionary<string, object> user;
-    [SerializeField] LoginController uicontroller;
+    [SerializeField] LoginController logincontroller;
     [SerializeField] RegisterController registercontroller;
 
     private bool error = false;
@@ -35,13 +35,13 @@ public class FirebaseController : MonoBehaviour
     {
         if(error)
         {
-            uicontroller.ErrorLogin();
+            logincontroller.ErrorLogin();
             error = false;
         }
 
         if(exitonlogin)
         {
-            uicontroller.ExitOnLogin();
+            logincontroller.ExitOnLogin();
             exitonlogin = false;
         }
 
@@ -157,6 +157,9 @@ public class FirebaseController : MonoBehaviour
     public void RegisterUser()
     {
         Debug.Log("Register User");
+        logincontroller.BackButton();
+        logincontroller.ReturnFromRegister();
+        registercontroller.ExitRegister();
     }
 
 
