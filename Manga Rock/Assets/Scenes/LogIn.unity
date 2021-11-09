@@ -217,6 +217,14 @@ PrefabInstance:
       propertyPath: m_Text
       value: "Repite contrase\xF1a"
       objectReference: {fileID: 0}
+    - target: {fileID: 1973893507431695170, guid: fb443730151934f44b2810021f92520f, type: 3}
+      propertyPath: m_InputType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973893507431695170, guid: fb443730151934f44b2810021f92520f, type: 3}
+      propertyPath: m_ContentType
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1973893507431695172, guid: fb443730151934f44b2810021f92520f, type: 3}
       propertyPath: m_Name
       value: AgainPassword
@@ -1332,7 +1340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed752bba7305b940a52d6311d6e846e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uicontroller: {fileID: 1277885509}
+  logincontroller: {fileID: 1277885509}
   registercontroller: {fileID: 376240251}
 --- !u!4 &772613642
 Transform:
@@ -1892,6 +1900,7 @@ MonoBehaviour:
   registerPanel: {fileID: 376240250}
   recoverPassordPanel: {fileID: 1391344060}
   firebase_controller: {fileID: 772613641}
+  registerController: {fileID: 376240251}
   back: {fileID: 858110749}
   loading: {fileID: 707004269}
   message: {fileID: 62120436}
@@ -2567,6 +2576,14 @@ PrefabInstance:
       propertyPath: m_Text
       value: "Contrase\xF1a"
       objectReference: {fileID: 0}
+    - target: {fileID: 1973893507431695170, guid: fb443730151934f44b2810021f92520f, type: 3}
+      propertyPath: m_InputType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973893507431695170, guid: fb443730151934f44b2810021f92520f, type: 3}
+      propertyPath: m_ContentType
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1973893507431695172, guid: fb443730151934f44b2810021f92520f, type: 3}
       propertyPath: m_Name
       value: Password
@@ -2809,7 +2826,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -15.000046, y: -248.28}
+  m_AnchoredPosition: {x: -15.000061, y: -248.28}
   m_SizeDelta: {x: -30, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1898386983

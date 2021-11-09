@@ -84,6 +84,13 @@ public class LoginController : MonoBehaviour
         registerController.ResetInputField();
     }
 
+    public void ReturnFromRecoverPassword()
+    {
+        message.text = "Se ha enviado un correo para recuperar tu contraseña.";
+        message.color = Color.black;
+        BackButton();
+    }
+
     public void OpenRecoverPassword()
     {
         ResetLogin();

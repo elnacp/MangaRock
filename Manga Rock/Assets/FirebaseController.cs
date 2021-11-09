@@ -17,9 +17,9 @@ public class FirebaseController : MonoBehaviour
 
     private bool errorEmail = false;
     private bool errorUsername = false;
-
     private bool exitNoEmail = false;
     private bool usernameNoexist = false;
+    private bool userAdded = false;
 
     private string username;
     private string email;
@@ -66,6 +66,12 @@ public class FirebaseController : MonoBehaviour
         {
             registercontroller.ErrorUsernameExist();
             errorUsername = false;
+        }
+
+        if(userAdded)
+        {
+            ReturnToLogin();
+            userAdded = false;
         }
 
     }
@@ -156,7 +162,32 @@ public class FirebaseController : MonoBehaviour
 
     public void RegisterUser()
     {
-        Debug.Log("Register User");
+        user = new Dictionary<string, object>
+        {
+            {"contraseña", password},
+            {"email", email},
+            {"username", username}
+
+        };
+
+        db.Collection("Users").AddAsync(user).ContinueWith(task =>
+        {
+            if(task.IsCompleted)
+            {
+                Debug.Log("user is added");
+                userAdded = true;
+            }
+            else
+            {
+                Debug.Log("user is not added");
+            }
+        });
+
+
+    }
+
+    public void ReturnToLogin()
+    {
         logincontroller.BackButton();
         logincontroller.ReturnFromRegister();
         registercontroller.ExitRegister();
