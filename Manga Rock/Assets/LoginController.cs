@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 
@@ -51,9 +52,9 @@ public class LoginController : MonoBehaviour
     public void ExitOnLogin()
     {
         //Change scene
-        //loading.SetActive(false);
+        SceneManager.LoadScene("Home");
     }
-   
+
     public void LogIn()
     {
         string _email = email.text;
