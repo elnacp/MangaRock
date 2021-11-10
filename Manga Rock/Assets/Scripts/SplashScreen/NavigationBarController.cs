@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NavigationBarController : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class NavigationBarController : MonoBehaviour
     private Transform search_pos;
     private Transform noti_pos;
     private Transform profile_pos;
+
+    
 
 
     private float speed = 1000;
@@ -68,24 +71,42 @@ public class NavigationBarController : MonoBehaviour
 
     public void MoveNavigationBar(int num)
     {
+
+        AllDisable();
+
         switch (num)
         {
             case 1:
                 destination = new Vector3(home_pos.position.x + 15, bar.position.y);
+                home.GetComponent<StateButtonNavigationBar>().ActiveButton();
                 break;
             case 2:
                 destination = new Vector3(library_pos.position.x + 15, bar.position.y);
+                library.GetComponent<StateButtonNavigationBar>().ActiveButton();
                 break;
             case 3:
                 destination = new Vector3(search_pos.position.x + 15, bar.position.y);
+                search.GetComponent<StateButtonNavigationBar>().ActiveButton();
                 break;
             case 4:
                 destination = new Vector3(noti_pos.position.x + 15, bar.position.y);
+                notifications.GetComponent<StateButtonNavigationBar>().ActiveButton();
                 break;
             case 5:
                 destination = new Vector3(profile_pos.position.x + 15, bar.position.y);
+                profile.GetComponent<StateButtonNavigationBar>().ActiveButton();
                 break;
         }
+    }
+
+    public void AllDisable()
+    {
+        home.GetComponent<StateButtonNavigationBar>().DisableButton();
+        library.GetComponent<StateButtonNavigationBar>().DisableButton();
+        search.GetComponent<StateButtonNavigationBar>().DisableButton();
+        notifications.GetComponent<StateButtonNavigationBar>().DisableButton();
+        profile.GetComponent<StateButtonNavigationBar>().DisableButton();
+
     }
 
 
