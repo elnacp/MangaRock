@@ -14,16 +14,17 @@ public class NavigationBarController : MonoBehaviour
 
     [SerializeField] Transform bar;
 
+    [SerializeField] PageController pageController;
+
     private Transform home_pos;
     private Transform library_pos;
     private Transform search_pos;
     private Transform noti_pos;
     private Transform profile_pos;
 
-    
-
-
     private float speed = 1000;
+
+    
 
     public Vector3 destination;
 
@@ -36,6 +37,9 @@ public class NavigationBarController : MonoBehaviour
         profile_pos = profile.GetComponent<Transform>();
 
         destination = bar.position;
+
+        GoHome();
+
     }
 
     public void Update()
@@ -47,26 +51,31 @@ public class NavigationBarController : MonoBehaviour
     public void GoHome()
     {
         MoveNavigationBar(1);
+        pageController.ChangePage("home");
     }
 
     public void GoLibrary()
     {
         MoveNavigationBar(2);
+        pageController.ChangePage("library");
     }
 
     public void GoSearch()
     {
         MoveNavigationBar(3);
+        pageController.ChangePage("search");
     }
 
     public void GoNotifications()
     {
         MoveNavigationBar(4);
+        pageController.ChangePage("notifications");
     }
 
     public void GoProfile()
     {
         MoveNavigationBar(5);
+        pageController.ChangePage("profile");
     }
 
     public void MoveNavigationBar(int num)
@@ -108,6 +117,7 @@ public class NavigationBarController : MonoBehaviour
         profile.GetComponent<StateButtonNavigationBar>().DisableButton();
 
     }
+
 
 
 }
