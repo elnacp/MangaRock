@@ -8,12 +8,23 @@ public class FirebasePageController : MonoBehaviour
     FirebaseFirestore db;
     List<int> mangasIds;
     List<MangaClass> mangaNovedades;
+    List<MangaClass> topGratis;
+    List<MangaClass> topPago;
 
+    List<TopElement> listPago;
+    List<TopElement> listGratis;
+
+
+   
+    private bool topListFinish = false;
     private bool novedadesFinish = false;
     private bool searchFinish = false;
+    private bool searchTop = false;
     private bool stop = false;
 
+  
     [SerializeField] NovedadesController novedadesController;
+    [SerializeField] TopVentasController topVentas;
 
 
     private void Start()
@@ -21,6 +32,10 @@ public class FirebasePageController : MonoBehaviour
         db = FirebaseFirestore.DefaultInstance;
         mangasIds = new List<int>();
         mangaNovedades = new List<MangaClass>();
+        listPago = new List<TopElement>();
+        listGratis = new List<TopElement>();
+        topGratis = new List<MangaClass>();
+        topPago = new List<MangaClass>();
     }
 
     private void Update()
@@ -40,15 +55,30 @@ public class FirebasePageController : MonoBehaviour
             searchFinish = false;
         }
         
-    }
-
-    private void PrintNovedades()
-    {
-        foreach(MangaClass element in mangaNovedades)
+        if(topListFinish)
         {
-            Debug.Log(element.titulo);
+            Debug.Log(listGratis.Count);
+            Debug.Log(listPago.Count);
+            //OrderListElements();
+            //topVentas.TopListData(listPago, listGratis);
+            if(listGratis.Count == 10 && listPago.Count == 10)
+            {
+                topVentas.TopListData(listPago, listGratis);
+            }
+            
+            topListFinish = false;
+        }
+
+        if(searchTop)
+        {
+            if(topGratis.Count == 10 && topPago.Count == 10)
+            {
+                topVentas.AddInformationContent(topPago, topGratis);
+            }
+            searchTop = false;
         }
     }
+
 
     public void GetNovedades()
     {
@@ -71,20 +101,6 @@ public class FirebasePageController : MonoBehaviour
             novedadesFinish = true;
         });        
     }
-
-    /*public void GetMangaInfo(int id)
-    {
-        db.Collection("Manga").WhereEqualTo("id", id).GetSnapshotAsync().ContinueWith(task =>
-        {
-            if(task.IsCompleted)
-            {
-                foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
-                {
-                    //Sava Manga Data
-                }
-            }
-        });
-    }*/
 
     public void GetMangaNovedades(int id)
     {
@@ -129,5 +145,94 @@ public class FirebasePageController : MonoBehaviour
         }
     }
 
-    
+    public void AskTopList()
+    {
+
+        db.Collection("Top List").OrderBy("categoria").GetSnapshotAsync().ContinueWith(task =>
+        {
+            QuerySnapshot allMangas = task.Result;
+            List<TopElement> listTops = new List<TopElement>();
+            foreach (DocumentSnapshot documentSnapshot in allMangas.Documents)
+            {
+                TopList info = documentSnapshot.ConvertTo<TopList>();
+                TopElement element = new TopElement();
+                element.categoria = info.categoria;
+                element.top = info.top;
+                element.idManga = info.idManga;
+
+
+                listTops.Add(element);
+            }
+
+            foreach(TopElement element in listTops)
+            {
+                if(element.categoria == "pago")
+                {
+                    listPago.Add(element);
+                }
+                else
+                {
+                    listGratis.Add(element);
+                }
+            }
+
+            topListFinish = true;
+        });
+    }
+
+    public void GetMangaTop(int id, string categoria)
+    {
+        db.Collection("Manga").WhereEqualTo("id", id).GetSnapshotAsync().ContinueWith(task =>
+        {
+
+            List<MangaClass> new_manga = new List<MangaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Manga info = documentSnapshot.ConvertTo<Manga>();
+                MangaClass element = new MangaClass();
+                element.autor = info.autor;
+                element.genero = info.genero;
+                element.id = info.id;
+                element.idioma = info.idioma;
+                element.paginas = info.paginas;
+                element.precio = info.precio;
+                element.resumen = info.resumen;
+                element.tamaño = info.tamaño;
+                element.titulo = info.titulo;
+                element.url = info.url;
+                element.valoracion = info.valoracion;
+
+                new_manga.Add(element);
+            }
+
+            foreach (MangaClass i in new_manga)
+            {
+                if(categoria == "pago")
+                {
+                    topPago.Add(i);
+                }
+                else
+                {
+                    topGratis.Add(i);
+                }
+            }
+            searchTop = true;
+
+        });
+    }
+
+    public void AskMangasInfoTop(List<TopElement> list)
+    {
+        foreach(TopElement element in list)
+        {
+            if(element.categoria == "pago")
+            {
+                GetMangaTop(element.idManga, "pago");
+            }
+            else
+            {
+                GetMangaTop(element.idManga, "gratis");
+            }
+        }
+    }
 }
