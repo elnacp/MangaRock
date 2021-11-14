@@ -1,0 +1,11 @@
+{
+    "id": 1,
+    "autor": "Tetsurō Araki",
+    "valoracion":  4.5,
+    "precio": 7.5,
+    "genero": "Fantasia", 
+    "idioma": "Español", 
+    "paginas": 200, 
+    "tamaño": 120, 
+    "resumen": "Death Note cuenta la historia de Light Yagami, un estudiante excepcional de secundaria que encuentra un misterioso cuaderno de notas el cual pertenece a un dios de la muerte también llamado shinigami que responde al nombre de Ryuk. El poder de este sobrenatural bloc de notas permite terminar con la vida de los demás."
+}
