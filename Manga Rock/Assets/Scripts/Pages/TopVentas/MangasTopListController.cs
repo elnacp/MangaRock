@@ -36,7 +36,16 @@ public class MangasTopListController : MonoBehaviour
 
         //Image
 
+        StartCoroutine(GetImage(url));
+
         this.number.text = number;
+    }
+
+    IEnumerator GetImage(string url)
+    {
+        WWW www = new WWW(url);
+        yield return www;
+        image.texture = www.texture;
     }
 
 
