@@ -10,6 +10,7 @@ public class FirebasePageController : MonoBehaviour
     List<MangaClass> mangaNovedades;
     List<MangaClass> topGratis;
     List<MangaClass> topPago;
+    List<MangaClass> recomendaciones;
 
     List<TopElement> listPago;
     List<TopElement> listGratis;
@@ -21,10 +22,12 @@ public class FirebasePageController : MonoBehaviour
     private bool searchFinish = false;
     private bool searchTop = false;
     private bool stop = false;
+    private bool recomendacionesFinish = false;
 
   
     [SerializeField] NovedadesController novedadesController;
     [SerializeField] TopVentasController topVentas;
+    [SerializeField] RecomendacionesController recomendacionesControlller;
 
 
     private void Start()
@@ -36,6 +39,7 @@ public class FirebasePageController : MonoBehaviour
         listGratis = new List<TopElement>();
         topGratis = new List<MangaClass>();
         topPago = new List<MangaClass>();
+        recomendaciones = new List<MangaClass>();
     }
 
     private void Update()
@@ -76,6 +80,12 @@ public class FirebasePageController : MonoBehaviour
                 topVentas.AddInformationContent(topPago, topGratis);
             }
             searchTop = false;
+        }
+
+        if(recomendacionesFinish)
+        {
+            recomendacionesControlller.AddInformation(recomendaciones);
+            recomendacionesFinish = false;
         }
     }
 
@@ -234,5 +244,39 @@ public class FirebasePageController : MonoBehaviour
                 GetMangaTop(element.idManga, "gratis");
             }
         }
+    }
+
+
+    public void RecomendationsForUser(string genero)
+    {
+        db.Collection("Manga").WhereEqualTo("genero", genero).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<MangaClass> listMangas = new List<MangaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Manga info = documentSnapshot.ConvertTo<Manga>();
+                MangaClass element = new MangaClass();
+                element.autor = info.autor;
+                element.genero = info.genero;
+                element.id = info.id;
+                element.idioma = info.idioma;
+                element.paginas = info.paginas;
+                element.precio = info.precio;
+                element.resumen = info.resumen;
+                element.tamaño = info.tamaño;
+                element.titulo = info.titulo;
+                element.url = info.url;
+                element.valoracion = info.valoracion;
+
+                listMangas.Add(element);
+            }
+
+            foreach(MangaClass manga in listMangas )
+            {
+                recomendaciones.Add(manga);
+            }
+            recomendacionesFinish = true;
+            //Debug.Log(new_manga.getAutor());
+        });
     }
 }
