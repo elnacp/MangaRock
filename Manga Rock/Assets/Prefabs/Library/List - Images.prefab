@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -300,7 +300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1682699907676997236, guid: 6aa44cdfa2eb1ad438688fbe7c459a7c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1682699907676997236, guid: 6aa44cdfa2eb1ad438688fbe7c459a7c, type: 3}
       propertyPath: m_AnchorMin.x
@@ -308,7 +308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1682699907676997236, guid: 6aa44cdfa2eb1ad438688fbe7c459a7c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1682699907676997236, guid: 6aa44cdfa2eb1ad438688fbe7c459a7c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -348,11 +348,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1682699907676997236, guid: 6aa44cdfa2eb1ad438688fbe7c459a7c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1682699907676997236, guid: 6aa44cdfa2eb1ad438688fbe7c459a7c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 1682699907676997236, guid: 6aa44cdfa2eb1ad438688fbe7c459a7c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
