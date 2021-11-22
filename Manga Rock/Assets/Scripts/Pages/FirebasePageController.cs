@@ -15,7 +15,8 @@ public class FirebasePageController : MonoBehaviour
     List<TopElement> listPago;
     List<TopElement> listGratis;
 
-
+    List<MangaClass> mangasSearch = new List<MangaClass>();
+    List<AutorClass> autorSearch = new List<AutorClass>();
    
     private bool topListFinish = false;
     private bool novedadesFinish = false;
@@ -23,11 +24,14 @@ public class FirebasePageController : MonoBehaviour
     private bool searchTop = false;
     private bool stop = false;
     private bool recomendacionesFinish = false;
+    private bool mangaisSearch = false;
+    private bool autorisSearch = false;
 
-  
+
     [SerializeField] NovedadesController novedadesController;
     [SerializeField] TopVentasController topVentas;
     [SerializeField] RecomendacionesController recomendacionesControlller;
+    [SerializeField] SearchController searchController;
 
 
     private void Start()
@@ -86,6 +90,18 @@ public class FirebasePageController : MonoBehaviour
         {
             recomendacionesControlller.AddInformation(recomendaciones);
             recomendacionesFinish = false;
+        }
+
+        if(mangaisSearch)
+        {
+            searchController.UpdateMangaList(mangasSearch);
+            mangaisSearch = false;
+        }
+
+        if(autorisSearch)
+        {
+            searchController.UpdateAutor(autorSearch);
+            autorisSearch = false;
         }
     }
 
@@ -287,6 +303,87 @@ public class FirebasePageController : MonoBehaviour
 
             
 
+        });
+    }
+
+    public void SearchInfo(string search)
+    {
+        AskForMangas(search);
+        //AskForCollections();
+        AskForAuthors(search);
+        //AskForUsers();
+    }
+
+    private void AskForMangas(string title)
+    {
+
+        if(mangasSearch.Count != 0)
+        {
+            mangasSearch.Clear();
+        }
+        Debug.Log(mangasSearch.Count);
+
+        db.Collection("Manga").WhereEqualTo("titulo", title).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<MangaClass> listMangas = new List<MangaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Manga info = documentSnapshot.ConvertTo<Manga>();
+                MangaClass element = new MangaClass();
+                element.autor = info.autor;
+                element.genero = info.genero;
+                element.id = info.id;
+                element.idioma = info.idioma;
+                element.paginas = info.paginas;
+                element.precio = info.precio;
+                element.resumen = info.resumen;
+                element.tamaño = info.tamaño;
+                element.titulo = info.titulo;
+                element.url = info.url;
+                element.valoracion = info.valoracion;
+
+                listMangas.Add(element);
+            }
+
+            foreach (MangaClass manga in listMangas)
+            {
+                mangasSearch.Add(manga);
+            }
+
+            mangaisSearch = true;
+            //Debug.Log(new_manga.getAutor());
+        });
+    }
+
+    private void AskForAuthors(string name)
+    {
+
+        if (autorSearch.Count != 0)
+        {
+            autorSearch.Clear();
+        }
+
+        db.Collection("Autor").WhereEqualTo("nombre", name).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<AutorClass> listAutores = new List<AutorClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Autor info = documentSnapshot.ConvertTo<Autor>();
+                AutorClass element = new AutorClass();
+                element.nombre = info.nombre;
+                element.followers = info.followers;
+                element.url = info.url;
+
+                listAutores.Add(element);
+            }
+
+            foreach (AutorClass autores in listAutores)
+            {
+                autorSearch.Add(autores);
+            }
+
+            autorisSearch = true;
+            //Debug.Log(new_manga.getAutor());
         });
     }
 

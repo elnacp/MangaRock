@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MangaWithNoPercentageControlle : MonoBehaviour
+public class ProfilePrefabController : MonoBehaviour
 {
     [SerializeField] RawImage image;
-    [SerializeField] Text title;
-    [SerializeField] Text author;
+    [SerializeField] Text name;
 
-    public void AddData(string url, string title, string author)
+    public void AddData(string nombre, string url)
     {
-        this.title.text = title;
-        this.author.text = author;
+        this.name.text = nombre;
         StartCoroutine(GetImage(url));
     }
 
@@ -22,5 +20,4 @@ public class MangaWithNoPercentageControlle : MonoBehaviour
         yield return www;
         image.texture = www.texture;
     }
-
 }
