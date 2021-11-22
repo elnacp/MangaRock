@@ -279,4 +279,15 @@ public class FirebasePageController : MonoBehaviour
             //Debug.Log(new_manga.getAutor());
         });
     }
+
+    public void GenreFav()
+    {
+        db.Collection("Users").WhereEqualTo("email", "elnacp@gmail.com").GetSnapshotAsync().ContinueWith(task =>
+        {
+
+            
+
+        });
+    }
+
 }
