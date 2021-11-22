@@ -9,6 +9,7 @@ public class NovedadesController : MonoBehaviour
 
     private Manga manga;
     [SerializeField] FirebasePageController db;
+    
 
     private List<MangaClass> listMangas;
 
@@ -16,8 +17,9 @@ public class NovedadesController : MonoBehaviour
     [SerializeField] Text autor;
     [SerializeField] Text valoration;
     [SerializeField] RawImage image;
+    [SerializeField] NovedadesDotsAnimation dotsController;
 
-    public float timePassed = 0.0f;
+    private float timePassed = 0.0f;
 
     private int index = 0;
 
@@ -57,6 +59,9 @@ public class NovedadesController : MonoBehaviour
         {
             listMangas.Add(element);
         }
+
+        dotsController.AddDots(listMangas.Count);
+
     }
 
     private void MostrarManga()
@@ -67,11 +72,17 @@ public class NovedadesController : MonoBehaviour
         valoration.text = mangas[index].valoracion.ToString();
         StartCoroutine(GetImage(mangas[index].url));
 
+       
+       dotsController.MoveDot(index);
+        
+
         index++;
         if(index > mangas.Length-1)
         {
             index = 0;
         }
+
+
 
     }
 
