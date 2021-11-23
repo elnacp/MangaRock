@@ -4207,8 +4207,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 254.60793, y: 0}
-  m_SizeDelta: {x: 449.21585, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &368631085
 MonoBehaviour:
@@ -8275,6 +8275,7 @@ MonoBehaviour:
   profile: {fileID: 1031892146}
   genre: {fileID: 2085009864}
   topVentas: {fileID: 63678294}
+  recomendaciones: {fileID: 627784065}
   navigationBar: {fileID: 1992845287}
   actionBarMenu: {fileID: 1425285544}
   actionBarBackWhite: {fileID: 1899483086}
@@ -18126,8 +18127,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 254.60793, y: 0}
-  m_SizeDelta: {x: 449.21585, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1639498309
 MonoBehaviour:
