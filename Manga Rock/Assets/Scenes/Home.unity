@@ -448,9 +448,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb348424fbe31134dac41b03114f67f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabManga: {fileID: 0}
-  contentPago: {fileID: 0}
-  contentGratuito: {fileID: 0}
+  prefabManga: {fileID: 241805300150858889, guid: 4e0e7e4ed349f294e82844b231d1f962, type: 3}
+  contentPago: {fileID: 1639498308}
+  contentGratuito: {fileID: 368631084}
 --- !u!1001 &66309590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4207,8 +4207,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 227.0613, y: 0}
-  m_SizeDelta: {x: 394.1226, y: 0}
+  m_AnchoredPosition: {x: 254.60793, y: 0}
+  m_SizeDelta: {x: 449.21585, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &368631085
 MonoBehaviour:
@@ -5448,7 +5448,7 @@ MonoBehaviour:
   contentPago: {fileID: 1773789841}
   contentFree: {fileID: 464040363}
   db: {fileID: 921228427}
-  pageController: {fileID: 0}
+  pageController: {fileID: 710092328}
 --- !u!1001 &532795511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18126,8 +18126,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 227.0613, y: 0}
-  m_SizeDelta: {x: 394.1226, y: 0}
+  m_AnchoredPosition: {x: 254.60793, y: 0}
+  m_SizeDelta: {x: 449.21585, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1639498309
 MonoBehaviour:
@@ -22668,6 +22668,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 525348948}
     m_Modifications:
+    - target: {fileID: 656095942017868814, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 656095942017868814, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 656095942017868814, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 525348951}
+    - target: {fileID: 656095942017868814, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 656095942017868814, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoTopList
+      objectReference: {fileID: 0}
+    - target: {fileID: 656095942017868814, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TopVentasController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 656095942017868814, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1120872761945195688, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
       propertyPath: m_Name
       value: Ver mas
