@@ -10,15 +10,16 @@ public class MangaRecomendaciones : MonoBehaviour
     [SerializeField] Text autor;
     [SerializeField] Text precio;
 
+    private MangaClass mangaData;
 
-    public void AddInfo(string url, string title, string autor, string precio)
+    public void AddInfo(MangaClass manga)
     {
-        StartCoroutine(GetImage(url));
-        this.title.text = title;
-        this.autor.text = autor;
-        this.precio.text = precio + "€";
+        StartCoroutine(GetImage(manga.url));
+        this.title.text = manga.titulo;
+        this.autor.text = manga.autor;
+        this.precio.text = manga.precio + "€";
 
-
+        this.mangaData = manga;
     }
 
     IEnumerator GetImage(string url)
@@ -26,6 +27,11 @@ public class MangaRecomendaciones : MonoBehaviour
         WWW www = new WWW(url);
         yield return www;
         image.texture = www.texture;
+    }
+
+    public void MangaDetail()
+    {
+        FindObjectOfType<PageController>().GoDetallesManga(mangaData);
     }
 
 }

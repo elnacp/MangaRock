@@ -61,6 +61,7 @@ public class DetallesMangaPageController : MonoBehaviour
 
     public void ListMangasSameAutor(List<MangaClass> mangas)
     {
+        DeleteContent(contentMangasSameAutor);
         foreach(MangaClass element in mangas)
         {
             GameObject prefab = Instantiate(mangaPrefab, contentMangasSameAutor);
@@ -70,6 +71,7 @@ public class DetallesMangaPageController : MonoBehaviour
 
     public void ListMangasSameColection(List<MangaClass> mangas)
     {
+        DeleteContent(contentMangasSameColection);
         foreach (MangaClass element in mangas)
         {
             GameObject prefab = Instantiate(mangaPrefab, contentMangasSameColection);
@@ -79,6 +81,7 @@ public class DetallesMangaPageController : MonoBehaviour
 
     public void ListMangasSameCategory(List<MangaClass> mangas)
     {
+        DeleteContent(contentMangasSameCategory);
         foreach (MangaClass element in mangas)
         {
             GameObject prefab = Instantiate(mangaPrefab, contentMangasSameCategory);
@@ -88,7 +91,15 @@ public class DetallesMangaPageController : MonoBehaviour
 
     private void AddInformationPrefab(GameObject prefab, MangaClass manga)
     {
-        prefab.GetComponent<MangaWithPricePrefab>().AddInformation(manga.url, manga.titulo, manga.autor, manga.precio.ToString());
+        prefab.GetComponent<MangaWithPricePrefab>().AddInformation(manga);
+    }
+
+    private void DeleteContent(Transform content)
+    {
+        foreach(Transform child in content)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     

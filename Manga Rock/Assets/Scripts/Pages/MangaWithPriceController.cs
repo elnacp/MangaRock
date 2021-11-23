@@ -14,16 +14,18 @@ public class MangaWithPriceController : MonoBehaviour
     [SerializeField] Text price;
     [SerializeField] Text valoracion;
 
-    public void AddInformation(string url, string number, string title, string autor, string genre, string price, string valoracion)
-    {
-        StartCoroutine(GetImage(url));
-        this.number.text = number;
-        this.title.text = title;
-        this.autor.text = autor;
+    MangaClass mangaData;
 
-        if (genre.Contains(","))
+    public void AddInformation(MangaClass manga, string number)
+    {
+        StartCoroutine(GetImage(manga.url));
+        this.number.text = number;
+        this.title.text = manga.titulo;
+        this.autor.text = manga.autor;
+
+        if (manga.genero.Contains(","))
         {
-            string[] generos = genre.Split(',');
+            string[] generos = manga.genero.Split(',');
             foreach (string e in generos)
             {
                 GameObject prefab = Instantiate(genrePrefab, contentGenre);
@@ -33,11 +35,13 @@ public class MangaWithPriceController : MonoBehaviour
         else
         {
             GameObject prefab = Instantiate(genrePrefab, contentGenre);
-            prefab.transform.GetChild(0).GetComponent<Text>().text = genre;
+            prefab.transform.GetChild(0).GetComponent<Text>().text = manga.genero;
         }
 
-        this.price.text = price+ "€";
-        this.valoracion.text = valoracion;
+        this.price.text = manga.precio+ "€";
+        this.valoracion.text = manga.valoracion.ToString();
+
+        this.mangaData = manga;
     }
 
     IEnumerator GetImage(string url)
@@ -47,6 +51,9 @@ public class MangaWithPriceController : MonoBehaviour
         image.texture = www.texture;
     }
 
-
+    public void MangaDetail()
+    {
+        FindObjectOfType<PageController>().GoDetallesManga(mangaData);
+    }
 
 }

@@ -10,18 +10,27 @@ public class MangaWithPricePrefab : MonoBehaviour
     [SerializeField] Text author;
     [SerializeField] Text price;
 
-    public void AddInformation(string url, string title, string author, string price)
+    MangaClass mangaData;
+
+    public void AddInformation(MangaClass manga)
     {
-        StartCoroutine(GetImage(url));
-        this.title.text = title;
-        this.author.text = author;
-        this.price.text = price;
+        StartCoroutine(GetImage(manga.url));
+        this.title.text = manga.titulo;
+        this.author.text = manga.autor;
+        this.price.text = manga.precio + "€";
+
+        this.mangaData = manga;
     }
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
         yield return www;
         image.texture = www.texture;
+    }
+
+    public void MangaDetail()
+    {
+        FindObjectOfType<PageController>().GoDetallesManga(mangaData);
     }
 }
 

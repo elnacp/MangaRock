@@ -14,15 +14,17 @@ public class MangasTopListController : MonoBehaviour
     [SerializeField] RawImage image;
     [SerializeField] Text number;
 
-    public void UpdateMangaInfo(string title, string autor, string valoracio, string genre, string url, string number)
-    {
-        this.title.text = title;
-        this.autor.text = autor;
-        this.valoracion.text = valoracio;
+    private MangaClass mangaData;
 
-        if(genre.Contains(","))
+    public void UpdateMangaInfo(MangaClass manga, string number)
+    {
+        this.title.text = manga.titulo;
+        this.autor.text = manga.autor;
+        this.valoracion.text = manga.valoracion.ToString();
+
+        if(manga.genero.Contains(","))
         {
-            string[] generos = genre.Split(',');
+            string[] generos = manga.genero.Split(',');
             foreach(string e in generos)
             {
                 GameObject prefab = Instantiate(genrePrefab, contentGenre.transform);
@@ -31,14 +33,16 @@ public class MangasTopListController : MonoBehaviour
         }else
         {
             GameObject prefab = Instantiate(genrePrefab, contentGenre.transform);
-            prefab.transform.GetChild(0).GetComponent<Text>().text = genre;
+            prefab.transform.GetChild(0).GetComponent<Text>().text = manga.genero;
         }
 
         //Image
 
-        StartCoroutine(GetImage(url));
+        StartCoroutine(GetImage(manga.url));
 
         this.number.text = number;
+
+        this.mangaData = manga;
     }
 
     IEnumerator GetImage(string url)
@@ -46,6 +50,11 @@ public class MangasTopListController : MonoBehaviour
         WWW www = new WWW(url);
         yield return www;
         image.texture = www.texture;
+    }
+
+    public void MangaDetail()
+    {
+        FindObjectOfType<PageController>().GoDetallesManga(mangaData);
     }
 
 

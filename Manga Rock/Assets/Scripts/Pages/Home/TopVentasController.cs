@@ -121,11 +121,7 @@ public class TopVentasController : MonoBehaviour
     {
         prefab.GetComponent<MangasTopListController>().UpdateMangaInfo
         (
-            element.titulo,
-            element.autor,
-            element.valoracion.ToString(),
-            element.genero,
-            element.url,
+            element,
             index.ToString()
         );
     }

@@ -35,7 +35,7 @@ public class RecomendacionesController : MonoBehaviour
         foreach(MangaClass manga in list)
         {
             GameObject prefab = Instantiate(mangaprefab, content);
-            prefab.GetComponent<MangaRecomendaciones>().AddInfo(manga.url, manga.titulo, manga.autor, manga.precio.ToString());
+            prefab.GetComponent<MangaRecomendaciones>().AddInfo(manga);
             recomendaciones.Add(manga);
         }
     }

@@ -32,13 +32,9 @@ public class GenreController : MonoBehaviour
         {
             GameObject prefab = Instantiate(manga_list, content);
             prefab.GetComponent<MangaWithPriceController>().AddInformation(
-                manga.url,
-                index.ToString(),
-                manga.titulo,
-                manga.autor,
-                manga.genero,
-                manga.precio.ToString(),
-                manga.valoracion.ToString());
+                manga,
+                index.ToString()
+                );
 
             index++;
         }
