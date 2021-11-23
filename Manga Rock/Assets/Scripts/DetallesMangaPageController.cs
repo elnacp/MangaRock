@@ -48,7 +48,7 @@ public class DetallesMangaPageController : MonoBehaviour
 
         firebase.MangasSameAutor(manga.autor);
         firebase.MangasSameColection(manga.idColeccion);
-        //firebase.MangasSameCategory(manga.genero);
+        firebase.MangasSameCategory(manga.genero);
 
     }
 
@@ -73,6 +73,15 @@ public class DetallesMangaPageController : MonoBehaviour
         foreach (MangaClass element in mangas)
         {
             GameObject prefab = Instantiate(mangaPrefab, contentMangasSameColection);
+            AddInformationPrefab(prefab, element);
+        }
+    }
+
+    public void ListMangasSameCategory(List<MangaClass> mangas)
+    {
+        foreach (MangaClass element in mangas)
+        {
+            GameObject prefab = Instantiate(mangaPrefab, contentMangasSameCategory);
             AddInformationPrefab(prefab, element);
         }
     }
