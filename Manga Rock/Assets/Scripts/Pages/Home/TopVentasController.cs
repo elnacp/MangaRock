@@ -16,8 +16,10 @@ public class TopVentasController : MonoBehaviour
 
     private List<TopElement> listgratis;
     private List<TopElement> listpago;
-    private List<MangaClass> listMangasPago;
-    private List<MangaClass> listMangasGratis;
+    private List<MangaClass> listMangasPago;  
+    private List<MangaClass> listMangasGratis; 
+
+    [SerializeField] PageController pageController;
 
     private bool ask = false;
 
@@ -31,6 +33,11 @@ public class TopVentasController : MonoBehaviour
         listMangasGratis = new List<MangaClass>();
         listMangasPago = new List<MangaClass>();
 
+    }
+
+    public void GoTopList()
+    {
+        pageController.GoTopList(listpago.ToArray(), listMangasPago, listgratis.ToArray(), listMangasGratis);
     }
 
     private void Update()
@@ -92,15 +99,15 @@ public class TopVentasController : MonoBehaviour
 
     private void AddInfoPanel(List<MangaClass> list, TopElement[] orderList, Transform content)
     {       
-        for (int i = 1; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             foreach(MangaClass element in list)
             {
                 if(orderList[i].idManga == element.id)
                 {
                     GameObject prefab = Instantiate(prefabManga, content);
-                    AddInformation(prefab, element, i);
-                    if (i != 3)
+                    AddInformation(prefab, element, i+1);
+                    if (i != 2)
                     {
                         Instantiate(separador, content);
                     }

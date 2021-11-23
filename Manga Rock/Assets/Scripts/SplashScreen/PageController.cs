@@ -5,12 +5,14 @@ using UnityEngine;
 public class PageController : MonoBehaviour
 {
 
-    public GameObject home;
-    public GameObject library;
-    public GameObject search;
-    public GameObject notifications;
-    public GameObject profile;
-    public GameObject genre;
+    [SerializeField] GameObject home;
+    [SerializeField] GameObject library;
+    [SerializeField] GameObject search;
+    [SerializeField] GameObject notifications;
+    [SerializeField] GameObject profile;
+    [SerializeField] GameObject genre;
+    [SerializeField] GameObject topVentas;
+
 
     [SerializeField] GameObject navigationBar;
     [SerializeField] GameObject actionBarMenu;
@@ -47,6 +49,12 @@ public class PageController : MonoBehaviour
         genre.GetComponent<GenreController>().GoCategory(category);
     }
 
+    public void GoTopList(TopElement[] orderListPago, List<MangaClass> listMangasPago, TopElement[] orderListFree, List<MangaClass> listMangasFree)
+    {
+        HideBarsAndShowBack();
+        topVentas.SetActive(true);
+        topVentas.GetComponent<TopListPageController>().PrintList(orderListPago, listMangasPago,orderListFree, listMangasFree);
+    }
     
 
     public void BackButton()
@@ -79,6 +87,7 @@ public class PageController : MonoBehaviour
         notifications.SetActive(false);
         profile.SetActive(false);
         genre.SetActive(false);
+        topVentas.SetActive(false);
 
     }
 
