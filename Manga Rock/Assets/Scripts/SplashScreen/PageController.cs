@@ -13,6 +13,7 @@ public class PageController : MonoBehaviour
     [SerializeField] GameObject genre;
     [SerializeField] GameObject topVentas;
     [SerializeField] GameObject recomendacionesPage;
+    [SerializeField] GameObject detallesManga;
 
     [SerializeField] RectTransform parent;
 
@@ -65,6 +66,13 @@ public class PageController : MonoBehaviour
         recomendacionesPage.SetActive(true);
         recomendacionesPage.GetComponent<RecomendacionesPageController>().PrintList(recomendaciones);
     }
+
+    public void GoDetallesManga(MangaClass manga)
+    {
+        HideBarsAndShowBack();
+        detallesManga.SetActive(true);
+        detallesManga.GetComponent<DetallesMangaPageController>().AddInformation(manga);
+    }
     
 
     public void BackButton()
@@ -80,7 +88,6 @@ public class PageController : MonoBehaviour
         actionBarBackBlack.SetActive(false);
 
         parent.offsetMin = new Vector2(parent.offsetMin.x, 65);
-
 
     }
 
@@ -105,7 +112,7 @@ public class PageController : MonoBehaviour
         genre.SetActive(false);
         topVentas.SetActive(false);
         recomendacionesPage.SetActive(false);
-
+        detallesManga.SetActive(false);
     }
 
 

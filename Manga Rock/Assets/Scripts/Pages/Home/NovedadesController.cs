@@ -19,6 +19,9 @@ public class NovedadesController : MonoBehaviour
     [SerializeField] RawImage image;
     [SerializeField] NovedadesDotsAnimation dotsController;
 
+    [SerializeField] PageController pageController;
+
+
     private float timePassed = 0.0f;
 
     private int index = 0;
@@ -51,6 +54,22 @@ public class NovedadesController : MonoBehaviour
     private void GetNovedades()
     {
         db.GetNovedades();
+    }
+
+    public void GoDetail()
+    {
+        int i = index;
+
+        int e = 1;
+        foreach(MangaClass manga in listMangas)
+        {
+            if( e == i)
+            {
+                pageController.GoDetallesManga(manga);
+            }
+            e++;
+        }
+
     }
 
     public void UpdateNovedades(List<MangaClass> list)

@@ -18,6 +18,7 @@ public class FirebasePageController : MonoBehaviour
 
     List<MangaClass> mangasSearch = new List<MangaClass>();
     List<AutorClass> autorSearch = new List<AutorClass>();
+    List<MangaClass> mangasSameAutor = new List<MangaClass>();
    
     private bool topListFinish = false;
     private bool novedadesFinish = false;
@@ -28,6 +29,7 @@ public class FirebasePageController : MonoBehaviour
     private bool mangaisSearch = false;
     private bool autorisSearch = false;
     private bool categoriaSearch = false;
+    private bool mangasSameAutorState = false;
 
 
     [SerializeField] NovedadesController novedadesController;
@@ -35,6 +37,7 @@ public class FirebasePageController : MonoBehaviour
     [SerializeField] RecomendacionesController recomendacionesControlller;
     [SerializeField] SearchController searchController;
     [SerializeField] GenreController genreController;
+    [SerializeField] DetallesMangaPageController detallesManga;
 
 
     private void Start()
@@ -68,10 +71,7 @@ public class FirebasePageController : MonoBehaviour
         
         if(topListFinish)
         {
-            Debug.Log(listGratis.Count);
-            Debug.Log(listPago.Count);
-            //OrderListElements();
-            //topVentas.TopListData(listPago, listGratis);
+
             if(listGratis.Count == 10 && listPago.Count == 10)
             {
                 topVentas.TopListData(listPago, listGratis);
@@ -111,6 +111,12 @@ public class FirebasePageController : MonoBehaviour
         {
             genreController.AddInformation(listCategoria);
             categoriaSearch = false;
+        }
+
+        if(mangasSameAutorState)
+        {
+            detallesManga.ListMangasSameAutor(mangasSameAutor);
+            mangasSameAutorState = false;
         }
     }
 
@@ -271,7 +277,6 @@ public class FirebasePageController : MonoBehaviour
         }
     }
 
-
     public void RecomendationsForUser(string genero)
     {
         db.Collection("Manga").WhereEqualTo("genero", genero).GetSnapshotAsync().ContinueWith(task =>
@@ -431,6 +436,46 @@ public class FirebasePageController : MonoBehaviour
 
             autorisSearch = true;
             //Debug.Log(new_manga.getAutor());
+        });
+    }
+
+    public void MangasSameAutor(string autor)
+    {
+        //Clear List
+        if (mangasSameAutor.Count != 0)
+        {
+            mangasSameAutor.Clear();
+        }
+        
+
+        db.Collection("Manga").WhereEqualTo("autor", autor).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<MangaClass> listMangas = new List<MangaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Manga info = documentSnapshot.ConvertTo<Manga>();
+                MangaClass element = new MangaClass();
+                element.autor = info.autor;
+                element.genero = info.genero;
+                element.id = info.id;
+                element.idioma = info.idioma;
+                element.paginas = info.paginas;
+                element.precio = info.precio;
+                element.resumen = info.resumen;
+                element.tamaño = info.tamaño;
+                element.titulo = info.titulo;
+                element.url = info.url;
+                element.valoracion = info.valoracion;
+
+                listMangas.Add(element);
+            }
+
+            foreach (MangaClass manga in listMangas)
+            {
+                mangasSameAutor.Add(manga);
+            }
+
+            mangasSameAutorState = true;
         });
     }
 
