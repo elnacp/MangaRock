@@ -10,6 +10,14 @@ public class PageController : MonoBehaviour
     public GameObject search;
     public GameObject notifications;
     public GameObject profile;
+    public GameObject genre;
+
+    [SerializeField] GameObject navigationBar;
+    [SerializeField] GameObject actionBarMenu;
+    [SerializeField] GameObject actionBarBackWhite;
+    [SerializeField] GameObject actionBarBackBlack;
+
+    private string actualPage;
 
     public void ChangePage(string name)
     {
@@ -27,8 +35,40 @@ public class PageController : MonoBehaviour
                 break;
             case "profile": profile.SetActive(true);
                 break;
-
         }
+
+        actualPage = name;
+    }
+
+    public void GoGenrePage(string category)
+    {
+        HideBarsAndShowBack();
+        genre.SetActive(true);
+        genre.GetComponent<GenreController>().GoCategory(category);
+    }
+
+    
+
+    public void BackButton()
+    {
+        ShowBarAndHideSubPages();
+    }
+
+    private void ShowBarAndHideSubPages()
+    {
+        ChangePage(actualPage);
+        navigationBar.SetActive(true);
+        actionBarMenu.SetActive(true);
+        actionBarBackBlack.SetActive(false);
+
+    }
+
+    private void HideBarsAndShowBack()
+    {
+        HidePages();
+        actionBarMenu.SetActive(false);
+        navigationBar.SetActive(false);
+        actionBarBackBlack.SetActive(true);
     }
 
     public void HidePages()
@@ -38,6 +78,7 @@ public class PageController : MonoBehaviour
         search.SetActive(false);
         notifications.SetActive(false);
         profile.SetActive(false);
+        genre.SetActive(false);
 
     }
 

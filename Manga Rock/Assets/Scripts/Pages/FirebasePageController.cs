@@ -11,6 +11,7 @@ public class FirebasePageController : MonoBehaviour
     List<MangaClass> topGratis;
     List<MangaClass> topPago;
     List<MangaClass> recomendaciones;
+    List<MangaClass> listCategoria = new List<MangaClass>();
 
     List<TopElement> listPago;
     List<TopElement> listGratis;
@@ -26,12 +27,14 @@ public class FirebasePageController : MonoBehaviour
     private bool recomendacionesFinish = false;
     private bool mangaisSearch = false;
     private bool autorisSearch = false;
+    private bool categoriaSearch = false;
 
 
     [SerializeField] NovedadesController novedadesController;
     [SerializeField] TopVentasController topVentas;
     [SerializeField] RecomendacionesController recomendacionesControlller;
     [SerializeField] SearchController searchController;
+    [SerializeField] GenreController genreController;
 
 
     private void Start()
@@ -102,6 +105,12 @@ public class FirebasePageController : MonoBehaviour
         {
             searchController.UpdateAutor(autorSearch);
             autorisSearch = false;
+        }
+
+        if(categoriaSearch)
+        {
+            genreController.AddInformation(listCategoria);
+            categoriaSearch = false;
         }
     }
 
@@ -303,6 +312,44 @@ public class FirebasePageController : MonoBehaviour
 
             
 
+        });
+    }
+
+    public void AskForCategoryMangas(string category)
+    {
+        if (listCategoria.Count != 0)
+        {
+            listCategoria.Clear();
+        }
+
+
+        db.Collection("Manga").WhereEqualTo("genero", category).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<MangaClass> listMangas = new List<MangaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Manga info = documentSnapshot.ConvertTo<Manga>();
+                MangaClass element = new MangaClass();
+                element.autor = info.autor;
+                element.genero = info.genero;
+                element.id = info.id;
+                element.idioma = info.idioma;
+                element.paginas = info.paginas;
+                element.precio = info.precio;
+                element.resumen = info.resumen;
+                element.tamaño = info.tamaño;
+                element.titulo = info.titulo;
+                element.url = info.url;
+                element.valoracion = info.valoracion;
+
+                listMangas.Add(element);
+            }
+
+            foreach (MangaClass manga in listMangas)
+            {
+                listCategoria.Add(manga);
+            }
+            categoriaSearch = true;
         });
     }
 

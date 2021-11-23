@@ -38,7 +38,7 @@ public class NavigationBarController : MonoBehaviour
 
         destination = bar.position;
 
-        GoSearch();
+        GoHome();
 
     }
 
@@ -46,8 +46,7 @@ public class NavigationBarController : MonoBehaviour
     {
         bar.position = Vector3.MoveTowards(bar.position, destination, speed * Time.deltaTime);
     }
-
-
+ 
     public void GoHome()
     {
         MoveNavigationBar(1);
