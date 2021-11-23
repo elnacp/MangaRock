@@ -15,6 +15,7 @@ public class MangaClass : MonoBehaviour
     public string titulo;
     public string url;
     public float valoracion;
+    public int idColeccion;
 
 
 }

@@ -28,5 +28,7 @@ public class Manga
     public string url { get; set; }
     [FirestoreProperty]
     public float valoracion { get; set; }
+    [FirestoreProperty]
+    public int idColeccion { get; set; }
 
 }

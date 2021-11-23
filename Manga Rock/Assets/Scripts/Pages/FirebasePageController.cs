@@ -19,7 +19,9 @@ public class FirebasePageController : MonoBehaviour
     List<MangaClass> mangasSearch = new List<MangaClass>();
     List<AutorClass> autorSearch = new List<AutorClass>();
     List<MangaClass> mangasSameAutor = new List<MangaClass>();
-   
+    List<MangaClass> mangasSameColection = new List<MangaClass>();
+
+
     private bool topListFinish = false;
     private bool novedadesFinish = false;
     private bool searchFinish = false;
@@ -30,6 +32,7 @@ public class FirebasePageController : MonoBehaviour
     private bool autorisSearch = false;
     private bool categoriaSearch = false;
     private bool mangasSameAutorState = false;
+    private bool mangasSameColectionState = false;
 
 
     [SerializeField] NovedadesController novedadesController;
@@ -118,6 +121,12 @@ public class FirebasePageController : MonoBehaviour
             detallesManga.ListMangasSameAutor(mangasSameAutor);
             mangasSameAutorState = false;
         }
+
+        if(mangasSameColectionState)
+        {
+            detallesManga.ListMangasSameColection(mangasSameColection);
+            mangasSameColectionState = false;
+        }
     }
 
 
@@ -164,6 +173,8 @@ public class FirebasePageController : MonoBehaviour
                 element.titulo = info.titulo;
                 element.url = info.url;
                 element.valoracion = info.valoracion;
+                element.idColeccion = info.idColeccion;
+
 
                 new_manga.Add(element);
             }
@@ -242,6 +253,8 @@ public class FirebasePageController : MonoBehaviour
                 element.titulo = info.titulo;
                 element.url = info.url;
                 element.valoracion = info.valoracion;
+                element.idColeccion = info.idColeccion;
+
 
                 new_manga.Add(element);
             }
@@ -297,6 +310,8 @@ public class FirebasePageController : MonoBehaviour
                 element.titulo = info.titulo;
                 element.url = info.url;
                 element.valoracion = info.valoracion;
+                element.idColeccion = info.idColeccion;
+
 
                 listMangas.Add(element);
             }
@@ -346,6 +361,8 @@ public class FirebasePageController : MonoBehaviour
                 element.titulo = info.titulo;
                 element.url = info.url;
                 element.valoracion = info.valoracion;
+                element.idColeccion = info.idColeccion;
+
 
                 listMangas.Add(element);
             }
@@ -393,6 +410,8 @@ public class FirebasePageController : MonoBehaviour
                 element.titulo = info.titulo;
                 element.url = info.url;
                 element.valoracion = info.valoracion;
+                element.idColeccion = info.idColeccion;
+
 
                 listMangas.Add(element);
             }
@@ -466,6 +485,7 @@ public class FirebasePageController : MonoBehaviour
                 element.titulo = info.titulo;
                 element.url = info.url;
                 element.valoracion = info.valoracion;
+                element.idColeccion = info.idColeccion;
 
                 listMangas.Add(element);
             }
@@ -479,4 +499,43 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    public void MangasSameColection(int idColeccion)
+    {
+        //Clear List
+        if (mangasSameColection.Count != 0)
+        {
+            mangasSameColection.Clear();
+        }
+
+        db.Collection("Manga").WhereEqualTo("idColeccion", idColeccion).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<MangaClass> listMangas = new List<MangaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Manga info = documentSnapshot.ConvertTo<Manga>();
+                MangaClass element = new MangaClass();
+                element.autor = info.autor;
+                element.genero = info.genero;
+                element.id = info.id;
+                element.idioma = info.idioma;
+                element.paginas = info.paginas;
+                element.precio = info.precio;
+                element.resumen = info.resumen;
+                element.tamaño = info.tamaño;
+                element.titulo = info.titulo;
+                element.url = info.url;
+                element.valoracion = info.valoracion;
+                element.idColeccion = info.idColeccion;
+
+                listMangas.Add(element);
+            }
+
+            foreach (MangaClass manga in listMangas)
+            {
+                mangasSameColection.Add(manga);
+            }
+
+            mangasSameColectionState = true;
+        });
+    }
 }
