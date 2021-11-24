@@ -38,7 +38,8 @@ public class NavigationBarController : MonoBehaviour
 
         destination = bar.position;
 
-        GoHome();
+        GoInit();
+        
 
     }
 
@@ -47,6 +48,12 @@ public class NavigationBarController : MonoBehaviour
         bar.position = Vector3.MoveTowards(bar.position, destination, speed * Time.deltaTime);
     }
  
+    public void GoInit()
+    {
+        MoveNavigationBar(6);
+        pageController.ChangePage("home");
+    }
+
     public void GoHome()
     {
         MoveNavigationBar(1);
@@ -85,7 +92,7 @@ public class NavigationBarController : MonoBehaviour
         switch (num)
         {
             case 1:
-                destination = new Vector3(home_pos.position.x + 15, bar.position.y);
+                destination = new Vector3(home_pos.position.x+15, bar.position.y);
                 home.GetComponent<StateButtonNavigationBar>().ActiveButton();
                 break;
             case 2:
@@ -103,6 +110,10 @@ public class NavigationBarController : MonoBehaviour
             case 5:
                 destination = new Vector3(profile_pos.position.x + 15, bar.position.y);
                 profile.GetComponent<StateButtonNavigationBar>().ActiveButton();
+                break;
+            case 6:
+                destination = new Vector3(home_pos.position.x + 30, bar.position.y);
+                home.GetComponent<StateButtonNavigationBar>().ActiveButton();
                 break;
         }
     }
