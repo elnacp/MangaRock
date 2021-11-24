@@ -14,10 +14,11 @@ public class PageController : MonoBehaviour
     [SerializeField] GameObject topVentas;
     [SerializeField] GameObject recomendacionesPage;
     [SerializeField] GameObject detallesManga;
+    [SerializeField] GameObject wishlist;
 
     [SerializeField] RectTransform parent;
 
-
+    [SerializeField] MenuSlider menuController;
     [SerializeField] GameObject navigationBar;
     [SerializeField] GameObject actionBarMenu;
     [SerializeField] GameObject actionBarBackWhite;
@@ -74,6 +75,13 @@ public class PageController : MonoBehaviour
         detallesManga.GetComponent<DetallesMangaPageController>().AddInformation(manga);
     }
     
+    public void GoWishList()
+    {
+        HideBarsAndShowBack();
+        wishlist.SetActive(true);
+        menuController.Menu();
+    }
+    
 
     public void BackButton()
     {
@@ -113,6 +121,7 @@ public class PageController : MonoBehaviour
         topVentas.SetActive(false);
         recomendacionesPage.SetActive(false);
         detallesManga.SetActive(false);
+        wishlist.SetActive(false);
     }
 
 
