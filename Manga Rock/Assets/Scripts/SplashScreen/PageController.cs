@@ -15,6 +15,7 @@ public class PageController : MonoBehaviour
     [SerializeField] GameObject recomendacionesPage;
     [SerializeField] GameObject detallesManga;
     [SerializeField] GameObject wishlist;
+    [SerializeField] GameObject suscription;
 
     [SerializeField] RectTransform parent;
 
@@ -79,9 +80,16 @@ public class PageController : MonoBehaviour
     {
         HideBarsAndShowBack();
         wishlist.SetActive(true);
-        menuController.Menu();
+        menuController.Menu();   //hide menu
     }
     
+    public void GoSuscription()
+    {
+        HideBarsAndShowBack();
+        suscription.SetActive(true);
+        menuController.Menu();  //hide menu
+    }
+
 
     public void BackButton()
     {
@@ -122,6 +130,7 @@ public class PageController : MonoBehaviour
         recomendacionesPage.SetActive(false);
         detallesManga.SetActive(false);
         wishlist.SetActive(false);
+        suscription.SetActive(false);
     }
 
 
