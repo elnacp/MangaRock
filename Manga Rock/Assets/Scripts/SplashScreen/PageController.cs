@@ -26,6 +26,8 @@ public class PageController : MonoBehaviour
     [SerializeField] GameObject actionBarBackWhite;
     [SerializeField] GameObject actionBarBackBlack;
 
+    [SerializeField] FirebasePageController firebase;
+
     private string actualPage;
 
     public void ChangePage(string name)
@@ -82,6 +84,7 @@ public class PageController : MonoBehaviour
         HideBarsAndShowBack();
         wishlist.SetActive(true);
         menuController.Menu();   //hide menu
+        firebase.WishList();
     }
     
     public void GoSuscription()

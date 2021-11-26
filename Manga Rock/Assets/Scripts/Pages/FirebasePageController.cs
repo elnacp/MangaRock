@@ -23,6 +23,7 @@ public class FirebasePageController : MonoBehaviour
     List<MangaClass> mangasSameCategory = new List<MangaClass>();
     List<UserClass> listUsers = new List<UserClass>();
     List<ComentarioClass> listComentarios;
+    List<MangaClass> wishlist = new List<MangaClass>();
 
     private bool topListFinish = false;
     private bool novedadesFinish = false;
@@ -39,6 +40,8 @@ public class FirebasePageController : MonoBehaviour
     private bool userinfodone = false;
     private bool logoutUser = false;
     private bool comentariosProfile = false;
+    private bool wishlistSearchDone = false;
+
 
     private bool isLogged = false;
     private bool ask = false;
@@ -52,6 +55,7 @@ public class FirebasePageController : MonoBehaviour
     [SerializeField] DetallesMangaPageController detallesManga;
     [SerializeField] HomeInit homeinit;
     [SerializeField] ProfileController profileController;
+    [SerializeField] WishlistController wishController;
 
 
     private void Start()
@@ -67,10 +71,17 @@ public class FirebasePageController : MonoBehaviour
         listComentarios = new List<ComentarioClass>();
 
         UserLogged();
+        
     }
 
     private void Update()
     {
+
+        if(wishlistSearchDone)
+        {
+            wishController.AddMangas(wishlist);
+            wishlistSearchDone = false;
+        }
 
         if(comentariosProfile)
         {
@@ -167,6 +178,41 @@ public class FirebasePageController : MonoBehaviour
             detallesManga.ListMangasSameCategory(mangasSameCategory);
             mangasSameCategoryState = false;
         }
+    }
+
+    public void WishList()
+    {
+        db.Collection("Wishlist").GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<MangaClass> new_manga = new List<MangaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Manga info = documentSnapshot.ConvertTo<Manga>();
+                MangaClass element = new MangaClass();
+                element.autor = info.autor;
+                element.genero = info.genero;
+                element.id = info.id;
+                element.idioma = info.idioma;
+                element.paginas = info.paginas;
+                element.precio = info.precio;
+                element.resumen = info.resumen;
+                element.tamaño = info.tamaño;
+                element.titulo = info.titulo;
+                element.url = info.url;
+                element.valoracion = info.valoracion;
+                element.idColeccion = info.idColeccion;
+
+
+                new_manga.Add(element);
+            }
+
+            foreach (MangaClass i in new_manga)
+            {
+                wishlist.Add(i);
+            }
+            wishlistSearchDone = true;
+            
+        });
     }
 
     private void UserLogged()
