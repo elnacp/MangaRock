@@ -23,7 +23,7 @@ public class FirebasePageController : MonoBehaviour
     List<MangaClass> mangasSameCategory = new List<MangaClass>();
     List<UserClass> listUsers = new List<UserClass>();
     List<ComentarioClass> listComentarios;
-    List<MangaClass> wishlist = new List<MangaClass>();
+    List<WishlistClass> wishlist = new List<WishlistClass>();
 
     private bool topListFinish = false;
     private bool novedadesFinish = false;
@@ -184,11 +184,12 @@ public class FirebasePageController : MonoBehaviour
     {
         db.Collection("Wishlist").GetSnapshotAsync().ContinueWith(task =>
         {
-            List<MangaClass> new_manga = new List<MangaClass>();
+            List<WishlistClass> new_manga = new List<WishlistClass>();
             foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
             {
-                Manga info = documentSnapshot.ConvertTo<Manga>();
-                MangaClass element = new MangaClass();
+                Wishlist info = documentSnapshot.ConvertTo<Wishlist>();
+                WishlistClass element = new WishlistClass();
+                element.username = info.username;
                 element.autor = info.autor;
                 element.genero = info.genero;
                 element.id = info.id;
@@ -206,7 +207,7 @@ public class FirebasePageController : MonoBehaviour
                 new_manga.Add(element);
             }
 
-            foreach (MangaClass i in new_manga)
+            foreach (WishlistClass i in new_manga)
             {
                 wishlist.Add(i);
             }

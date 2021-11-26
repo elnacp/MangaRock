@@ -7,10 +7,10 @@ public class WishlistController : MonoBehaviour
     [SerializeField] Transform content;
     [SerializeField] GameObject prefab;
    
-    public void AddMangas(List<MangaClass> wishlist)
+    public void AddMangas(List<WishlistClass> wishlist)
     {
         int i = 1;
-        foreach(MangaClass manga in wishlist)
+        foreach(WishlistClass manga in wishlist)
         {
             GameObject element = Instantiate(prefab, content);
             element.GetComponent<WishlistPrefab>().AddInformation(manga, i);

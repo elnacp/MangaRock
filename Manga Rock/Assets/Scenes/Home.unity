@@ -12959,6 +12959,7 @@ MonoBehaviour:
   actionBarMenu: {fileID: 1425285544}
   actionBarBackWhite: {fileID: 1899483086}
   actionBarBackBlack: {fileID: 773633276}
+  firebase: {fileID: 921228427}
 --- !u!1 &721487710
 GameObject:
   m_ObjectHideFlags: 0

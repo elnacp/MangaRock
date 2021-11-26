@@ -11,16 +11,16 @@ public class WishlistPrefab : MonoBehaviour
     [SerializeField] Text valoracio;
     [SerializeField] Text price;
 
-    MangaClass manga;
+    WishlistClass manga;
 
-    public void AddInformation(MangaClass manga, int index)
+    public void AddInformation(WishlistClass manga, int index)
     {
         number.text = index.ToString();
         StartCoroutine(GetImage(manga.url));
         autor.text = manga.autor;
         valoracio.text = manga.valoracion.ToString();
         price.text = manga.precio + "€";
-        this.manga = manga;
+        //this.manga = manga;
     }
 
     IEnumerator GetImage(string url)
