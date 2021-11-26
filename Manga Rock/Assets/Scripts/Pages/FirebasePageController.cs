@@ -21,7 +21,7 @@ public class FirebasePageController : MonoBehaviour
     List<MangaClass> mangasSameAutor = new List<MangaClass>();
     List<MangaClass> mangasSameColection = new List<MangaClass>();
     List<MangaClass> mangasSameCategory = new List<MangaClass>();
-
+    List<UserClass> listUsers = new List<UserClass>();
 
     private bool topListFinish = false;
     private bool novedadesFinish = false;
@@ -35,6 +35,11 @@ public class FirebasePageController : MonoBehaviour
     private bool mangasSameAutorState = false;
     private bool mangasSameColectionState = false;
     private bool mangasSameCategoryState = false;
+    private bool userinfodone = false;
+    private bool logoutUser = false;
+
+    private bool isLogged = false;
+    private bool ask = false;
 
 
     [SerializeField] NovedadesController novedadesController;
@@ -43,6 +48,7 @@ public class FirebasePageController : MonoBehaviour
     [SerializeField] SearchController searchController;
     [SerializeField] GenreController genreController;
     [SerializeField] DetallesMangaPageController detallesManga;
+    [SerializeField] HomeInit homeinit;
 
 
     private void Start()
@@ -55,11 +61,27 @@ public class FirebasePageController : MonoBehaviour
         topGratis = new List<MangaClass>();
         topPago = new List<MangaClass>();
         recomendaciones = new List<MangaClass>();
+
+        UserLogged();
     }
 
     private void Update()
     {
-        if(novedadesFinish)
+
+        if(logoutUser)
+        {
+            homeinit.ReturnLogIn();
+            logoutUser = false;
+        }
+
+        if(userinfodone)
+        {
+            homeinit.SaveUserLogged(listUsers);
+            userinfodone = false;
+        }
+
+
+        if (novedadesFinish)
         {
             MangasForNovedades();
             novedadesFinish = false;
@@ -137,7 +159,59 @@ public class FirebasePageController : MonoBehaviour
         }
     }
 
+    private void UserLogged()
+    {
+        db.Collection("User").WhereEqualTo("loggeado", "yes").GetSnapshotAsync().ContinueWith((task) =>
+        {
 
+            QuerySnapshot query = task.Result;
+            List<UserClass> users = new List<UserClass>();
+            foreach (DocumentSnapshot documentSnapshot in query.Documents)
+            {
+                Users info = documentSnapshot.ConvertTo<Users>();
+                UserClass element = new UserClass();
+                element.contraseña = info.contraseña;
+                element.loggeado = info.loggeado;
+                element.descripcion = info.descripcion;
+                element.email = info.email;
+                element.followers = info.followers;
+                element.id = info.id;
+                element.following = info.following;
+                element.idMangas = info.idMangas;
+                element.generoFavorito = info.generoFavorito;
+                element.imagen = info.imagen;
+                element.loggeado = info.loggeado;
+                element.username = info.username;
+
+                users.Add(element);
+
+            }
+            foreach (UserClass element in users)
+            {
+                listUsers.Add(element);
+            }
+            userinfodone = true;
+
+        });
+
+
+    }
+
+    public void UserLogOut()
+    {
+
+        db.Collection("User").WhereEqualTo("email", homeinit.GetMail()).GetSnapshotAsync().ContinueWith((task) =>
+        {
+            QuerySnapshot querySnapShot = task.Result;
+            foreach (DocumentSnapshot document in querySnapShot.Documents)
+            {
+                document.Reference.UpdateAsync("loggeado", "no").ContinueWith(task =>
+                {
+                    logoutUser = true;
+                });
+            }
+        });
+    }
     public void GetNovedades()
     {
         db.Collection("Novedades").GetSnapshotAsync().ContinueWith(task =>

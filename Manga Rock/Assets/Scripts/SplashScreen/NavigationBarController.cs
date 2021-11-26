@@ -38,7 +38,7 @@ public class NavigationBarController : MonoBehaviour
 
         destination = bar.position;
 
-        GoInit();
+        GoProfile();
         
 
     }

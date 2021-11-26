@@ -20,10 +20,12 @@ public class FirebaseController : MonoBehaviour
     private bool exitNoEmail = false;
     private bool usernameNoexist = false;
     private bool userAdded = false;
+    private bool exitOnMail = false;
 
     private string username;
     private string email;
     private string password;
+    private string verify_password;
 
     // Start is called before the first frame update
     void Start()
@@ -76,10 +78,13 @@ public class FirebaseController : MonoBehaviour
 
     }
 
+    
+
     public void UserLogIn(string email, string password)
     {
+        this.verify_password = password;
         
-        db.Collection("Users").WhereEqualTo("email", email).WhereEqualTo("contraseña", password).GetSnapshotAsync().ContinueWith((task) =>
+        db.Collection("User").WhereEqualTo("email", email).GetSnapshotAsync().ContinueWith((task) =>
         {
             if(task.IsCompleted)
             {
@@ -88,9 +93,27 @@ public class FirebaseController : MonoBehaviour
                     error = true;
                 }
 
+                bool lookData = false;
                 foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
                 {
-                    exitonlogin = true;               
+                    foreach (KeyValuePair<string, object> pair in documentSnapshot.ToDictionary())
+                    {
+                        /*if(pair.Value.ToString() == password)
+                        {
+                            exitonlogin = true;
+                        }*/
+                        if(pair.Key == "contraseña")
+                        {
+                            lookData = true;
+                        }
+                        if (pair.Value.ToString() == password && lookData)
+                        {
+                            exitonlogin = true;
+                            lookData = false;
+                        }
+                    }
+
+                    //exitonlogin = true;
                 }
             }
             else
@@ -112,9 +135,24 @@ public class FirebaseController : MonoBehaviour
 
     }
 
+    public void Loggear(string email)
+    {
+        db.Collection("User").WhereEqualTo("email", email).GetSnapshotAsync().ContinueWith((task) =>
+        {
+            QuerySnapshot querySnapShot = task.Result;
+            foreach(DocumentSnapshot document in querySnapShot.Documents)
+            {
+                document.Reference.UpdateAsync("loggeado", "yes").ContinueWith(task =>
+                {
+                    Debug.Log("Update");
+                });
+            }    
+        });
+    }
+
     public void EmailValidation()
     {
-        db.Collection("Users").WhereEqualTo("email", email).GetSnapshotAsync().ContinueWith((task) =>
+        db.Collection("User").WhereEqualTo("email", email).GetSnapshotAsync().ContinueWith((task) =>
         {
             if (task.IsCompleted)
             {
@@ -138,7 +176,7 @@ public class FirebaseController : MonoBehaviour
 
     public void UsernameValidation()
     {
-        db.Collection("Users").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith((task) =>
+        db.Collection("User").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith((task) =>
         {
             if (task.IsCompleted)
             {
@@ -165,12 +203,18 @@ public class FirebaseController : MonoBehaviour
         user = new Dictionary<string, object>
         {
             {"contraseña", password},
+            {"descripcion", ""},
             {"email", email},
+            {"followers", 0 },
+            {"following", null },
+            {"generoFavorito", "Aventura"},
+            {"idMangas", null },
+            {"imagen", "https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2018/08/fotos-perfil-whatsapp_16.jpg?itok=fl2H3Opv" },
+            {"loggeado", "no"},
             {"username", username}
-
         };
 
-        db.Collection("Users").AddAsync(user).ContinueWith(task =>
+        db.Collection("User").AddAsync(user).ContinueWith(task =>
         {
             if(task.IsCompleted)
             {

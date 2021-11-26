@@ -53,6 +53,7 @@ public class LoginController : MonoBehaviour
     {
         //Change scene
         SceneManager.LoadScene("Home");
+        firebase_controller.Loggear(email.text);
     }
 
     public void LogIn()
