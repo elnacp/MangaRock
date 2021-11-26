@@ -483,7 +483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4062737736303931558}
   - component: {fileID: 4746924818784863699}
-  - component: {fileID: 6525685529975112413}
+  - component: {fileID: 3428125872432615338}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -518,7 +518,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2880245861458906442}
   m_CullTransparentMesh: 1
---- !u!114 &6525685529975112413
+--- !u!114 &3428125872432615338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -527,27 +527,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 2880245861458906442}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &2888040333571893794
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +557,7 @@ GameObject:
   - component: {fileID: 3952181925693266118}
   - component: {fileID: 3201456669363135216}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Likes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -664,7 +661,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 123.4, y: 25}
+  m_SizeDelta: {x: 123.4, y: 21.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2429314445647717245
 MonoBehaviour:
@@ -803,7 +800,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 20}
+  m_SizeDelta: {x: 160, y: 19.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &812498335059295432
 CanvasRenderer:
@@ -1480,7 +1477,7 @@ GameObject:
   - component: {fileID: 2977647895268616542}
   - component: {fileID: 6252108199522510611}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Dislikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1560,6 +1557,7 @@ GameObject:
   - component: {fileID: 6139138157139128752}
   - component: {fileID: 7223763693629765236}
   - component: {fileID: 2707820921968113339}
+  - component: {fileID: 3241403327334458980}
   m_Layer: 5
   m_Name: Comment
   m_TagString: Untagged
@@ -1671,6 +1669,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3241403327334458980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9153236445192831632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0078b9356f236429167e6edbb8ca72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 3428125872432615338}
+  likes: {fileID: 3201456669363135216}
+  dislikes: {fileID: 6252108199522510611}
+  username: {fileID: 3998345388886985974}
+  textComment: {fileID: 8963386618475729451}
 --- !u!1 &9160866924655690785
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,6 +22,7 @@ public class FirebasePageController : MonoBehaviour
     List<MangaClass> mangasSameColection = new List<MangaClass>();
     List<MangaClass> mangasSameCategory = new List<MangaClass>();
     List<UserClass> listUsers = new List<UserClass>();
+    List<ComentarioClass> listComentarios;
 
     private bool topListFinish = false;
     private bool novedadesFinish = false;
@@ -37,6 +38,7 @@ public class FirebasePageController : MonoBehaviour
     private bool mangasSameCategoryState = false;
     private bool userinfodone = false;
     private bool logoutUser = false;
+    private bool comentariosProfile = false;
 
     private bool isLogged = false;
     private bool ask = false;
@@ -49,6 +51,7 @@ public class FirebasePageController : MonoBehaviour
     [SerializeField] GenreController genreController;
     [SerializeField] DetallesMangaPageController detallesManga;
     [SerializeField] HomeInit homeinit;
+    [SerializeField] ProfileController profileController;
 
 
     private void Start()
@@ -61,12 +64,19 @@ public class FirebasePageController : MonoBehaviour
         topGratis = new List<MangaClass>();
         topPago = new List<MangaClass>();
         recomendaciones = new List<MangaClass>();
+        listComentarios = new List<ComentarioClass>();
 
         UserLogged();
     }
 
     private void Update()
     {
+
+        if(comentariosProfile)
+        {
+            profileController.AddComentarios(listComentarios);
+            comentariosProfile = false;
+        }
 
         if(logoutUser)
         {
@@ -195,6 +205,72 @@ public class FirebasePageController : MonoBehaviour
         });
 
 
+    }
+
+    public void ComentariosUser(string username)
+    {
+
+        db.Collection("Comentario").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
+        {
+            QuerySnapshot query = task.Result;
+            List<ComentarioClass> comentarios = new List<ComentarioClass>();
+            foreach (DocumentSnapshot documentSnapshot in query.Documents)
+            {
+                ComentarioFirebase info = documentSnapshot.ConvertTo<ComentarioFirebase>();
+                ComentarioClass element = new ComentarioClass();
+                element.text = info.Comentario;
+                element.username = info.username;
+                element.idManga = info.idManga;
+                element.likes = info.likes;
+                element.valoracion = info.valoracion;
+                element.dislikes = info.dislikes;
+                element.id = info.IdComentario;
+
+                comentarios.Add(element);
+
+            }
+
+            foreach (ComentarioClass element in comentarios)
+            {
+                listComentarios.Add(element);
+            }
+
+            comentariosProfile = true;
+
+
+        });
+
+        /*Debug.Log(username);
+        db.Collection("Comentario").GetSnapshotAsync().ContinueWith((task) =>
+        {
+
+
+            /*QuerySnapshot query = task.Result;
+            List<ComentarioClass> comentarios = new List<ComentarioClass>();
+            foreach (DocumentSnapshot documentSnapshot in query.Documents)
+            {
+                ComentarioFirebase info = documentSnapshot.ConvertTo<ComentarioFirebase>();
+                ComentarioClass element = new ComentarioClass();
+                element.comentario = info.comentario;
+                element.dislikes = info.Dislikes;
+                element.id = info.IdComentario;
+                element.idManga = info.IdManga;
+                element.likes = info.Likes;
+                element.valoracion = info.Valoracion;
+                element.fecha = info.fecha;
+                element.username = info.username;
+                
+                comentarios.Add(element);
+
+            }
+
+            Debug.Log("Hello");
+            foreach (ComentarioClass element in comentarios)
+            {
+                listComentarios.Add(element);
+            }
+            comentariosProfile = true;
+        });*/
     }
 
     public void UserLogOut()

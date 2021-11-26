@@ -36,7 +36,7 @@ public class ProfileController : MonoBehaviour
         num_mangas.text = data.idMangas.Count.ToString();
         //Comentarios
 
-
+        db.ComentariosUser(data.username);
 
         num_followers.text = data.followers.ToString();
         num_following.text = data.following.Count.ToString();
@@ -48,5 +48,23 @@ public class ProfileController : MonoBehaviour
         WWW www = new WWW(url);
         yield return www;
         image.texture = www.texture;
+    }
+
+    public void AddComentarios(List<ComentarioClass> comentarios)
+    {
+        num_comentarios.text = comentarios.Count.ToString();
+        //Debug.Log(comentarios.Count);
+        int i = 0;
+        foreach(ComentarioClass comment in comentarios)
+        {
+            if( i < 10)
+            {
+                GameObject element = Instantiate(prefabComents, contentComments);
+                element.GetComponent<ComentarioController>().AddInformation(comment, user.imagen);
+            }
+            i++;
+            
+        }
+        
     }
 }
