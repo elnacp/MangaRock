@@ -49,8 +49,6 @@ public class SearchController : MonoBehaviour
     {
         HideLastSearch();
 
-        Debug.Log(textToSeach.text);
-
         if(textToSeach.text != "")
         {
             db.SearchInfo(textToSeach.text);
