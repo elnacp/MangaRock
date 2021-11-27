@@ -21,13 +21,9 @@ public class RecomendacionesController : MonoBehaviour
         
     }
 
-    public void Update()
+    public void GetRecomendaciones()
     {
-        if(!ask)
-        {
-            db.RecomendationsForUser(genreFav);
-            ask = true;
-        }
+        db.RecomendationsForUser(genreFav);
     }
 
     public void AddInformation(List<MangaClass> list)

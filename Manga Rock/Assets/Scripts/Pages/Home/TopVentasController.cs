@@ -40,13 +40,10 @@ public class TopVentasController : MonoBehaviour
         pageController.GoTopList(listpago.ToArray(), listMangasPago, listgratis.ToArray(), listMangasGratis);
     }
 
-    private void Update()
+   
+    public void GetTopVentas()
     {
-        if(!ask)
-        {
-            db.AskTopList();     
-            ask = true;
-        }
+        db.AskTopList();
     }
 
     public void TopListData(List<TopElement> pago, List<TopElement> gratis)

@@ -17,19 +17,19 @@ public class HomeInit : MonoBehaviour
 
     private void Start()
     {
-        
+        userLogged = new UserClass();
     }
 
 
     public void SaveUserLogged(List<UserClass> data)
     {
         UserClass[] user = data.ToArray();
-        this.userLogged = user[0];
+        userLogged = user[0];
 
         username.text = this.userLogged.username;
         email.text = this.userLogged.email;
         StartCoroutine(GetImage(this.userLogged.imagen));
-        profilePage.Setuser(user[0]);
+        //profilePage.Setuser(user[0]);
     }
 
     public UserClass GetUser()

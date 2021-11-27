@@ -31,7 +31,7 @@ public class NovedadesController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetNovedades();
+        //GetNovedades();
         listMangas = new List<MangaClass>();
     }
 
@@ -51,7 +51,7 @@ public class NovedadesController : MonoBehaviour
 
     }
 
-    private void GetNovedades()
+    public void GetNovedades()
     {
         db.GetNovedades();
     }

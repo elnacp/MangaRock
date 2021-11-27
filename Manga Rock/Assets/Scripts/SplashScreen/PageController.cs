@@ -38,6 +38,7 @@ public class PageController : MonoBehaviour
         switch(name)
         {
             case "home": home.SetActive(true);
+                home.GetComponent<HomeController>().AddInformation();
                 break;
             case "library": library.SetActive(true);
                 break;
@@ -85,7 +86,7 @@ public class PageController : MonoBehaviour
         HideBarsAndShowBack();
         wishlist.SetActive(true);
         menuController.Menu();   //hide menu
-        firebase.WishList(userData.GetUser().username);
+        firebase.ShowWishList(userData.GetUser().username);
     }
     
     public void GoSuscription()

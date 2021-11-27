@@ -10,12 +10,11 @@ public class HomeController : MonoBehaviour
     [SerializeField] TopVentasController p_topventas;
 
 
-    // Start is called before the first frame update
-    void Start()
+    public void AddInformation()
     {
-     
-        
-
+        p_novedades.GetNovedades();
+        p_recomendaciones.GetRecomendaciones();
+        p_topventas.GetTopVentas();
     }
 
 

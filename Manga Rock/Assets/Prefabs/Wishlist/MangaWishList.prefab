@@ -412,8 +412,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MangaWithPriceController, Assembly-CSharp
+      - m_Target: {fileID: 2341059420078411726}
+        m_TargetAssemblyTypeName: WishlistPrefab, Assembly-CSharp
         m_MethodName: MangaDetail
         m_Mode: 1
         m_Arguments:

@@ -18,6 +18,8 @@ public class FirebasePageController : MonoBehaviour
 
     List<MangaClass> mangasSearch = new List<MangaClass>();
     List<AutorClass> autorSearch = new List<AutorClass>();
+    List<UserClass> usersSearch = new List<UserClass>();
+
     List<MangaClass> mangasSameAutor = new List<MangaClass>();
     List<MangaClass> mangasSameColection = new List<MangaClass>();
     List<MangaClass> mangasSameCategory = new List<MangaClass>();
@@ -42,6 +44,9 @@ public class FirebasePageController : MonoBehaviour
     private bool comentariosProfile = false;
     private bool wishlistSearchDone = false;
     private bool deleteWishListElement = false;
+    private bool wishlistMangaexist = false;
+    private bool stateWishlistManga = false;
+    private bool userisSearch = false;
 
 
     private bool isLogged = false;
@@ -78,6 +83,12 @@ public class FirebasePageController : MonoBehaviour
 
     private void Update()
     {
+
+        if(stateWishlistManga)
+        {
+            detallesManga.StateWishButton(wishlistMangaexist);
+            stateWishlistManga = false;
+        }
 
         if(deleteWishListElement)
         {
@@ -163,6 +174,12 @@ public class FirebasePageController : MonoBehaviour
             autorisSearch = false;
         }
 
+        if(userisSearch)
+        {
+            searchController.UpdateUsers(usersSearch);
+            userisSearch = false;
+        }
+
         if(categoriaSearch)
         {
             genreController.AddInformation(listCategoria);
@@ -188,7 +205,7 @@ public class FirebasePageController : MonoBehaviour
         }
     }
 
-    public void WishList(string username)
+    public void ShowWishList(string username)
     {
         wishlist.Clear();
 
@@ -244,6 +261,76 @@ public class FirebasePageController : MonoBehaviour
 
             deleteWishListElement = true;
         });
+    }
+
+    public void AddToWishlist(WishlistClass manga)
+    {
+        //db.Collection("Wishlist").AddAsync(manga);
+        Dictionary<string, object> new_manga = new Dictionary<string, object>
+        {
+            {"autor", manga.autor},
+            {"genero", manga.genero},
+            {"id", manga.id},
+            {"idColeccion", manga.idColeccion},
+            {"idioma", manga.idioma},
+            {"paginas", manga.paginas},
+            {"precio", manga.precio},
+            {"resumen", manga.resumen},
+            {"tamaño", manga.tamaño},
+            {"titulo", manga.titulo},
+            {"url", manga.url},
+            {"username", manga.username},
+            {"valoracion", manga.valoracion}
+        };
+        db.Collection("Wishlist").AddAsync(new_manga).ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                Debug.Log("manga is added");
+            }
+            else
+            {
+                Debug.Log("user is not added");
+            }
+        });
+
+    }
+    public void DeleteMangaFromWishlist(WishlistClass manga)
+    {
+        db.Collection("Wishlist").WhereEqualTo("titulo", manga.titulo).GetSnapshotAsync().ContinueWith(task =>
+        {
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Wishlist info = documentSnapshot.ConvertTo<Wishlist>();
+                if (info.username == manga.username)
+                {
+                    documentSnapshot.Reference.DeleteAsync();
+                    Debug.Log("Delete");
+                }
+            }
+        });
+    }
+
+    public void InfoWishlist(WishlistClass manga)
+    {
+        wishlistMangaexist = false;
+        db.Collection("Wishlist").WhereEqualTo("titulo", manga.titulo).GetSnapshotAsync().ContinueWith(task =>
+        {
+            if (task.Result.Count != 0)
+            {
+                foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+                {
+                    Wishlist info = documentSnapshot.ConvertTo<Wishlist>();
+                    if (info.username == manga.username)
+                    {
+                        //Ya esta en la lista
+                        wishlistMangaexist = true;
+                    }
+                }
+            }
+            stateWishlistManga = true;
+        });
+
     }
 
     private void UserLogged()
@@ -615,7 +702,7 @@ public class FirebasePageController : MonoBehaviour
         AskForMangas(search);
         //AskForCollections();
         AskForAuthors(search);
-        //AskForUsers();
+        AskForUsersSearch(search);
     }
 
     private void AskForMangas(string title)
@@ -692,6 +779,43 @@ public class FirebasePageController : MonoBehaviour
             //Debug.Log(new_manga.getAutor());
         });
     }
+
+    private void AskForUsersSearch(string username)
+    {
+
+        if (usersSearch.Count != 0)
+        {
+            usersSearch.Clear();
+        }
+        db.Collection("User").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<UserClass> list = new List<UserClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Users info = documentSnapshot.ConvertTo<Users>();
+                UserClass element = new UserClass();
+                element.contraseña = info.contraseña;
+                element.descripcion = info.descripcion;
+                element.email = info.email;
+                element.followers = info.followers;
+                element.idMangas = info.idMangas;
+                element.generoFavorito = info.generoFavorito;
+                element.imagen = info.imagen;
+                element.loggeado = info.loggeado;
+                element.username = info.username;
+
+                list.Add(element);
+            }
+
+            foreach (UserClass element in list)
+            {
+                usersSearch.Add(element);
+            }
+
+            userisSearch = true;
+        });
+    }
+
 
     public void MangasSameAutor(string autor)
     {

@@ -22,6 +22,13 @@ public class DetallesMangaPageController : MonoBehaviour
     [SerializeField] GameObject mangaPrefab;
 
     [SerializeField] FirebasePageController firebase;
+    [SerializeField] HomeInit homeinit;
+
+    [SerializeField] Button wishlist_button;
+
+    MangaClass mangaData = new MangaClass();
+    WishlistClass mangaWishlist;
+    private bool isAdded = false;
 
     public void AddInformation(MangaClass manga)
     {
@@ -50,6 +57,26 @@ public class DetallesMangaPageController : MonoBehaviour
         firebase.MangasSameColection(manga.idColeccion);
         firebase.MangasSameCategory(manga.genero);
 
+        mangaData = manga;
+
+
+        mangaWishlist = new WishlistClass();
+        mangaWishlist.username = homeinit.GetUser().username;
+        mangaWishlist.autor = manga.autor;
+        mangaWishlist.genero = manga.genero;
+        mangaWishlist.id = manga.id;
+        mangaWishlist.idioma = manga.idioma;
+        mangaWishlist.paginas = manga.paginas;
+        mangaWishlist.precio = manga.precio;
+        mangaWishlist.resumen = manga.resumen;
+        mangaWishlist.tamaño = manga.tamaño;
+        mangaWishlist.titulo = manga.titulo;
+        mangaWishlist.url = manga.url;
+        mangaWishlist.valoracion = manga.valoracion;
+        mangaWishlist.idColeccion = manga.idColeccion;
+
+        firebase.InfoWishlist(mangaWishlist);
+
     }
 
     IEnumerator GetImage(string url)
@@ -66,6 +93,20 @@ public class DetallesMangaPageController : MonoBehaviour
         {
             GameObject prefab = Instantiate(mangaPrefab, contentMangasSameAutor);
             AddInformationPrefab(prefab, element);
+        }
+    }
+
+    public void StateWishButton(bool state)
+    {
+        if(state)
+        {
+            wishlist_button.GetComponent<WishlistButtonAnimation>().WishListButtonActive();
+            isAdded = true;
+        }
+        else
+        {
+            wishlist_button.GetComponent<WishlistButtonAnimation>().WishListButtonDeactive();
+            isAdded = false;
         }
     }
 
@@ -102,7 +143,42 @@ public class DetallesMangaPageController : MonoBehaviour
         }
     }
 
-    
+    public void AddOrRemove()
+    {
+        if( isAdded )
+        {
+            isAdded = false;
+        }
+        else
+        {
+            isAdded = true;
+        }
+
+        if (isAdded)
+        {
+            AddToWishlist();
+            Debug.Log("Add");
+        }
+        else
+        {
+            DeleteFromWishlist();
+            Debug.Log("Remove");
+        }
+    }
+
+    private void AddToWishlist()
+    {
+        firebase.AddToWishlist(mangaWishlist);
+        wishlist_button.GetComponent<WishlistButtonAnimation>().WishListButtonActive();
+    }
+
+    private void DeleteFromWishlist()
+    {
+        firebase.DeleteMangaFromWishlist(mangaWishlist);
+        wishlist_button.GetComponent<WishlistButtonAnimation>().WishListButtonDeactive();
+    }
+
+
 
 
 }

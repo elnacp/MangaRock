@@ -75,6 +75,23 @@ public class SearchController : MonoBehaviour
         }
     }
 
+    public void UpdateUsers(List<UserClass> users)
+    {
+        DeleteChildList(contentPerfiles);
+        if(users.Count == 0)
+        {
+            Instantiate(contentNotFound, contentPerfiles);
+        }
+        else
+        {
+            foreach(UserClass element in users)
+            {
+                GameObject prefab = Instantiate(profilePrefab, contentPerfiles);
+                prefab.GetComponent<ProfilePrefabController>().AddData(element.username, element.imagen);
+            }
+        }
+    }
+
     public void UpdateMangaList(List<MangaClass> mangas)
     {
         DeleteChildList(contentMangas);
