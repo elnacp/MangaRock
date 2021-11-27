@@ -41,10 +41,12 @@ public class FirebasePageController : MonoBehaviour
     private bool logoutUser = false;
     private bool comentariosProfile = false;
     private bool wishlistSearchDone = false;
+    private bool deleteWishListElement = false;
 
 
     private bool isLogged = false;
     private bool ask = false;
+    private string titleWishlistToDelete = "";
 
 
     [SerializeField] NovedadesController novedadesController;
@@ -76,6 +78,12 @@ public class FirebasePageController : MonoBehaviour
 
     private void Update()
     {
+
+        if(deleteWishListElement)
+        {
+            wishController.UpdateWishlist(titleWishlistToDelete);
+            deleteWishListElement = true;
+        }
 
         if(wishlistSearchDone)
         {
@@ -180,9 +188,12 @@ public class FirebasePageController : MonoBehaviour
         }
     }
 
-    public void WishList()
+    public void WishList(string username)
     {
-        db.Collection("Wishlist").GetSnapshotAsync().ContinueWith(task =>
+        wishlist.Clear();
+
+
+        db.Collection("Wishlist").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
         {
             List<WishlistClass> new_manga = new List<WishlistClass>();
             foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
@@ -213,6 +224,25 @@ public class FirebasePageController : MonoBehaviour
             }
             wishlistSearchDone = true;
             
+        });
+    }
+
+    public void DeleteMangaWishlist(WishlistClass manga)
+    {
+        db.Collection("Wishlist").WhereEqualTo("titulo", manga.titulo).GetSnapshotAsync().ContinueWith(task =>
+        {
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Wishlist info = documentSnapshot.ConvertTo<Wishlist>();
+                if(info.username == manga.username)
+                {
+                    documentSnapshot.Reference.DeleteAsync();
+                    Debug.Log("Delete");
+                    titleWishlistToDelete = manga.titulo;
+                }
+            }
+
+            deleteWishListElement = true;
         });
     }
 

@@ -20,7 +20,8 @@ public class WishlistPrefab : MonoBehaviour
         autor.text = manga.autor;
         valoracio.text = manga.valoracion.ToString();
         price.text = manga.precio + "€";
-        //this.manga = manga;
+
+        this.manga = manga;
     }
 
     IEnumerator GetImage(string url)
@@ -28,6 +29,17 @@ public class WishlistPrefab : MonoBehaviour
         WWW www = new WWW(url);
         yield return www;
         image.texture = www.texture;
+    }
+
+    public void DeleteManga()
+    {
+        FirebasePageController firebase = FindObjectOfType<FirebasePageController>();
+        firebase.DeleteMangaWishlist(manga);      
+    }
+
+    public string GetTitleManga()
+    {
+        return manga.titulo;
     }
 
 }
