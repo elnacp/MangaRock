@@ -19,6 +19,7 @@ public class FirebasePageController : MonoBehaviour
     List<MangaClass> mangasSearch = new List<MangaClass>();
     List<AutorClass> autorSearch = new List<AutorClass>();
     List<UserClass> usersSearch = new List<UserClass>();
+    List<ColeccionesClass> collectionSearch = new List<ColeccionesClass>();
 
     List<MangaClass> mangasSameAutor = new List<MangaClass>();
     List<MangaClass> mangasSameColection = new List<MangaClass>();
@@ -47,6 +48,7 @@ public class FirebasePageController : MonoBehaviour
     private bool wishlistMangaexist = false;
     private bool stateWishlistManga = false;
     private bool userisSearch = false;
+    private bool colectionisSearch = false;
 
 
     private bool isLogged = false;
@@ -166,6 +168,12 @@ public class FirebasePageController : MonoBehaviour
         {
             searchController.UpdateMangaList(mangasSearch);
             mangaisSearch = false;
+        }
+
+        if(colectionisSearch)
+        {
+            searchController.UpdateColectionList(collectionSearch);
+            colectionisSearch = false;
         }
 
         if(autorisSearch)
@@ -700,7 +708,7 @@ public class FirebasePageController : MonoBehaviour
     public void SearchInfo(string search)
     {
         AskForMangas(search);
-        //AskForCollections();
+        AskForCollections(search);
         AskForAuthors(search);
         AskForUsersSearch(search);
     }
@@ -745,6 +753,33 @@ public class FirebasePageController : MonoBehaviour
 
             mangaisSearch = true;
             //Debug.Log(new_manga.getAutor());
+        });
+    }
+
+    private void AskForCollections(string nombre)
+    {
+        collectionSearch.Clear();
+
+        db.Collection("Colecciones").WhereEqualTo("nombre", nombre).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<ColeccionesClass> list = new List<ColeccionesClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Colecciones info = documentSnapshot.ConvertTo<Colecciones>();
+                ColeccionesClass element = new ColeccionesClass();
+                element.autor = info.autor;
+                element.id = info.id;
+                element.nombre = info.nombre;
+                element.url = info.url;
+
+                list.Add(element);
+            }
+
+            foreach(ColeccionesClass colection in list)
+            {
+                collectionSearch.Add(colection);
+            }
+            colectionisSearch = true;
         });
     }
 

@@ -14,6 +14,7 @@ public class SearchController : MonoBehaviour
     [SerializeField] GameObject mangaPrefab;
     [SerializeField] GameObject profilePrefab;
     [SerializeField] Text contentNotFound;
+    [SerializeField] GameObject collectionPrefab;
 
     [SerializeField] Transform contentMangas;
     [SerializeField] Transform contentColecciones;
@@ -88,6 +89,23 @@ public class SearchController : MonoBehaviour
             {
                 GameObject prefab = Instantiate(profilePrefab, contentPerfiles);
                 prefab.GetComponent<ProfilePrefabController>().AddData(element.username, element.imagen);
+            }
+        }
+    }
+
+    public void UpdateColectionList(List<ColeccionesClass> collection)
+    {
+        DeleteChildList(contentColecciones);
+        if(collection.Count == 0)
+        {
+            Instantiate(contentNotFound, contentColecciones);
+        }
+        else
+        {
+            foreach(ColeccionesClass element in collection)
+            {
+                GameObject prefab = Instantiate(collectionPrefab, contentColecciones);
+                prefab.GetComponent<CollectionPrefabController>().AddData(element.url, element.nombre, element.autor);
             }
         }
     }
