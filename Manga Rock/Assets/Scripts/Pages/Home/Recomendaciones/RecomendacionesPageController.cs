@@ -21,7 +21,7 @@ public class RecomendacionesPageController : MonoBehaviour
 
     private void AddInformationElement(GameObject element, MangaClass info, int index)
     {
-        element.GetComponent<MangaWithPriceController>().AddInformation(
+            element.GetComponent<MangaWithPriceController>().AddInformation(
             info, index.ToString());
     }
 

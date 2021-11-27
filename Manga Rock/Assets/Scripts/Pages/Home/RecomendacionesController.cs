@@ -23,7 +23,12 @@ public class RecomendacionesController : MonoBehaviour
 
     public void GetRecomendaciones()
     {
-        db.RecomendationsForUser(genreFav);
+        db.GetGenreFavUser();
+    }
+
+    public void GetRecomendacion(string genero)
+    {
+        db.RecomendationsForUser(genero);
     }
 
     public void AddInformation(List<MangaClass> list)

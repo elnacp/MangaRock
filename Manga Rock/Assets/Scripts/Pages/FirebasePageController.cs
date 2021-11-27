@@ -49,11 +49,13 @@ public class FirebasePageController : MonoBehaviour
     private bool stateWishlistManga = false;
     private bool userisSearch = false;
     private bool colectionisSearch = false;
+    private bool genreFavSearchDone = false;
 
 
     private bool isLogged = false;
     private bool ask = false;
     private string titleWishlistToDelete = "";
+    private string genreFav = "";
 
 
     [SerializeField] NovedadesController novedadesController;
@@ -85,6 +87,12 @@ public class FirebasePageController : MonoBehaviour
 
     private void Update()
     {
+
+        if(genreFavSearchDone)
+        {
+            recomendacionesControlller.GetRecomendacion(genreFav);
+            genreFavSearchDone = false;
+        }
 
         if(stateWishlistManga)
         {
@@ -460,6 +468,24 @@ public class FirebasePageController : MonoBehaviour
             }
         });
     }
+
+    public void GetGenreFavUser()
+    {
+        genreFav = "";
+        db.Collection("User").WhereEqualTo("loggeado", "yes").GetSnapshotAsync().ContinueWith((task) =>
+        {
+
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Users info = documentSnapshot.ConvertTo<Users>();
+                genreFav = info.generoFavorito;
+            }
+
+            genreFavSearchDone = true;
+
+
+        });
+    }
     public void GetNovedades()
     {
         db.Collection("Novedades").GetSnapshotAsync().ContinueWith(task =>
@@ -720,7 +746,6 @@ public class FirebasePageController : MonoBehaviour
         {
             mangasSearch.Clear();
         }
-        Debug.Log(mangasSearch.Count);
 
         db.Collection("Manga").WhereEqualTo("titulo", title).GetSnapshotAsync().ContinueWith(task =>
         {
