@@ -16,12 +16,12 @@ public class LibraryController : MonoBehaviour
     [SerializeField] Transform finalizado;
     [SerializeField] Transform contentColecciones;
     [SerializeField] GameObject prefabList;
+    [SerializeField] GameObject buttonAddCollection;
     
 
     [SerializeField] GameObject prefabWithPercentage;
     [SerializeField] GameObject prefabManga;
     [SerializeField] GameObject prefabTitle;
-    [SerializeField] GameObject prefabButtonAddCollection;
 
     [SerializeField] HomeInit userData;
 
@@ -73,8 +73,6 @@ public class LibraryController : MonoBehaviour
         List<string> listNombres = new List<string>();
         List<Transform> listContent = new List<Transform>();
 
-        Debug.Log(list.Count);
-
         foreach(ColeccionBibliotecaClass element in list)
         {
             if (listNombres.Count == 0)
@@ -118,9 +116,6 @@ public class LibraryController : MonoBehaviour
 
         }
 
-        Instantiate(prefabButtonAddCollection, contentColecciones);
-
-
     }
 
 
@@ -130,10 +125,12 @@ public class LibraryController : MonoBehaviour
         ButtonDeselected(button_colecciones);
         bibliotecaPanel.SetActive(true);
         coleccionesPanel.SetActive(false);
+        buttonAddCollection.SetActive(false);
     }
 
     public void GoCollection()
     {
+        buttonAddCollection.SetActive(true);
         ButtonSelected(button_colecciones);
         ButtonDeselected(button_biblioteca);
         bibliotecaPanel.SetActive(false);

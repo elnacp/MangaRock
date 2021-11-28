@@ -49,6 +49,7 @@ public class PageController : MonoBehaviour
             case "notifications": notifications.SetActive(true);
                 break;
             case "profile": profile.SetActive(true);
+
                 break;
         }
 
