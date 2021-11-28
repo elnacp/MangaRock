@@ -3357,7 +3357,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 150}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &235296225
 MonoBehaviour:
@@ -3389,7 +3389,7 @@ MonoBehaviour:
     m_Left: 0
     m_Right: 0
     m_Top: 20
-    m_Bottom: 0
+    m_Bottom: 20
   m_ChildAlignment: 4
   m_Spacing: 30
   m_ChildForceExpandWidth: 1
@@ -3806,7 +3806,7 @@ GameObject:
   - component: {fileID: 264848014}
   - component: {fileID: 264848013}
   m_Layer: 5
-  m_Name: Biblioteca
+  m_Name: ButtonBiblioteca
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3827,10 +3827,10 @@ RectTransform:
   m_Father: {fileID: 518529712}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 157.28, y: -25}
-  m_SizeDelta: {x: 114.56, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 114.56, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &264848013
 MonoBehaviour:
@@ -3875,7 +3875,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 264848014}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 694199624}
+        m_TargetAssemblyTypeName: LibraryController, Assembly-CSharp
+        m_MethodName: GoBiblioteca
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &264848014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8026,10 +8038,10 @@ RectTransform:
   m_Father: {fileID: 235296224}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 181.38205, y: -45}
-  m_SizeDelta: {x: 449.12, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &518529713
 MonoBehaviour:
@@ -10471,7 +10483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &627784066
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11903,13 +11915,14 @@ GameObject:
   - component: {fileID: 694199623}
   - component: {fileID: 694199622}
   - component: {fileID: 694199621}
+  - component: {fileID: 694199624}
   m_Layer: 5
   m_Name: Library
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &694199620
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11998,6 +12011,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694199619}
   m_CullTransparentMesh: 1
+--- !u!114 &694199624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694199619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b158769c76ae95447a1813438ed549a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bibliotecaPanel: {fileID: 158760099}
+  coleccionesPanel: {fileID: 1367772750}
+  button_biblioteca: {fileID: 264848011}
+  button_colecciones: {fileID: 1618892048}
+  leyendo: {fileID: 759992055}
+  porLeer: {fileID: 2136855249}
+  finalizado: {fileID: 1780372085}
+  prefabWithPercentage: {fileID: 5541867595980976528, guid: 778a1e179998010448ee56e6ced264ba, type: 3}
+  prefabManga: {fileID: 8513963412782686230, guid: aae51febff8463f44879f855b008aaca, type: 3}
+  firebase: {fileID: 921228427}
+  userData: {fileID: 491122859}
 --- !u!1 &703758351
 GameObject:
   m_ObjectHideFlags: 0
@@ -13001,6 +13037,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3db271830c191a4a8c1c73559b20c9e, type: 3}
+--- !u!224 &759992055 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8621212962635337625, guid: eff4dfef20edb414995265c8353c645b, type: 3}
+  m_PrefabInstance: {fileID: 8621212962585120337}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &764292507 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 353696231075840725, guid: a3db271830c191a4a8c1c73559b20c9e, type: 3}
@@ -14794,6 +14835,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 158760100}
     m_Modifications:
+    - target: {fileID: 1457070685487344634, guid: c59d4ab56ba6074479fb65964799733e, type: 3}
+      propertyPath: m_Name
+      value: ContentFinalizado
+      objectReference: {fileID: 0}
     - target: {fileID: 3009636145046324813, guid: c59d4ab56ba6074479fb65964799733e, type: 3}
       propertyPath: m_SizeDelta.x
       value: -192.7641
@@ -15144,6 +15189,7 @@ MonoBehaviour:
   homeinit: {fileID: 491122859}
   profileController: {fileID: 1031892151}
   wishController: {fileID: 2066692023}
+  libraryController: {fileID: 694199624}
 --- !u!4 &921228428
 Transform:
   m_ObjectHideFlags: 0
@@ -17251,7 +17297,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1053068241
 MonoBehaviour:
@@ -21733,10 +21779,10 @@ RectTransform:
   m_Father: {fileID: 235296224}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 181.38205, y: -125}
-  m_SizeDelta: {x: 362.7641, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 224.12312, y: 0}
+  m_SizeDelta: {x: 448.24625, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1367772752
 MonoBehaviour:
@@ -24993,10 +25039,10 @@ RectTransform:
   m_Father: {fileID: 1053068240}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 201.89687, y: -35}
+  m_SizeDelta: {x: 343.79373, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1542835196
 MonoBehaviour:
@@ -26297,7 +26343,7 @@ GameObject:
   - component: {fileID: 1618892051}
   - component: {fileID: 1618892050}
   m_Layer: 5
-  m_Name: Colecciones
+  m_Name: ButtonCollection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26318,10 +26364,10 @@ RectTransform:
   m_Father: {fileID: 518529712}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 291.84, y: -25}
-  m_SizeDelta: {x: 114.56, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 114.56, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1618892050
 MonoBehaviour:
@@ -26366,7 +26412,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1618892051}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 694199624}
+        m_TargetAssemblyTypeName: LibraryController, Assembly-CSharp
+        m_MethodName: GoCollection
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1618892051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29279,6 +29337,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95473da3b5d818842a6ac618e6619919, type: 3}
+--- !u!224 &1780372085 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3009636145046324813, guid: c59d4ab56ba6074479fb65964799733e, type: 3}
+  m_PrefabInstance: {fileID: 888641449}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1789962695
 GameObject:
   m_ObjectHideFlags: 0
@@ -29313,10 +29376,10 @@ RectTransform:
   m_Father: {fileID: 1367772751}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 181.38205, y: -25}
-  m_SizeDelta: {x: 302.7641, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1789962697
 MonoBehaviour:
@@ -34034,6 +34097,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6aa44cdfa2eb1ad438688fbe7c459a7c, type: 3}
+--- !u!1 &2136855248 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1457070685487344634, guid: c59d4ab56ba6074479fb65964799733e, type: 3}
+  m_PrefabInstance: {fileID: 4082884422737251973}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &2136855249 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3009636145046324813, guid: c59d4ab56ba6074479fb65964799733e, type: 3}
+  m_PrefabInstance: {fileID: 4082884422737251973}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2136855251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136855248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!222 &182110989591576796
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -34971,6 +35058,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 158760100}
     m_Modifications:
+    - target: {fileID: 1457070685487344634, guid: c59d4ab56ba6074479fb65964799733e, type: 3}
+      propertyPath: m_Name
+      value: ContentPorleer
+      objectReference: {fileID: 0}
     - target: {fileID: 3009636145046324813, guid: c59d4ab56ba6074479fb65964799733e, type: 3}
       propertyPath: m_SizeDelta.x
       value: -192.7641
@@ -35864,6 +35955,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 158760100}
     m_Modifications:
+    - target: {fileID: 8621212962635337622, guid: eff4dfef20edb414995265c8353c645b, type: 3}
+      propertyPath: m_Name
+      value: ContentLeyendo
+      objectReference: {fileID: 0}
     - target: {fileID: 8621212963472279892, guid: eff4dfef20edb414995265c8353c645b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -27,6 +27,8 @@ public class FirebasePageController : MonoBehaviour
     List<UserClass> listUsers = new List<UserClass>();
     List<ComentarioClass> listComentarios;
     List<WishlistClass> wishlist = new List<WishlistClass>();
+    List<BibliotecaClass> bibliotecalist = new List<BibliotecaClass>();
+
 
     private bool topListFinish = false;
     private bool novedadesFinish = false;
@@ -50,6 +52,8 @@ public class FirebasePageController : MonoBehaviour
     private bool userisSearch = false;
     private bool colectionisSearch = false;
     private bool genreFavSearchDone = false;
+    private bool bibliotecaSearch = false;
+
 
 
     private bool isLogged = false;
@@ -67,6 +71,10 @@ public class FirebasePageController : MonoBehaviour
     [SerializeField] HomeInit homeinit;
     [SerializeField] ProfileController profileController;
     [SerializeField] WishlistController wishController;
+    [SerializeField] LibraryController libraryController;
+
+
+
 
 
     private void Start()
@@ -219,6 +227,46 @@ public class FirebasePageController : MonoBehaviour
             detallesManga.ListMangasSameCategory(mangasSameCategory);
             mangasSameCategoryState = false;
         }
+
+        if (bibliotecaSearch)
+        {
+            libraryController.AddInformationBiblioteca(bibliotecalist);
+            bibliotecaSearch = false;
+        }
+    }
+
+    public void GetBiblioteca(string username)
+    {
+        if (bibliotecalist.Count != 0)
+        {
+            bibliotecalist.Clear();
+        }
+
+        db.Collection("Biblioteca").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<BibliotecaClass> list = new List<BibliotecaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Biblioteca info = documentSnapshot.ConvertTo<Biblioteca>();
+                BibliotecaClass element = new BibliotecaClass();
+                element.autor = info.autor;
+                element.idioma = info.idioma;
+                element.paginas = info.paginas;
+                element.titulo = info.titulo;
+                element.url = info.url;
+                element.percentage = info.percentage;
+                element.username = info.username;
+
+                list.Add(element);
+            }
+
+            foreach (BibliotecaClass i in list)
+            {
+                bibliotecalist.Add(i);
+            }
+
+            bibliotecaSearch = true;
+        });
     }
 
     public void ShowWishList(string username)

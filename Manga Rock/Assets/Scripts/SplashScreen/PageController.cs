@@ -41,6 +41,8 @@ public class PageController : MonoBehaviour
                 home.GetComponent<HomeController>().AddInformation();
                 break;
             case "library": library.SetActive(true);
+                library.GetComponent<LibraryController>().GoBiblioteca();
+                firebase.GetBiblioteca(userData.GetUser().username);
                 break;
             case "search": search.SetActive(true);
                 break;
