@@ -14,19 +14,17 @@ public class LibraryController : MonoBehaviour
     [SerializeField] Transform leyendo;
     [SerializeField] Transform porLeer;
     [SerializeField] Transform finalizado;
+    [SerializeField] Transform contentColecciones;
+    [SerializeField] GameObject prefabList;
+    
 
     [SerializeField] GameObject prefabWithPercentage;
     [SerializeField] GameObject prefabManga;
+    [SerializeField] GameObject prefabTitle;
+    [SerializeField] GameObject prefabButtonAddCollection;
 
-    [SerializeField] FirebasePageController firebase;
     [SerializeField] HomeInit userData;
 
-    UserClass user = new UserClass();
-
-    private void Start()
-    {
-        user = userData.GetUser();
-    }
 
     public void AddInformationBiblioteca(List<BibliotecaClass> list)
     {
@@ -67,6 +65,62 @@ public class LibraryController : MonoBehaviour
         {
             prefab.GetComponent<MangaWithNoPercentageControlle>().AddData(element.url, element.titulo, element.autor);
         }
+    }
+
+
+    public void AddInformationCollection(List<ColeccionBibliotecaClass> list)
+    {
+        List<string> listNombres = new List<string>();
+        List<Transform> listContent = new List<Transform>();
+
+        Debug.Log(list.Count);
+
+        foreach(ColeccionBibliotecaClass element in list)
+        {
+            if (listNombres.Count == 0)
+            {
+
+                listNombres.Add(element.nombreColeccion);
+            }
+            else
+            {
+                bool encontrado = false;
+                foreach(string nombre in listNombres)
+                {
+
+                    if(nombre == element.nombreColeccion)
+                    {
+                        encontrado = true;
+                    }
+                }
+                if(!encontrado)
+                {
+                    listNombres.Add(element.nombreColeccion);
+                }
+            }
+            
+        }
+        
+        foreach(string nombre in listNombres)
+        {
+            GameObject title = Instantiate(prefabTitle, contentColecciones);
+            title.transform.GetChild(0).GetComponent<Text>().text = nombre;
+            GameObject content = Instantiate(prefabList, contentColecciones);
+
+            foreach(ColeccionBibliotecaClass element in list)
+            {
+                if(nombre == element.nombreColeccion)
+                {
+                    GameObject prefab = Instantiate(prefabManga, content.transform.GetChild(0).GetChild(0).transform);
+                    prefab.GetComponent<MangaWithNoPercentageControlle>().AddData(element.url, element.titulo, element.titulo);
+                }
+            }
+
+        }
+
+        Instantiate(prefabButtonAddCollection, contentColecciones);
+
+
     }
 
 

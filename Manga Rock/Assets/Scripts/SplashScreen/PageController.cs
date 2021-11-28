@@ -62,6 +62,11 @@ public class PageController : MonoBehaviour
         genre.GetComponent<GenreController>().GoCategory(category);
     }
 
+    public void GoCollectionBiblioteca()
+    {
+        firebase.GetCollections(userData.GetUser().username);
+    }
+
     public void GoTopList(TopElement[] orderListPago, List<MangaClass> listMangasPago, TopElement[] orderListFree, List<MangaClass> listMangasFree)
     {
         HideBarsAndShowBack();

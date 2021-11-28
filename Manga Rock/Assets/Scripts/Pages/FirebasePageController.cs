@@ -28,7 +28,7 @@ public class FirebasePageController : MonoBehaviour
     List<ComentarioClass> listComentarios;
     List<WishlistClass> wishlist = new List<WishlistClass>();
     List<BibliotecaClass> bibliotecalist = new List<BibliotecaClass>();
-
+    List<ColeccionBibliotecaClass> listColeccionesBiblioteca = new List<ColeccionBibliotecaClass>();
 
     private bool topListFinish = false;
     private bool novedadesFinish = false;
@@ -53,6 +53,7 @@ public class FirebasePageController : MonoBehaviour
     private bool colectionisSearch = false;
     private bool genreFavSearchDone = false;
     private bool bibliotecaSearch = false;
+    private bool coleccionesBibliotecaSearch = false;
 
 
 
@@ -233,6 +234,12 @@ public class FirebasePageController : MonoBehaviour
             libraryController.AddInformationBiblioteca(bibliotecalist);
             bibliotecaSearch = false;
         }
+
+        if(coleccionesBibliotecaSearch)
+        {
+            libraryController.AddInformationCollection(listColeccionesBiblioteca);
+            coleccionesBibliotecaSearch = false;
+        }
     }
 
     public void GetBiblioteca(string username)
@@ -266,6 +273,42 @@ public class FirebasePageController : MonoBehaviour
             }
 
             bibliotecaSearch = true;
+        });
+    }
+
+    public void GetCollections(string username)
+    {
+
+        if(listColeccionesBiblioteca.Count != 0)
+        {
+            listColeccionesBiblioteca.Clear();
+        }
+
+        db.Collection("Colecciones Biblioteca").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<ColeccionBibliotecaClass> list = new List<ColeccionBibliotecaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                ColeccionBiblioteca info = documentSnapshot.ConvertTo<ColeccionBiblioteca>();
+                ColeccionBibliotecaClass element = new ColeccionBibliotecaClass();
+                element.nombreColeccion = info.nombreColeccion;
+                element.autor = info.autor;
+                element.idioma = info.idioma;
+                element.paginas = info.paginas;
+                element.titulo = info.titulo;
+                element.url = info.url;
+                element.percentage = info.percentage;
+                element.username = info.username;
+
+                list.Add(element);
+            }
+
+            foreach (ColeccionBibliotecaClass i in list)
+            {
+                listColeccionesBiblioteca.Add(i);
+            }
+
+            coleccionesBibliotecaSearch = true;
         });
     }
 
