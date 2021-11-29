@@ -268,6 +268,44 @@ public class FirebasePageController : MonoBehaviour
         }
     }
 
+    public void UpdateProfile(string username, string email)
+    {
+        db.Collection("User").WhereEqualTo("loggeado", "yes").GetSnapshotAsync().ContinueWith((task) =>
+        {
+            QuerySnapshot querySnapShot = task.Result;
+            foreach (DocumentSnapshot document in querySnapShot.Documents)
+            {
+                document.Reference.UpdateAsync("username", username).ContinueWith(task =>
+                {
+                    Debug.Log("Update");
+                });
+
+                document.Reference.UpdateAsync("email", email).ContinueWith(task =>
+                {
+                    Debug.Log("Update");
+                });
+            }
+
+        });
+    }
+
+    public void UpdatePassword(string password)
+    {
+        db.Collection("User").WhereEqualTo("loggeado", "yes").GetSnapshotAsync().ContinueWith((task) =>
+        {
+            QuerySnapshot querySnapShot = task.Result;
+            foreach (DocumentSnapshot document in querySnapShot.Documents)
+            {
+                document.Reference.UpdateAsync("password", password).ContinueWith(task =>
+                {
+                    Debug.Log("Update");
+                });
+
+            }
+
+        });
+    }
+
     public void GetSuscripcion(string username)
     {
         suscritoList.Clear();

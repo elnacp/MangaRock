@@ -107,9 +107,10 @@ public class PageController : MonoBehaviour
 
     public void GoConfiguracion()
     {
+        menuController.Menu();
         HideBarsAndShowBack();
         configuracion.SetActive(true);
-        menuController.Menu();
+        configuracion.GetComponent<ConfiguracionController>().GoConfiguracionPanel();
     }
 
     public void BackButton()

@@ -11,6 +11,10 @@ public class ConfiguracionController : MonoBehaviour
     [SerializeField] GameObject notificaciones;
     [SerializeField] GameObject editarPerfil;
     [SerializeField] GameObject configuracionPanel;
+    [SerializeField] GameObject changePasswordPanel;
+
+    //erializeField]
+
 
     private string positionActual = "";
 
@@ -41,6 +45,7 @@ public class ConfiguracionController : MonoBehaviour
 
     public void GoBack()
     {
+        HideAllPanels();
         switch(positionActual)
         {
             case "metodoPago":
@@ -52,14 +57,27 @@ public class ConfiguracionController : MonoBehaviour
             case "editarPerfil":
                 GoConfiguracionPanel();
                 break;
+            case "editarContraseña":
+                GoEditarPerfil();
+                break;
         }
     }
 
-    private void GoConfiguracionPanel()
+    public void GoChangePasswordPanel()
+    {
+        HideNormalActionBar();
+        HideAllPanels();
+        changePasswordPanel.SetActive(true);
+        positionActual = "editarContraseña";
+
+    }
+
+    public void GoConfiguracionPanel()
     {
         HideAllPanels();
         ActivateNormalActionBar();
         configuracionPanel.SetActive(true);
+
 
     }
 
@@ -69,6 +87,8 @@ public class ConfiguracionController : MonoBehaviour
         metodoPago.SetActive(false);
         notificaciones.SetActive(false);
         editarPerfil.SetActive(false);
+        configuracionPanel.SetActive(false);
+        changePasswordPanel.SetActive(false);
     }
 
     private void HideNormalActionBar()

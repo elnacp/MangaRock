@@ -8,18 +8,22 @@ using UnityEngine.SceneManagement;
 public class HomeInit : MonoBehaviour
 {
 
-    UserClass userLogged;
+    UserClass userLogged = new UserClass();
     [SerializeField] RawImage image;
     [SerializeField] Text username;
     [SerializeField] Text email;
 
     [SerializeField] ProfileController profilePage;
 
-    private void Start()
+    public void SaveUsername(string username)
     {
-        userLogged = new UserClass();
+        userLogged.username = username;
     }
 
+    public void SaveEmail(string email)
+    {
+        userLogged.email = email;
+    }
 
     public void SaveUserLogged(List<UserClass> data)
     {
