@@ -49,7 +49,7 @@ public class PageController : MonoBehaviour
             case "notifications": notifications.SetActive(true);
                 break;
             case "profile": profile.SetActive(true);
-
+                profile.GetComponent<ProfileController>().Setuser(userData.GetUser());
                 break;
         }
 
@@ -102,6 +102,7 @@ public class PageController : MonoBehaviour
         HideBarsAndShowBack();
         suscription.SetActive(true);
         menuController.Menu();  //hide menu
+        firebase.GetSuscripcion(userData.GetUser().username);
     }
 
     public void GoConfiguracion()

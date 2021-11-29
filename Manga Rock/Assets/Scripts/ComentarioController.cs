@@ -14,7 +14,10 @@ public class ComentarioController : MonoBehaviour
 
     public void AddInformation(ComentarioClass data, string urlImage)
     {
-        StartCoroutine(GetImage(urlImage));
+        if(urlImage != null)
+        {
+            StartCoroutine(GetImage(urlImage));
+        }
         likes.text = data.likes.ToString();
         dislikes.text = data.dislikes.ToString();
         username.text = data.username;

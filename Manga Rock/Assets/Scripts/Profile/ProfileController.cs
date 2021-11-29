@@ -24,7 +24,7 @@ public class ProfileController : MonoBehaviour
 
     private void Start()
     {
-        
+       
     }
 
     public void Setuser(UserClass data)
@@ -37,9 +37,14 @@ public class ProfileController : MonoBehaviour
         //Comentarios
 
         db.ComentariosUser(data.username);
+        db.UserMangas(data.username);
 
         num_followers.text = data.followers.ToString();
         num_following.text = data.following.Count.ToString();
+
+        ClearContentComments();
+        ClearMangas();
+
     }
 
 
@@ -52,6 +57,7 @@ public class ProfileController : MonoBehaviour
 
     public void AddComentarios(List<ComentarioClass> comentarios)
     {
+
         num_comentarios.text = comentarios.Count.ToString();
         //Debug.Log(comentarios.Count);
         int i = 0;
@@ -66,5 +72,35 @@ public class ProfileController : MonoBehaviour
             
         }
         
+    }
+    public void AddMangas(List<BibliotecaClass> mangas)
+    {
+        foreach(BibliotecaClass element in mangas)
+        {
+            if(element.percentage != 0 && element.percentage != 100)
+            {
+                GameObject prefab = Instantiate(prefabMangas, contentMangas);
+                prefab.GetComponent<MangaWithPercentageController>().AddData(element.url, element.titulo, element.autor, element.percentage);
+            }
+        }
+    }
+
+    public void ClearContentComments()
+    {
+        foreach(Transform child in contentComments)
+        {
+            if(child.tag == "comment")
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
+    private void ClearMangas()
+    {
+        foreach (Transform child in contentMangas)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }

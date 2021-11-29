@@ -18,6 +18,10 @@ public class DetallesMangaPageController : MonoBehaviour
     [SerializeField] Transform contentMangasSameAutor;
     [SerializeField] Transform contentMangasSameColection;
     [SerializeField] Transform contentMangasSameCategory;
+    
+    [SerializeField] Transform contentCommentarios;
+    [SerializeField] GameObject prefabCommentario;
+    [SerializeField] Text verMas;
 
     [SerializeField] GameObject mangaPrefab;
 
@@ -25,6 +29,9 @@ public class DetallesMangaPageController : MonoBehaviour
     [SerializeField] HomeInit homeinit;
 
     [SerializeField] Button wishlist_button;
+    private List<ComentarioClass> comentariosManga = new List<ComentarioClass>();
+
+    private bool showComments;
 
     MangaClass mangaData = new MangaClass();
     WishlistClass mangaWishlist;
@@ -51,11 +58,15 @@ public class DetallesMangaPageController : MonoBehaviour
         pages.text = manga.paginas.ToString();
         size.text = manga.tamaño+" MB";
         review.text = manga.resumen;
+        verMas.text = "Expandir";
 
+        showComments = false;
+        ClearComments();
 
         firebase.MangasSameAutor(manga.autor);
         firebase.MangasSameColection(manga.idColeccion);
         firebase.MangasSameCategory(manga.genero);
+        firebase.GetCommentsOfManga(manga.id);
 
         mangaData = manga;
 
@@ -84,6 +95,45 @@ public class DetallesMangaPageController : MonoBehaviour
         WWW www = new WWW(url);
         yield return www;
         image.texture = www.texture;
+    }
+
+    public void SaveComments(List<ComentarioClass> list)
+    {
+        foreach(ComentarioClass comentario in list)
+        {
+            comentariosManga.Add(comentario);
+        }
+    }
+
+    public void ShowOrHideComentarios()
+    {
+        ClearComments();
+        showComments = !showComments;
+        if(showComments)
+        {
+            verMas.text = "Cerrar";
+            foreach(ComentarioClass comment in comentariosManga)
+            {
+                GameObject prefab = Instantiate(prefabCommentario, contentCommentarios);
+                prefab.GetComponent<ComentarioController>().AddInformation(comment, null);
+            }
+        }
+        else
+        {
+            verMas.text = "Expandir";
+        }
+
+    }
+
+    private void ClearComments()
+    {
+        foreach(Transform child in contentCommentarios)
+        {
+            if(child.tag == "comment")
+            {
+                Destroy(child.gameObject);
+            }
+        }
     }
 
     public void ListMangasSameAutor(List<MangaClass> mangas)

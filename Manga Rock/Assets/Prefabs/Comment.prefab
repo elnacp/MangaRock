@@ -315,7 +315,6 @@ GameObject:
   - component: {fileID: 7939630358449793815}
   - component: {fileID: 4419051915896257718}
   - component: {fileID: 8963386618475729451}
-  - component: {fileID: 1354983126350817242}
   m_Layer: 5
   m_Name: Comment
   m_TagString: Untagged
@@ -339,7 +338,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 168, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4419051915896257718
@@ -384,20 +383,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Mencanta este manga
---- !u!114 &1354983126350817242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1378848280258559902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 2
 --- !u!1 &2015859304464365269
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,7 +646,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 123.4, y: 21.75}
+  m_SizeDelta: {x: 123.4, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2429314445647717245
 MonoBehaviour:
@@ -800,7 +785,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 19.75}
+  m_SizeDelta: {x: 160, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &812498335059295432
 CanvasRenderer:
@@ -1033,7 +1018,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 79.99, y: 10}
+  m_SizeDelta: {x: 79.99, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8080030975911955999
 MonoBehaviour:
@@ -1554,13 +1539,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6460741856904416490}
   - component: {fileID: 5703270797751663012}
-  - component: {fileID: 6139138157139128752}
   - component: {fileID: 7223763693629765236}
   - component: {fileID: 2707820921968113339}
   - component: {fileID: 3241403327334458980}
   m_Layer: 5
   m_Name: Comment
-  m_TagString: Untagged
+  m_TagString: comment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1589,7 +1573,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 157.5, y: 0}
-  m_SizeDelta: {x: 315, y: 0}
+  m_SizeDelta: {x: 315, y: 123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5703270797751663012
 MonoBehaviour:
@@ -1613,24 +1597,10 @@ MonoBehaviour:
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &6139138157139128752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9153236445192831632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 2
 --- !u!222 &7223763693629765236
 CanvasRenderer:
   m_ObjectHideFlags: 0
