@@ -11,6 +11,7 @@ public class EditarPerfillController : MonoBehaviour
     [SerializeField] HomeInit userData;
     [SerializeField] Text message;
 
+
     private UserClass user = new UserClass();
 
     private void Start()
@@ -44,5 +45,7 @@ public class EditarPerfillController : MonoBehaviour
         username.placeholder.GetComponent<Text>().text = user.username;
         email.placeholder.GetComponent<Text>().text = user.email;
     }
+
+
 
 }

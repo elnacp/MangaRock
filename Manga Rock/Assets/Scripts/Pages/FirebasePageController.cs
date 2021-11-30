@@ -61,6 +61,7 @@ public class FirebasePageController : MonoBehaviour
     private bool bibliotecaPerfilState = false;
     private bool comentariosMangaState = false;
     private bool suscritoSearch = false;
+    private bool deleteUserDone = false;
 
 
 
@@ -266,6 +267,8 @@ public class FirebasePageController : MonoBehaviour
             suscriptionController.AddData(suscritoList);
             suscritoSearch = false;
         }
+
+        
     }
 
     public void UpdateProfile(string username, string email)
@@ -296,13 +299,27 @@ public class FirebasePageController : MonoBehaviour
             QuerySnapshot querySnapShot = task.Result;
             foreach (DocumentSnapshot document in querySnapShot.Documents)
             {
-                document.Reference.UpdateAsync("password", password).ContinueWith(task =>
+                document.Reference.UpdateAsync("contraseña", password).ContinueWith(task =>
                 {
                     Debug.Log("Update");
                 });
 
             }
 
+        });
+    }
+
+    public void DeleteUser()
+    {
+        db.Collection("User").WhereEqualTo("loggeado", "yes").GetSnapshotAsync().ContinueWith((task) =>
+        {
+            QuerySnapshot querySnapShot = task.Result;
+            foreach (DocumentSnapshot document in querySnapShot.Documents)
+            {
+                document.Reference.DeleteAsync();
+                deleteUserDone = true;
+            }
+            logoutUser = true;
         });
     }
 
