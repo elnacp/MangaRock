@@ -290,13 +290,13 @@ public class FirebasePageController : MonoBehaviour
     {
         listTarjeta.Clear();
 
-        db.Collection("Tarjeta").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
+        db.Collection("Tarjetas").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
         {
             QuerySnapshot query = task.Result;
             List<TarjetaClass> list = new List<TarjetaClass>();
             foreach (DocumentSnapshot documentSnapshot in query.Documents)
             {
-                Tarjeta info = documentSnapshot.ConvertTo<Tarjeta>();
+                TarjetaFirebase info = documentSnapshot.ConvertTo<TarjetaFirebase>();
                 TarjetaClass element = new TarjetaClass();
                 element.username = info.username;
                 element.number = info.number;
@@ -347,10 +347,6 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
-    public void AskPaypal()
-    {
-
-    }
 
     public void UpdateProfile(string username, string email)
     {

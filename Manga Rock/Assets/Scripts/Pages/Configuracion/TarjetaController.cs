@@ -8,12 +8,18 @@ public class TarjetaController : MonoBehaviour
     [SerializeField] Text number;
     [SerializeField] Text fechaCaducidad;
 
-    TarjetaClass tarjeta;
+    TarjetaClass data = new TarjetaClass();
     public void AddInformation(TarjetaClass tarjeta)
     {
         number.text = "Visa/Tarjeta "+ tarjeta.number;
         fechaCaducidad.text = tarjeta.fechaCaducidad;
 
-        this.tarjeta = tarjeta;
+        data = tarjeta;
     }
+
+    public void MostrarTarjeta()
+    {
+        FindObjectOfType<ConfiguracionController>().GoShowTarjeta(data);
+    }
+    
 }

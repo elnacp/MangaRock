@@ -11,7 +11,6 @@ public class MetododePago : MonoBehaviour
 
     public void AddTarjetas(List<TarjetaClass> tarjetaslist)
     {
-        Debug.Log(tarjetaslist.Count);
 
         ClearContent(contentTarjetas);
         foreach(TarjetaClass tarjeta in tarjetaslist)
@@ -24,7 +23,7 @@ public class MetododePago : MonoBehaviour
 
     public void AddPaypal(List<PaypalClass> paypallist)
     {
-        Debug.Log(paypallist.Count);
+        Debug.Log("Paypal" +paypallist.Count);
         ClearContent(contentPaypal);
         foreach (PaypalClass paypal in paypallist)
         {

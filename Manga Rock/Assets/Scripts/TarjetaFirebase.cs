@@ -4,7 +4,7 @@ using UnityEngine;
 using Firebase.Firestore;
 
 [FirestoreData]
-public class Tarjeta 
+public class TarjetaFirebase 
 {
     [FirestoreProperty]
     public string username { get; set; }

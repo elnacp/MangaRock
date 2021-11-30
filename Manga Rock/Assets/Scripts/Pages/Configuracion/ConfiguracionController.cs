@@ -12,6 +12,8 @@ public class ConfiguracionController : MonoBehaviour
     [SerializeField] GameObject editarPerfil;
     [SerializeField] GameObject configuracionPanel;
     [SerializeField] GameObject changePasswordPanel;
+    [SerializeField] GameObject addTarjetaPanel;
+    [SerializeField] GameObject showTarjetaPanel;
 
     [SerializeField] FirebasePageController firebase;
     [SerializeField] HomeInit userData;
@@ -28,6 +30,8 @@ public class ConfiguracionController : MonoBehaviour
         firebase.AskTarjeta(userData.GetUser().username);
         firebase.AskPaypal(userData.GetUser().username);
     }
+
+    
 
     public void GoNotificaciones()
     {
@@ -63,6 +67,12 @@ public class ConfiguracionController : MonoBehaviour
             case "editarContraseña":
                 GoEditarPerfil();
                 break;
+            case "addTarjeta":
+                GoMetodoPago();
+                break;
+            case "showTarjeta":
+                GoMetodoPago();
+                break;
         }
     }
 
@@ -72,6 +82,24 @@ public class ConfiguracionController : MonoBehaviour
         HideAllPanels();
         changePasswordPanel.SetActive(true);
         positionActual = "editarContraseña";
+    }
+
+    public void GoAddTarjeta()
+    {
+        HideNormalActionBar();
+        HideAllPanels();
+        addTarjetaPanel.SetActive(true);
+        positionActual = "addTarjeta";
+    }
+
+    public void GoShowTarjeta(TarjetaClass tarjeta)
+    {
+        HideNormalActionBar();
+        HideAllPanels();
+        showTarjetaPanel.SetActive(true);
+        positionActual = "showTarjeta";
+        showTarjetaPanel.GetComponent<ShowTarjetaController>().AddInformation(tarjeta);
+        Debug.Log(tarjeta.number);
 
     }
 
@@ -92,6 +120,8 @@ public class ConfiguracionController : MonoBehaviour
         editarPerfil.SetActive(false);
         configuracionPanel.SetActive(false);
         changePasswordPanel.SetActive(false);
+        addTarjetaPanel.SetActive(false);
+        showTarjetaPanel.SetActive(false);
     }
 
     private void HideNormalActionBar()
