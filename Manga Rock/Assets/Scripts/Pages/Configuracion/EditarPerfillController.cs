@@ -40,6 +40,8 @@ public class EditarPerfillController : MonoBehaviour
         
     }
 
+
+
     public void CancelUpdate()
     {
         username.placeholder.GetComponent<Text>().text = user.username;

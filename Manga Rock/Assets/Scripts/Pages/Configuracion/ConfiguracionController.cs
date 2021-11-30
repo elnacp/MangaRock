@@ -13,7 +13,8 @@ public class ConfiguracionController : MonoBehaviour
     [SerializeField] GameObject configuracionPanel;
     [SerializeField] GameObject changePasswordPanel;
 
-    //erializeField]
+    [SerializeField] FirebasePageController firebase;
+    [SerializeField] HomeInit userData;
 
 
     private string positionActual = "";
@@ -24,6 +25,8 @@ public class ConfiguracionController : MonoBehaviour
         HideAllPanels();
         metodoPago.SetActive(true);
         positionActual = "metodoPago";
+        firebase.AskTarjeta(userData.GetUser().username);
+        firebase.AskPaypal(userData.GetUser().username);
     }
 
     public void GoNotificaciones()
@@ -77,9 +80,9 @@ public class ConfiguracionController : MonoBehaviour
         HideAllPanels();
         ActivateNormalActionBar();
         configuracionPanel.SetActive(true);
-
-
     }
+
+
 
     private void HideAllPanels()
     {

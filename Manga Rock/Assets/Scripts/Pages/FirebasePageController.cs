@@ -31,6 +31,8 @@ public class FirebasePageController : MonoBehaviour
     List<BibliotecaClass> bibliotecaPerfil = new List<BibliotecaClass>();
     List<ComentarioClass> comentariosManga = new List<ComentarioClass>();
     List<SuscritoClass> suscritoList = new List<SuscritoClass>();
+    List<TarjetaClass> listTarjeta = new List<TarjetaClass>();
+    List<PaypalClass> listPaypal = new List<PaypalClass>();
 
     List<ColeccionBibliotecaClass> listColeccionesBiblioteca = new List<ColeccionBibliotecaClass>();
 
@@ -62,6 +64,8 @@ public class FirebasePageController : MonoBehaviour
     private bool comentariosMangaState = false;
     private bool suscritoSearch = false;
     private bool deleteUserDone = false;
+    private bool finishPaypal = false;
+    private bool finishTarjeta = false;
 
 
 
@@ -82,7 +86,7 @@ public class FirebasePageController : MonoBehaviour
     [SerializeField] WishlistController wishController;
     [SerializeField] LibraryController libraryController;
     [SerializeField] SuscriptionController suscriptionController;
-
+    [SerializeField] MetododePago metodoPagoController;
 
 
 
@@ -268,7 +272,84 @@ public class FirebasePageController : MonoBehaviour
             suscritoSearch = false;
         }
 
-        
+        if(finishPaypal)
+        {
+            metodoPagoController.AddPaypal(listPaypal);
+            finishPaypal = false;
+        }
+        if (finishTarjeta)
+        {
+            metodoPagoController.AddTarjetas(listTarjeta);
+            finishTarjeta = false;
+        }
+
+
+    }
+
+    public void AskTarjeta(string username)
+    {
+        listTarjeta.Clear();
+
+        db.Collection("Tarjeta").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
+        {
+            QuerySnapshot query = task.Result;
+            List<TarjetaClass> list = new List<TarjetaClass>();
+            foreach (DocumentSnapshot documentSnapshot in query.Documents)
+            {
+                Tarjeta info = documentSnapshot.ConvertTo<Tarjeta>();
+                TarjetaClass element = new TarjetaClass();
+                element.username = info.username;
+                element.number = info.number;
+                element.fechaCaducidad = info.fechaCaducidad;
+                element.cvv = info.cvv;
+
+                list.Add(element);
+
+            }
+
+            foreach (TarjetaClass element in list)
+            {
+                listTarjeta.Add(element);
+            }
+
+            finishTarjeta = true;
+
+        });
+    }
+
+    public void AskPaypal(string username)
+    {
+
+        listPaypal.Clear();
+
+        db.Collection("Paypal").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
+        {
+            QuerySnapshot query = task.Result;
+            List<PaypalClass> list = new List<PaypalClass>();
+            foreach (DocumentSnapshot documentSnapshot in query.Documents)
+            {
+                Paypal info = documentSnapshot.ConvertTo<Paypal>();
+                PaypalClass element = new PaypalClass();
+                element.username = info.username;
+                element.email = info.email;
+
+                list.Add(element);
+
+            }
+
+            foreach (PaypalClass element in list)
+            {
+                listPaypal.Add(element);
+            }
+
+            finishPaypal = true;
+
+        });
+    }
+
+    public void AskPaypal()
+    {
+
     }
 
     public void UpdateProfile(string username, string email)
