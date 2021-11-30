@@ -26,7 +26,7 @@ public class PopupController : MonoBehaviour
 
     }
 
-    private void HidePopups()
+    private void HideAllPopups()
     {
         añadirColeccion.SetActive(false);
         eliminarColeccion.SetActive(false);
@@ -41,7 +41,7 @@ public class PopupController : MonoBehaviour
     {
         popups.enabled = true;
 
-        HidePopups();
+        HideAllPopups();
 
         switch(page)
         {
