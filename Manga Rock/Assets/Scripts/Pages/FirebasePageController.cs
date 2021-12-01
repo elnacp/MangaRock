@@ -33,6 +33,7 @@ public class FirebasePageController : MonoBehaviour
     List<SuscritoClass> suscritoList = new List<SuscritoClass>();
     List<TarjetaClass> listTarjeta = new List<TarjetaClass>();
     List<PaypalClass> listPaypal = new List<PaypalClass>();
+    List<ColeccionBibliotecaClass> listCollectionName = new List<ColeccionBibliotecaClass>();
 
     List<ColeccionBibliotecaClass> listColeccionesBiblioteca = new List<ColeccionBibliotecaClass>();
 
@@ -92,12 +93,13 @@ public class FirebasePageController : MonoBehaviour
     [SerializeField] MetododePago metodoPagoController;
     [SerializeField] ConfiguracionController configuracionController;
 
-    public bool exitAddTarjeta = false;
-    public bool notExitAddTarjeta = false;
-    public bool exitAddPaypal = false;
-    public bool notExitAddPaypal = false;
+    private bool exitAddTarjeta = false;
+    private bool notExitAddTarjeta = false;
+    private bool exitAddPaypal = false;
+    private bool notExitAddPaypal = false;
     private bool updateTarjetaDone = false;
     private bool updatePaypalDone = false;
+    private bool coleccionNameDone = false;
 
 
     private void Start()
@@ -340,7 +342,11 @@ public class FirebasePageController : MonoBehaviour
             paypalRemoved = false;
         }
 
-
+        if(coleccionNameDone)
+        {
+            FindObjectOfType<CollectionPageController>().AddInformation(listCollectionName);
+            coleccionNameDone = false;
+        }
 
     }
 
@@ -735,6 +741,38 @@ public class FirebasePageController : MonoBehaviour
             }
 
             coleccionesBibliotecaSearch = true;
+        });
+    }
+
+    public void AskCollection(string name)
+    {
+        listCollectionName.Clear();
+
+        db.Collection("Colecciones Biblioteca").WhereEqualTo("nombreColeccion", name).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<ColeccionBibliotecaClass> list = new List<ColeccionBibliotecaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                ColeccionBiblioteca info = documentSnapshot.ConvertTo<ColeccionBiblioteca>();
+                ColeccionBibliotecaClass element = new ColeccionBibliotecaClass();
+                element.nombreColeccion = info.nombreColeccion;
+                element.autor = info.autor;
+                element.idioma = info.idioma;
+                element.paginas = info.paginas;
+                element.titulo = info.titulo;
+                element.url = info.url;
+                element.percentage = info.percentage;
+                element.username = info.username;
+
+                list.Add(element);
+            }
+
+            foreach (ColeccionBibliotecaClass i in list)
+            {
+                listCollectionName.Add(i);
+            }
+
+            coleccionNameDone = true;
         });
     }
 

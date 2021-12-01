@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2939531387103794387}
   - component: {fileID: 6958537247716606867}
   - component: {fileID: 3801550406993658867}
+  - component: {fileID: 4342172776532361171}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -77,6 +78,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4342172776532361171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4123021119710552370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5443b629ba07cc648bdcf34541b89b0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: {fileID: 6806552365970712705}
 --- !u!1 &5288334280043796262
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,6 +177,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2939531387103794387}
     m_Modifications:
+    - target: {fileID: 656095942017868814, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 656095942017868814, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 656095942017868814, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4342172776532361171}
+    - target: {fileID: 656095942017868814, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 656095942017868814, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: VerMasCollection
+      objectReference: {fileID: 0}
+    - target: {fileID: 656095942017868814, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CollectionTitleController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 656095942017868814, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1120872761945195688, guid: f231d188dd5378e4c9620a8a12dafb2a, type: 3}
       propertyPath: m_Name
       value: Ver mas

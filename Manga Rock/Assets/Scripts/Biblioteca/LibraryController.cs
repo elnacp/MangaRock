@@ -70,6 +70,14 @@ public class LibraryController : MonoBehaviour
 
     public void AddInformationCollection(List<ColeccionBibliotecaClass> list)
     {
+        foreach(Transform child in contentColecciones)
+        {
+            if(child.name != "Añadir Coleccion")
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
         List<string> listNombres = new List<string>();
         List<Transform> listContent = new List<Transform>();
 
@@ -118,6 +126,7 @@ public class LibraryController : MonoBehaviour
 
     }
 
+    
 
     public void GoBiblioteca()
     {
@@ -135,6 +144,8 @@ public class LibraryController : MonoBehaviour
         ButtonDeselected(button_biblioteca);
         bibliotecaPanel.SetActive(false);
         coleccionesPanel.SetActive(true);
+
+        
     }
 
     public void ButtonSelected(GameObject button)

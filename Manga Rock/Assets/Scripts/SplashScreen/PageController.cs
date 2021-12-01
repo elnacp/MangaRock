@@ -17,6 +17,7 @@ public class PageController : MonoBehaviour
     [SerializeField] GameObject wishlist;
     [SerializeField] GameObject suscription;
     [SerializeField] GameObject configuracion;
+    [SerializeField] GameObject collectionpage;
 
     [SerializeField] RectTransform parent;
 
@@ -51,6 +52,9 @@ public class PageController : MonoBehaviour
             case "profile": profile.SetActive(true);
                 profile.GetComponent<ProfileController>().Setuser(userData.GetUser());
                 break;
+            case "collection": library.SetActive(true);
+                firebase.GetCollections(userData.GetUser().username);
+                break;
         }
 
         actualPage = name;
@@ -66,6 +70,7 @@ public class PageController : MonoBehaviour
     public void GoCollectionBiblioteca()
     {
         firebase.GetCollections(userData.GetUser().username);
+
     }
 
     public void GoTopList(TopElement[] orderListPago, List<MangaClass> listMangasPago, TopElement[] orderListFree, List<MangaClass> listMangasFree)
@@ -89,6 +94,14 @@ public class PageController : MonoBehaviour
         detallesManga.GetComponent<DetallesMangaPageController>().AddInformation(manga);
     }
     
+    public void GoCollectionPage(string nameCollection)
+    {
+        HideBarsAndShowBack();
+        collectionpage.SetActive(true);
+        firebase.AskCollection(nameCollection);
+        actualPage = "collection";
+    }
+
     public void GoWishList()
     {
         HideBarsAndShowBack();
@@ -154,6 +167,7 @@ public class PageController : MonoBehaviour
         wishlist.SetActive(false);
         suscription.SetActive(false);
         configuracion.SetActive(false);
+        collectionpage.SetActive(false);
     }
 
 
