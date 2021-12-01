@@ -76,6 +76,12 @@ public class ConfiguracionController : MonoBehaviour
             case "showTarjeta":
                 GoMetodoPago();
                 break;
+            case "addPaypal":
+                GoMetodoPago();
+                break;
+            case "showPaypal":
+                GoMetodoPago();
+                break;
         }
     }
 
@@ -93,6 +99,14 @@ public class ConfiguracionController : MonoBehaviour
         HideAllPanels();
         addTarjetaPanel.SetActive(true);
         positionActual = "addTarjeta";
+    }
+
+    public void GoAddPaypal()
+    {
+        HideNormalActionBar();
+        HideAllPanels();
+        addPaypalPanel.SetActive(true);
+        positionActual = "addPaypal";
     }
 
     public void GoShowTarjeta(TarjetaClass tarjeta)

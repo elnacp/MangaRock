@@ -94,6 +94,8 @@ public class FirebasePageController : MonoBehaviour
 
     public bool exitAddTarjeta = false;
     public bool notExitAddTarjeta = false;
+    public bool exitAddPaypal = false;
+    public bool notExitAddPaypal = false;
     private bool updateTarjetaDone = false;
     private bool updatePaypalDone = false;
 
@@ -302,7 +304,19 @@ public class FirebasePageController : MonoBehaviour
             notExitAddTarjeta = false;
         }
 
-        if(tarjetaRemoved)
+        if (exitAddPaypal)
+        {
+            FindObjectOfType<AddPaypalController>().AddMessageDone();
+            exitAddPaypal = false;
+        }
+
+        if (notExitAddPaypal)
+        {
+            FindObjectOfType<AddPaypalController>().AddMessageError();
+            notExitAddPaypal = false;
+        }
+
+        if (tarjetaRemoved)
         {
             configuracionController.GoMetodoPago();
             tarjetaRemoved = false;
@@ -343,6 +357,23 @@ public class FirebasePageController : MonoBehaviour
             {
                 Debug.Log("tarjeta is not added");
                 notExitAddTarjeta = true;
+            }
+        });
+    }
+
+    public void AddPaypal(Dictionary<string, object> paypal)
+    {
+        db.Collection("Paypal").AddAsync(paypal).ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                Debug.Log("tarjeta is added");
+                exitAddPaypal = true;
+            }
+            else
+            {
+                Debug.Log("tarjeta is not added");
+                notExitAddPaypal = true;
             }
         });
     }
