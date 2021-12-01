@@ -7,11 +7,16 @@ public class PaypalController : MonoBehaviour
 {
     [SerializeField] Text email;
 
-    PaypalClass paypal;
+    PaypalClass data;
 
     public void AddInformation(PaypalClass paypal)
     {
         email.text = "Email: "+paypal.email;
-        this.paypal = paypal;
+        data = paypal;
+    }
+
+    public void MostrarPaypal()
+    {
+        FindObjectOfType<ConfiguracionController>().GoShowPaypal(data);
     }
 }

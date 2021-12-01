@@ -66,6 +66,8 @@ public class FirebasePageController : MonoBehaviour
     private bool deleteUserDone = false;
     private bool finishPaypal = false;
     private bool finishTarjeta = false;
+    private bool tarjetaRemoved = false;
+
 
 
 
@@ -87,8 +89,12 @@ public class FirebasePageController : MonoBehaviour
     [SerializeField] LibraryController libraryController;
     [SerializeField] SuscriptionController suscriptionController;
     [SerializeField] MetododePago metodoPagoController;
+    [SerializeField] ConfiguracionController configuracionController;
 
-
+    public bool exitAddTarjeta = false;
+    public bool notExitAddTarjeta = false;
+    private bool updateTarjetaDone = false;
+    private bool updatePaypalDone = false;
 
 
     private void Start()
@@ -283,7 +289,55 @@ public class FirebasePageController : MonoBehaviour
             finishTarjeta = false;
         }
 
+        if(exitAddTarjeta)
+        {
+            FindObjectOfType<AddTarjetaController>().AddMessageDone();
+            exitAddTarjeta = false;
+        }
 
+        if(notExitAddTarjeta)
+        {
+            FindObjectOfType<AddTarjetaController>().AddMessageError();
+            notExitAddTarjeta = false;
+        }
+
+        if(tarjetaRemoved)
+        {
+            configuracionController.GoMetodoPago();
+            tarjetaRemoved = false;
+        }
+
+        if(updateTarjetaDone)
+        {
+            FindObjectOfType<ShowTarjetaController>().MessageAddTarjeta();
+            updateTarjetaDone = false;
+        }
+
+        if(updatePaypalDone)
+        {
+            FindObjectOfType<ShowPaypalController>().MessageUpdatePaypal();
+            updatePaypalDone = false;
+        }
+
+
+
+    }
+
+    public void AddTarjeta(Dictionary<string, object> tarjeta)
+    {
+        db.Collection("Tarjetas").AddAsync(tarjeta).ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                Debug.Log("tarjeta is added");
+                exitAddTarjeta = true;
+            }
+            else
+            {
+                Debug.Log("tarjeta is not added");
+                notExitAddTarjeta = true;
+            }
+        });
     }
 
     public void AskTarjeta(string username)
@@ -386,6 +440,56 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    public void UpdateTarjeta(TarjetaClass tarjeta)
+    {
+        Debug.Log("update tarjeta");
+
+        db.Collection("Tarjetas").WhereEqualTo("username", tarjeta.username).GetSnapshotAsync().ContinueWith((task) =>
+        {
+            QuerySnapshot querySnapShot = task.Result;
+            foreach (DocumentSnapshot document in querySnapShot.Documents)
+            {
+                document.Reference.UpdateAsync("number", tarjeta.number).ContinueWith(task =>
+                {
+                    Debug.Log("Update");
+                });
+
+                document.Reference.UpdateAsync("cvv", tarjeta.cvv).ContinueWith(task =>
+                {
+                    Debug.Log("Update");
+                });
+
+                document.Reference.UpdateAsync("fechaCaducidad", tarjeta.fechaCaducidad).ContinueWith(task =>
+                {
+                    Debug.Log("Update");
+                });
+
+                updateTarjetaDone = true;
+
+            }
+
+        });
+    }
+
+    public void UpdatePaypal(PaypalClass paypal)
+    {
+        db.Collection("Paypal").WhereEqualTo("username", paypal.username).GetSnapshotAsync().ContinueWith((task) =>
+        {
+            QuerySnapshot querySnapShot = task.Result;
+            foreach (DocumentSnapshot document in querySnapShot.Documents)
+            {
+                document.Reference.UpdateAsync("email", paypal.email).ContinueWith(task =>
+                {
+                    Debug.Log("Update");
+                });
+
+                updatePaypalDone = true;
+              
+            }
+
+        });
+    }
+
     public void DeleteUser()
     {
         db.Collection("User").WhereEqualTo("loggeado", "yes").GetSnapshotAsync().ContinueWith((task) =>
@@ -397,6 +501,19 @@ public class FirebasePageController : MonoBehaviour
                 deleteUserDone = true;
             }
             logoutUser = true;
+        });
+    }
+
+    public void DeleteTarjeta(TarjetaClass tarjeta)
+    {
+        db.Collection("Tarjetas").WhereEqualTo("username", tarjeta.username).GetSnapshotAsync().ContinueWith((task) =>
+        {
+            QuerySnapshot querySnapShot = task.Result;
+            foreach (DocumentSnapshot document in querySnapShot.Documents)
+            {
+                document.Reference.DeleteAsync();
+                tarjetaRemoved = true;
+            }
         });
     }
 

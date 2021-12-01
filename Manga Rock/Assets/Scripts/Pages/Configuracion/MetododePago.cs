@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MetododePago : MonoBehaviour
 {
@@ -9,27 +10,46 @@ public class MetododePago : MonoBehaviour
     [SerializeField] GameObject prefabTarjeta;
     [SerializeField] GameObject prefabPaypal;
 
+    [SerializeField] Button añadirTarjeta;
+    [SerializeField] Button añadirCuenta;
+
     public void AddTarjetas(List<TarjetaClass> tarjetaslist)
     {
-
         ClearContent(contentTarjetas);
-        foreach(TarjetaClass tarjeta in tarjetaslist)
+        Debug.Log(tarjetaslist.Count);
+        if(tarjetaslist.Count != 0)
         {
-            GameObject prefab = Instantiate(prefabTarjeta, contentTarjetas);
-            prefab.GetComponent<TarjetaController>().AddInformation(tarjeta);
-            
+            foreach (TarjetaClass tarjeta in tarjetaslist)
+            {
+                GameObject prefab = Instantiate(prefabTarjeta, contentTarjetas);
+                prefab.GetComponent<TarjetaController>().AddInformation(tarjeta);
+
+            }
+            añadirTarjeta.interactable = false;
+        }
+        else
+        {
+            añadirTarjeta.interactable = true;
         }
     }
 
     public void AddPaypal(List<PaypalClass> paypallist)
     {
-        Debug.Log("Paypal" +paypallist.Count);
         ClearContent(contentPaypal);
-        foreach (PaypalClass paypal in paypallist)
+        if( paypallist.Count != 0)
         {
-            GameObject prefab = Instantiate(prefabPaypal, contentPaypal);
-            prefab.GetComponent<PaypalController>().AddInformation(paypal);
+            foreach (PaypalClass paypal in paypallist)
+            {
+                GameObject prefab = Instantiate(prefabPaypal, contentPaypal);
+                prefab.GetComponent<PaypalController>().AddInformation(paypal);
+            }
+            añadirCuenta.interactable = false;
         }
+        else
+        {
+            añadirCuenta.interactable = true;
+        }
+        
     }
 
     private void ClearContent(Transform content)

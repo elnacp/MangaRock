@@ -14,6 +14,9 @@ public class ConfiguracionController : MonoBehaviour
     [SerializeField] GameObject changePasswordPanel;
     [SerializeField] GameObject addTarjetaPanel;
     [SerializeField] GameObject showTarjetaPanel;
+    [SerializeField] GameObject addPaypalPanel;
+    [SerializeField] GameObject showPaypalPanel;
+
 
     [SerializeField] FirebasePageController firebase;
     [SerializeField] HomeInit userData;
@@ -99,8 +102,16 @@ public class ConfiguracionController : MonoBehaviour
         showTarjetaPanel.SetActive(true);
         positionActual = "showTarjeta";
         showTarjetaPanel.GetComponent<ShowTarjetaController>().AddInformation(tarjeta);
-        Debug.Log(tarjeta.number);
+    }
 
+
+    public void GoShowPaypal(PaypalClass paypal)
+    {
+        HideNormalActionBar();
+        HideAllPanels();
+        showPaypalPanel.SetActive(true);
+        positionActual = "showPaypal";
+        showPaypalPanel.GetComponent<ShowPaypalController>().AddInformation(paypal);
     }
 
     public void GoConfiguracionPanel()
@@ -122,6 +133,8 @@ public class ConfiguracionController : MonoBehaviour
         changePasswordPanel.SetActive(false);
         addTarjetaPanel.SetActive(false);
         showTarjetaPanel.SetActive(false);
+        addPaypalPanel.SetActive(false);
+        showPaypalPanel.SetActive(false);
     }
 
     private void HideNormalActionBar()
