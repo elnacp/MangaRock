@@ -47,7 +47,7 @@ public class ShowPaypalController : MonoBehaviour
     
     public void DeletePaypal()
     {
-
+        FindObjectOfType<FirebasePageController>().DeletePaypal(data);
     }
 
 }

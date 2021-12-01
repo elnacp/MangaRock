@@ -67,6 +67,7 @@ public class FirebasePageController : MonoBehaviour
     private bool finishPaypal = false;
     private bool finishTarjeta = false;
     private bool tarjetaRemoved = false;
+    private bool paypalRemoved = false;
 
 
 
@@ -319,6 +320,12 @@ public class FirebasePageController : MonoBehaviour
             updatePaypalDone = false;
         }
 
+        if(paypalRemoved)
+        {
+            configuracionController.GoMetodoPago();
+            paypalRemoved = false;
+        }
+
 
 
     }
@@ -513,6 +520,19 @@ public class FirebasePageController : MonoBehaviour
             {
                 document.Reference.DeleteAsync();
                 tarjetaRemoved = true;
+            }
+        });
+    }
+
+    public void DeletePaypal(PaypalClass paypal)
+    {
+        db.Collection("Paypal").WhereEqualTo("username", paypal.username).GetSnapshotAsync().ContinueWith((task) =>
+        {
+            QuerySnapshot querySnapShot = task.Result;
+            foreach (DocumentSnapshot document in querySnapShot.Documents)
+            {
+                document.Reference.DeleteAsync();
+                paypalRemoved = true;
             }
         });
     }
