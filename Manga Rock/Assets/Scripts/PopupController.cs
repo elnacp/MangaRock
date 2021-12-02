@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PopupController : MonoBehaviour
 {
-    [SerializeField] Canvas aplication;
-    [SerializeField] Canvas popups;
+    [SerializeField] GameObject popups;
 
     [SerializeField] GameObject añadirColeccion;
     [SerializeField] GameObject eliminarColeccion;
@@ -15,15 +14,16 @@ public class PopupController : MonoBehaviour
     [SerializeField] GameObject eliminarMangaListaDeseos;
     [SerializeField] GameObject eliminarUsuario;
 
+
     [SerializeField] FirebasePageController firebase;
 
-    
+    private string nameCollection = "";
+    private string usernameUser = "";
 
 
     private void Start()
     {
-        popups.enabled = false;
-
+        popups.SetActive(false);
     }
 
     private void HideAllPopups()
@@ -39,7 +39,7 @@ public class PopupController : MonoBehaviour
 
     public void ActivatePopup(string page)
     {
-        popups.enabled = true;
+        //popups.enabled = true;
 
         HideAllPopups();
 
@@ -47,13 +47,13 @@ public class PopupController : MonoBehaviour
         {
             case "deleteUser": eliminarUsuario.SetActive(true);
                 break;
-            
+
         }
     }
 
     public void HidePopup()
     {
-        popups.enabled = false;
+        popups.SetActive(false);
     }
 
     public void  PopupDeleteUser()
@@ -65,5 +65,42 @@ public class PopupController : MonoBehaviour
     {
         firebase.DeleteUser();
     }
+
+    public void GoEditarCollection(List<ColeccionBibliotecaClass> list, string name)
+    {
+        popups.SetActive(true);
+        HideAllPopups();
+        editarColeccion.SetActive(true);
+        editarColeccion.GetComponent<EditarCollection>().AddMangas(list, name);
+    }
+
+    public void GoAñadirCollection(string name)
+    {
+        popups.SetActive(true);
+        HideAllPopups();
+        añadirColeccion.SetActive(true);
+
+        nameCollection = name;
+        usernameUser = FindObjectOfType<HomeInit>().GetUser().username;
+
+    }
+
+    public void GoEliminarCollection(string name)
+    {
+        popups.SetActive(true);
+        HideAllPopups();
+        eliminarColeccion.SetActive(true);
+
+        nameCollection = name;
+        usernameUser = FindObjectOfType<HomeInit>().GetUser().username;
+
+    }
+
+    public void DeleteCollection()
+    {
+        firebase.DeleteCollection(nameCollection, usernameUser);
+    }
+
+
 
 }

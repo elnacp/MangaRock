@@ -98,6 +98,7 @@ public class PageController : MonoBehaviour
     {
         HideBarsAndShowBack();
         collectionpage.SetActive(true);
+        collectionpage.GetComponent<CollectionPageController>().ChangeName(nameCollection);
         firebase.AskCollection(nameCollection);
         actualPage = "collection";
     }

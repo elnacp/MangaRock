@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CollectionPageController : MonoBehaviour
 {
@@ -8,9 +9,23 @@ public class CollectionPageController : MonoBehaviour
     [SerializeField] GameObject prefabList;
     [SerializeField] GameObject prefabManga;
 
+    [SerializeField] Text nombreColeccion;
+
+    [SerializeField] PopupController popupController;
+
+    private List<ColeccionBibliotecaClass> listCollection = new List<ColeccionBibliotecaClass>();
+
+    public void ChangeName(string nombre)
+    {
+        nombreColeccion.text = nombre;
+    }
+
     public void AddInformation(List<ColeccionBibliotecaClass> list)
     {
         ClearContent();
+
+        listCollection.Clear();
+        listCollection = list;
 
         List<ColeccionBibliotecaClass> new_list = new List<ColeccionBibliotecaClass>();
 
@@ -74,5 +89,21 @@ public class CollectionPageController : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+    }
+
+    public void EditCollection()
+    {
+        popupController.GoEditarCollection(listCollection, nombreColeccion.text);
+
+    }
+
+    public void DeleteCollection()
+    {
+        popupController.GoEliminarCollection(nombreColeccion.text);
+    }
+
+    public void AñadirManga()
+    {
+        popupController.GoAñadirCollection(nombreColeccion.text);
     }
 }

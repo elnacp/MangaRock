@@ -100,6 +100,7 @@ public class FirebasePageController : MonoBehaviour
     private bool updateTarjetaDone = false;
     private bool updatePaypalDone = false;
     private bool coleccionNameDone = false;
+    private bool collectionRemoved = false;
 
 
     private void Start()
@@ -120,6 +121,13 @@ public class FirebasePageController : MonoBehaviour
 
     private void Update()
     {
+        if (collectionRemoved)
+        {
+            FindObjectOfType<PopupController>().HidePopup();
+            FindObjectOfType<PageController>().ChangePage("library");
+            collectionRemoved = false;
+        }
+
 
         if(comentariosMangaState)
         {
@@ -574,6 +582,25 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    public void DeleteCollection(string name, string username)
+    {
+        db.Collection("Colecciones Biblioteca").WhereEqualTo("nombreColeccion", name).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<ColeccionBibliotecaClass> list = new List<ColeccionBibliotecaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                ColeccionBiblioteca info = documentSnapshot.ConvertTo<ColeccionBiblioteca>();
+                if(info.username == username)
+                {
+                    documentSnapshot.Reference.DeleteAsync();
+                    collectionRemoved = true;
+                }
+            }
+
+        });
+    }
+
+
     public void GetSuscripcion(string username)
     {
         suscritoList.Clear();
@@ -744,6 +771,8 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+
+    
     public void AskCollection(string name)
     {
         listCollectionName.Clear();
