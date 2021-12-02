@@ -582,6 +582,27 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    public void DeleteMangaFromCollection(ColeccionBibliotecaClass element, string username, string nombrecoleccion)
+    {
+        db.Collection("Colecciones Biblioteca").WhereEqualTo("nombreColeccion", nombrecoleccion).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<ColeccionBibliotecaClass> list = new List<ColeccionBibliotecaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                ColeccionBiblioteca info = documentSnapshot.ConvertTo<ColeccionBiblioteca>();
+                if (info.username == username)
+                {
+                    if(info.titulo == element.titulo)
+                    {
+                        documentSnapshot.Reference.DeleteAsync();
+                    }
+                }
+            }
+
+        });
+    }
+
+
     public void DeleteCollection(string name, string username)
     {
         db.Collection("Colecciones Biblioteca").WhereEqualTo("nombreColeccion", name).GetSnapshotAsync().ContinueWith(task =>

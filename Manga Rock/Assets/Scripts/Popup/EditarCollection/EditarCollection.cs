@@ -12,6 +12,7 @@ public class EditarCollection : MonoBehaviour
 
     private List<ColeccionBibliotecaClass> listCollection = new List<ColeccionBibliotecaClass>();
     private List<ColeccionBibliotecaClass> removeItems = new List<ColeccionBibliotecaClass>();
+
     public void AddMangas(List<ColeccionBibliotecaClass> list, string name)
     {
         ClearContent();
@@ -54,11 +55,22 @@ public class EditarCollection : MonoBehaviour
   
     public void AcceptRemove()
     {
-        Debug.Log(removeItems.Count);
+        foreach(ColeccionBibliotecaClass element in removeItems)
+        {
+            string username = FindObjectOfType<HomeInit>().GetUser().username;
+            FindObjectOfType<FirebasePageController>().DeleteMangaFromCollection(element, username, title.text);
+            listCollection.Remove(element);
+        }
+
+        FindObjectOfType<PopupController>().HidePopup();
+
+        FindObjectOfType<PageController>().ChangePage("library");
     }
 
-    
-    
+
+
+
+
 
 
 }
