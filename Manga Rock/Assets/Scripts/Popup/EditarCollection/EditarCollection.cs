@@ -64,7 +64,8 @@ public class EditarCollection : MonoBehaviour
 
         FindObjectOfType<PopupController>().HidePopup();
 
-        FindObjectOfType<PageController>().ChangePage("library");
+        //FindObjectOfType<PageController>().ChangePage("library");
+        FindObjectOfType<CollectionPageController>().AddInformation(listCollection);
     }
 
 

@@ -22,10 +22,8 @@ public class CollectionPageController : MonoBehaviour
 
     public void AddInformation(List<ColeccionBibliotecaClass> list)
     {
-        Debug.Log(list.Count);
         ClearContent();
-
-        listCollection.Clear();
+      
         listCollection = list;
 
         List<ColeccionBibliotecaClass> new_list = new List<ColeccionBibliotecaClass>();
@@ -41,7 +39,11 @@ public class CollectionPageController : MonoBehaviour
         }
 
         int i = 0;
-        int num = 1;
+        int num = 0;
+        if(list.Count > 0)
+        {
+            num = 1;
+        }
         foreach(ColeccionBibliotecaClass element in list)
         {
             i++;
