@@ -107,6 +107,6 @@ public class CollectionPageController : MonoBehaviour
 
     public void AñadirManga()
     {
-        popupController.GoAñadirCollection(nombreColeccion.text);
+        popupController.GoAñadirCollection(listCollection, nombreColeccion.text);
     }
 }

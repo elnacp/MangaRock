@@ -34,7 +34,7 @@ public class FirebasePageController : MonoBehaviour
     List<TarjetaClass> listTarjeta = new List<TarjetaClass>();
     List<PaypalClass> listPaypal = new List<PaypalClass>();
     List<ColeccionBibliotecaClass> listCollectionName = new List<ColeccionBibliotecaClass>();
-
+    List<ColeccionBibliotecaClass> listMangasBiblioteca = new List<ColeccionBibliotecaClass>();
     List<ColeccionBibliotecaClass> listColeccionesBiblioteca = new List<ColeccionBibliotecaClass>();
 
     private bool topListFinish = false;
@@ -69,9 +69,7 @@ public class FirebasePageController : MonoBehaviour
     private bool finishTarjeta = false;
     private bool tarjetaRemoved = false;
     private bool paypalRemoved = false;
-
-
-
+    private bool getMangasUserDone = false;
 
     private bool isLogged = false;
     private bool ask = false;
@@ -121,6 +119,12 @@ public class FirebasePageController : MonoBehaviour
 
     private void Update()
     {
+        if(getMangasUserDone)
+        {
+            FindObjectOfType<AñadirMangasCollectionController>().AddMangas(listMangasBiblioteca);
+            getMangasUserDone = false;
+        }
+
         if (collectionRemoved)
         {
             FindObjectOfType<PopupController>().HidePopup();
@@ -792,6 +796,67 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    public void DeleteMangaCollection(ColeccionBibliotecaClass manga)
+    {
+        db.Collection("Colecciones Biblioteca").WhereEqualTo("titulo", manga.titulo).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<ColeccionBibliotecaClass> list = new List<ColeccionBibliotecaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                documentSnapshot.Reference.DeleteAsync();
+            }
+        });
+    }
+
+    public void AñadirMangaCollection(Dictionary<string, object> manga)
+    {
+        db.Collection("Colecciones Biblioteca").AddAsync(manga).ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                Debug.Log("manga is added");
+            }
+            else
+            {
+                Debug.Log("manga is not added");
+            }
+        });
+    }
+
+    public void GetAllMangasUser(string username, string nombreColeccion)
+    {
+        if(listMangasBiblioteca.Count != 0)
+        {
+            listMangasBiblioteca.Clear();
+        }
+
+        db.Collection("Biblioteca").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<ColeccionBibliotecaClass> list = new List<ColeccionBibliotecaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Biblioteca info = documentSnapshot.ConvertTo<Biblioteca>();
+                ColeccionBibliotecaClass element = new ColeccionBibliotecaClass();
+                element.autor = info.autor;
+                element.idioma = info.idioma;
+                element.paginas = info.paginas;
+                element.titulo = info.titulo;
+                element.url = info.url;
+                element.percentage = info.percentage;
+                element.username = info.username;
+                element.nombreColeccion = nombreColeccion;
+
+                list.Add(element);
+            }
+
+            foreach (ColeccionBibliotecaClass i in list)
+            {
+                listMangasBiblioteca.Add(i);
+            }
+
+            getMangasUserDone = true;
+        });
+    }
 
     
     public void AskCollection(string name)

@@ -74,15 +74,18 @@ public class PopupController : MonoBehaviour
         editarColeccion.GetComponent<EditarCollection>().AddMangas(list, name);
     }
 
-    public void GoAñadirCollection(string name)
+    public void GoAñadirCollection(List<ColeccionBibliotecaClass> list, string name)
     {
         popups.SetActive(true);
         HideAllPopups();
-        añadirColeccion.SetActive(true);
+        AddMangas.SetActive(true);
+        AddMangas.GetComponent<AñadirMangasCollectionController>().AddTitle(name);
+        AddMangas.GetComponent<AñadirMangasCollectionController>().AddList(list);
+
 
         nameCollection = name;
         usernameUser = FindObjectOfType<HomeInit>().GetUser().username;
-
+        firebase.GetAllMangasUser(usernameUser, name);
     }
 
     public void GoEliminarCollection(string name)

@@ -68,6 +68,13 @@ public class EditarCollection : MonoBehaviour
         FindObjectOfType<CollectionPageController>().AddInformation(listCollection);
     }
 
+    public void Cancel()
+    {
+        FindObjectOfType<PopupController>().HidePopup();
+        FindObjectOfType<CollectionPageController>().AddInformation(listCollection);
+
+    }
+
 
 
 
