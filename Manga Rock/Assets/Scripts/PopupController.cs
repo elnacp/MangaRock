@@ -96,13 +96,20 @@ public class PopupController : MonoBehaviour
 
         nameCollection = name;
         usernameUser = FindObjectOfType<HomeInit>().GetUser().username;
-
     }
 
     public void DeleteCollection()
     {
         firebase.DeleteCollection(nameCollection, usernameUser);
     }
+
+    public void AñadirCollection()
+    {
+        popups.SetActive(true);
+        HideAllPopups();
+        añadirColeccion.SetActive(true);
+    }
+
 
 
 

@@ -18,6 +18,7 @@ public class PageController : MonoBehaviour
     [SerializeField] GameObject suscription;
     [SerializeField] GameObject configuracion;
     [SerializeField] GameObject collectionpage;
+    [SerializeField] GameObject listaCompra;
 
     [SerializeField] RectTransform parent;
 
@@ -58,9 +59,20 @@ public class PageController : MonoBehaviour
             case "collectionBiblioteca": library.SetActive(true);
                 firebase.GetCollections(userData.GetUser().username);
                 break;
+            case "llistaCompra":
+                listaCompra.SetActive(true);
+                break;
         }
 
         actualPage = name;
+    }
+
+
+    public void GoListaCompra()
+    {
+        HideBarsAndShowBack();
+        actualPage = "llistaCompra";
+        listaCompra.SetActive(true);
     }
 
     public void GoGenrePage(string category)
@@ -72,6 +84,7 @@ public class PageController : MonoBehaviour
 
     public void GoCollectionBiblioteca()
     {
+
         actualPage = "collectionBiblioteca";
         firebase.GetCollections(userData.GetUser().username);
 
@@ -173,6 +186,7 @@ public class PageController : MonoBehaviour
         suscription.SetActive(false);
         configuracion.SetActive(false);
         collectionpage.SetActive(false);
+        listaCompra.SetActive(false);
     }
 
 

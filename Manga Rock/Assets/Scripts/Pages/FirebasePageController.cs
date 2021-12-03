@@ -379,6 +379,8 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    
+
     public void AddPaypal(Dictionary<string, object> paypal)
     {
         db.Collection("Paypal").AddAsync(paypal).ContinueWith(task =>
@@ -600,6 +602,23 @@ public class FirebasePageController : MonoBehaviour
                     {
                         documentSnapshot.Reference.DeleteAsync();
                     }
+                }
+            }
+
+        });
+    }
+
+    public void DeleteCollectionMangas(string nombreColeccion, string username)
+    {
+        db.Collection("Colecciones Biblioteca").WhereEqualTo("nombreColeccion", nombreColeccion).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<ColeccionBibliotecaClass> list = new List<ColeccionBibliotecaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                ColeccionBiblioteca info = documentSnapshot.ConvertTo<ColeccionBiblioteca>();
+                if (info.username == username)
+                {
+                    documentSnapshot.Reference.DeleteAsync();
                 }
             }
 
