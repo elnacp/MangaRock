@@ -55,6 +55,9 @@ public class PageController : MonoBehaviour
             case "collection": library.SetActive(true);
                 firebase.GetCollections(userData.GetUser().username);
                 break;
+            case "collectionBiblioteca": library.SetActive(true);
+                firebase.GetCollections(userData.GetUser().username);
+                break;
         }
 
         actualPage = name;
@@ -69,6 +72,7 @@ public class PageController : MonoBehaviour
 
     public void GoCollectionBiblioteca()
     {
+        actualPage = "collectionBiblioteca";
         firebase.GetCollections(userData.GetUser().username);
 
     }

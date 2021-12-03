@@ -81,30 +81,67 @@ public class AñadirMangasCollectionController : MonoBehaviour
 
     public void Acceptar()
     {
+        /*
         foreach(ColeccionBibliotecaClass element in listMangasInCollection)
         {
-            FindObjectOfType<FirebasePageController>().DeleteMangaCollection(element);
         }
 
         foreach(ColeccionBibliotecaClass element in mangasAñadir)
         {
-            Dictionary<string, object> manga = new Dictionary<string, object>
+            
+        }
+
+        FindObjectOfType<PopupController>().HidePopup();
+        FindObjectOfType<CollectionPageController>().AddInformation(mangasAñadir);*/
+
+        bool exist = false;
+        foreach(ColeccionBibliotecaClass element in listMangasInCollection)
+        {
+            exist = false;
+            foreach(ColeccionBibliotecaClass element2 in mangasAñadir)
             {
-                {"autor", element.autor},
-                {"idioma", element.idioma},
-                {"nombreColeccion", element.nombreColeccion},
-                {"paginas", element.paginas},
-                {"percentage", element.percentage},
-                {"titulo", element.titulo},
-                {"url", element.url},
-                {"username", element.username }
-            };
-            FindObjectOfType<FirebasePageController>().AñadirMangaCollection(manga);
+                if(element.titulo == element2.titulo)
+                {
+                    exist = true;
+                }
+            }
+            if(!exist)
+            {
+                FindObjectOfType<FirebasePageController>().DeleteMangaCollection(element);
+            }
+        }
+
+        bool exist2 = false;
+        foreach(ColeccionBibliotecaClass element in mangasAñadir)
+        {
+            exist2 = false;
+            foreach(ColeccionBibliotecaClass element2 in listMangasInCollection)
+            {
+                if(element.titulo == element2.titulo)
+                {
+                    exist2 = true;
+                }
+            }
+            if(!exist2)
+            {
+
+                Dictionary<string, object> manga = new Dictionary<string, object>
+                {
+                    {"autor", element.autor},
+                    {"idioma", element.idioma},
+                    {"nombreColeccion", element.nombreColeccion},
+                    {"paginas", element.paginas},
+                    {"percentage", element.percentage},
+                    {"titulo", element.titulo},
+                    {"url", element.url},
+                    {"username", element.username }
+                };
+                FindObjectOfType<FirebasePageController>().AñadirMangaCollection(manga);
+            }
         }
 
         FindObjectOfType<PopupController>().HidePopup();
         FindObjectOfType<CollectionPageController>().AddInformation(mangasAñadir);
-
     }
 
 

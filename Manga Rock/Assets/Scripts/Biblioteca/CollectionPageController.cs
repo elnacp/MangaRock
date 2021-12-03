@@ -23,7 +23,8 @@ public class CollectionPageController : MonoBehaviour
     public void AddInformation(List<ColeccionBibliotecaClass> list)
     {
         ClearContent();
-      
+
+        Debug.Log(list.Count);
         listCollection = list;
 
         List<ColeccionBibliotecaClass> new_list = new List<ColeccionBibliotecaClass>();

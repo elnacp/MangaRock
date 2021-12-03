@@ -70,6 +70,8 @@ public class LibraryController : MonoBehaviour
 
     public void AddInformationCollection(List<ColeccionBibliotecaClass> list)
     {
+
+        Debug.Log(list);
         foreach(Transform child in contentColecciones)
         {
             if(child.name != "Añadir Coleccion")
