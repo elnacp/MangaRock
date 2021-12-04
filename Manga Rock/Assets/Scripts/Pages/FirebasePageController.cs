@@ -106,6 +106,8 @@ public class FirebasePageController : MonoBehaviour
     private bool updatePaypalDone = false;
     private bool coleccionNameDone = false;
     private bool collectionRemoved = false;
+    private bool existeMangaShopList = false;
+    private bool finishAddMangaShopList = false;
 
 
     private void Start()
@@ -126,6 +128,12 @@ public class FirebasePageController : MonoBehaviour
 
     private void Update()
     {
+
+        if(finishAddMangaShopList)
+        {
+            FindObjectOfType<DetallesMangaPageController>().CanBuy(existeMangaShopList);
+            finishAddMangaShopList = false;
+        }
 
         if(tarjetaShopListFinish)
         {
@@ -725,6 +733,24 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    public void IsInShopList(string titulo, string username)
+    {
+        db.Collection("ShopList").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith((task) =>
+        {
+            existeMangaShopList = false;
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                ShopList info = documentSnapshot.ConvertTo<ShopList>();
+                if (info.titulo == titulo)
+                {
+                    existeMangaShopList = true;
+                }
+
+            }
+            finishAddMangaShopList = true;
+        });
+    }
+
     public void DeletePaypal(PaypalClass paypal)
     {
         db.Collection("Paypal").WhereEqualTo("username", paypal.username).GetSnapshotAsync().ContinueWith((task) =>
@@ -977,6 +1003,20 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    public void AddToShopList(Dictionary<string, object> manga)
+    {
+        db.Collection("ShopList").AddAsync(manga).ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                Debug.Log("add to shoplist");
+            }
+            else
+            {
+                Debug.Log("not added to shoplist");
+            }
+        });
+    }
     public void AñadirMangaCollection(Dictionary<string, object> manga)
     {
         db.Collection("Colecciones Biblioteca").AddAsync(manga).ContinueWith(task =>

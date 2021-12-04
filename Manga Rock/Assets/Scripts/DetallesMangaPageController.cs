@@ -18,6 +18,8 @@ public class DetallesMangaPageController : MonoBehaviour
     [SerializeField] Transform contentMangasSameAutor;
     [SerializeField] Transform contentMangasSameColection;
     [SerializeField] Transform contentMangasSameCategory;
+
+    [SerializeField] Button payButton;
     
     [SerializeField] Transform contentCommentarios;
     [SerializeField] GameObject prefabCommentario;
@@ -36,6 +38,35 @@ public class DetallesMangaPageController : MonoBehaviour
     MangaClass mangaData = new MangaClass();
     WishlistClass mangaWishlist;
     private bool isAdded = false;
+
+    public void AddShopList()
+    {
+        payButton.interactable = false;
+        string username = FindObjectOfType<HomeInit>().GetUser().username;
+        Dictionary<string, object> new_manga = new Dictionary<string, object>
+        {
+            {"titulo", mangaData.titulo },
+            {"autor", mangaData.autor },
+            {"precio", mangaData.precio },
+            {"cantidad", 1 },
+            {"url", mangaData.url },
+            {"username", username  },
+        };
+        firebase.AddToShopList(new_manga);
+
+    }
+
+    public void CanBuy(bool isInShopList)
+    {
+        if(isInShopList == true)
+        {
+            payButton.interactable = false;
+        }
+        else
+        {
+            payButton.interactable = true;
+        }
+    }
 
     public void AddInformation(MangaClass manga)
     {
@@ -88,6 +119,8 @@ public class DetallesMangaPageController : MonoBehaviour
 
         firebase.InfoWishlist(mangaWishlist);
 
+        firebase.IsInShopList(manga.titulo, homeinit.GetUser().username);
+
     }
 
     IEnumerator GetImage(string url)
@@ -125,6 +158,7 @@ public class DetallesMangaPageController : MonoBehaviour
 
     }
 
+    
     private void ClearComments()
     {
         foreach(Transform child in contentCommentarios)

@@ -93,12 +93,12 @@ public class ShopListController : MonoBehaviour
         if(increase)
         {
             precioTotalList += precio;
-            precioFinal.text = precioTotalList.ToString();
+            precioFinal.text = precioTotalList + "€";
         }
         else
         {
             precioTotalList -= precio;
-            precioFinal.text = precioTotalList.ToString();
+            precioFinal.text = precioTotalList + "€";
         }
     }
 
