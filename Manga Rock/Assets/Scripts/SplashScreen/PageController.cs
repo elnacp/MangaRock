@@ -73,6 +73,8 @@ public class PageController : MonoBehaviour
         HideBarsAndShowBack();
         actualPage = "llistaCompra";
         listaCompra.SetActive(true);
+
+        firebase.GetShopList(userData.GetUser().username);
     }
 
     public void GoGenrePage(string category)

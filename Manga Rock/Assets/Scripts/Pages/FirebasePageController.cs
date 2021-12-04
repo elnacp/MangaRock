@@ -36,6 +36,7 @@ public class FirebasePageController : MonoBehaviour
     List<ColeccionBibliotecaClass> listCollectionName = new List<ColeccionBibliotecaClass>();
     List<ColeccionBibliotecaClass> listMangasBiblioteca = new List<ColeccionBibliotecaClass>();
     List<ColeccionBibliotecaClass> listColeccionesBiblioteca = new List<ColeccionBibliotecaClass>();
+    List<ShopListClass> listShopList = new List<ShopListClass>();
 
     private bool topListFinish = false;
     private bool novedadesFinish = false;
@@ -70,6 +71,7 @@ public class FirebasePageController : MonoBehaviour
     private bool tarjetaRemoved = false;
     private bool paypalRemoved = false;
     private bool getMangasUserDone = false;
+    private bool finishShopList = false;
 
     private bool isLogged = false;
     private bool ask = false;
@@ -360,6 +362,12 @@ public class FirebasePageController : MonoBehaviour
             coleccionNameDone = false;
         }
 
+        if(finishShopList)
+        {
+            FindObjectOfType<ShopListController>().AddMangaList(listShopList);
+            finishShopList = false;
+        }
+
     }
 
     public void AddTarjeta(Dictionary<string, object> tarjeta)
@@ -459,6 +467,36 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+
+    public void GetShopList(string username)
+    {
+        listShopList.Clear();
+
+        db.Collection("ShopList").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<ShopListClass> list = new List<ShopListClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                ShopList info = documentSnapshot.ConvertTo<ShopList>();
+                ShopListClass element = new ShopListClass();
+                element.username = info.username;
+                element.autor = info.autor;
+                element.cantidad = info.cantidad;
+                element.precio = info.precio;
+                element.titulo = info.titulo;
+                element.url = info.url;
+
+                list.Add(element);
+            }
+
+            foreach (ShopListClass element in list)
+            {
+                listShopList.Add(element);
+            }
+
+            finishShopList = true;
+        });
+    }
 
     public void UpdateProfile(string username, string email)
     {
