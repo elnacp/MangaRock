@@ -619,6 +619,18 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    public void ClearShopList(string username)
+    {
+        db.Collection("ShopList").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith((task) =>
+        {
+            QuerySnapshot querySnapShot = task.Result;
+            foreach (DocumentSnapshot document in querySnapShot.Documents)
+            {
+                document.Reference.DeleteAsync();
+            }
+        });
+    }
+
     public void UpdatePassword(string password)
     {
         db.Collection("User").WhereEqualTo("loggeado", "yes").GetSnapshotAsync().ContinueWith((task) =>

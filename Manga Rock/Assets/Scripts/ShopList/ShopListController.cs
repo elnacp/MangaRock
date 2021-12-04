@@ -22,12 +22,22 @@ public class ShopListController : MonoBehaviour
     [SerializeField] GameObject BackTarjeta;
     [SerializeField] GameObject buttonDelante;
 
+    [SerializeField] GameObject saveTarjetaPanel;
+    [SerializeField] GameObject savePaypalPanel;
 
+    [SerializeField] Image savepaypal;
+    [SerializeField] Image savetarjeta;
+    [SerializeField] Sprite checkOn;
+    [SerializeField] Sprite checkOff;
+
+    private List<ShopListClass> shopList = new List<ShopListClass>();
 
     private float precioTotalList = 0;
     private TarjetaClass tarjeta;
     private PaypalClass paypal;
 
+    private bool saveTarjetaState = false;
+    private bool savePaypalState = false;
 
     public void AddMangaList(List<ShopListClass> list)
     {
@@ -45,6 +55,8 @@ public class ShopListController : MonoBehaviour
         precioTotalList = precio;
 
         precioFinal.text = precio + "€";
+
+        shopList = list;
 
     }
 
@@ -69,6 +81,8 @@ public class ShopListController : MonoBehaviour
         UserClass userData = FindObjectOfType<HomeInit>().GetUser();
         firebase.GetShopList(userData.username);
         firebase.GetTarjeta(userData.username);
+        firebase.GetPaypal(userData.username);
+
 
         tarjetaPanel.SetActive(true);
         paypalPanel.SetActive(false);
@@ -87,8 +101,6 @@ public class ShopListController : MonoBehaviour
             precioFinal.text = precioTotalList.ToString();
         }
     }
-
-    
 
     public void AddTarjeta(List<TarjetaClass> listTarjetas)
     {
@@ -110,8 +122,13 @@ public class ShopListController : MonoBehaviour
             fechaCaducidad.placeholder.GetComponent<Text>().text = tarjeta.fechaCaducidad;
             number.interactable = false;
             fechaCaducidad.interactable = false;
-        }
 
+            saveTarjetaPanel.SetActive(false);
+        }
+        else
+        {
+            saveTarjetaPanel.SetActive(true);
+        }
     }
 
     private void AddTarjetaDatosBack()
@@ -125,8 +142,6 @@ public class ShopListController : MonoBehaviour
 
     }
 
-
-
     public void ShowBack()
     {
         FrontTarjeta.SetActive(false);
@@ -136,6 +151,7 @@ public class ShopListController : MonoBehaviour
         buttonDelante.SetActive(true);
         AddTarjetaDatosBack();
     }
+
     public void ShowFront()
     {
         FrontTarjeta.SetActive(true);
@@ -159,16 +175,84 @@ public class ShopListController : MonoBehaviour
 
     private void AddPaypalDatos()
     {
-        if (paypalPanel.activeSelf)
+       
+        if (paypal != null)
         {
-            if (paypal != null)
-            {
-                email.placeholder.GetComponent<Text>().text = paypal.email;
-                email.interactable = false;
-            }
+            email.placeholder.GetComponent<Text>().text = paypal.email;
+            email.interactable = false;
+
+            savePaypalPanel.SetActive(false);
+        }
+        else
+        {
+            savePaypalPanel.SetActive(true);
+        }
+
+    }
+
+    public void SaveTarjeta()
+    {
+        saveTarjetaState = !saveTarjetaState;
+        if(saveTarjetaState)
+        {
+            savetarjeta.sprite = checkOn;
+        }
+        else
+        {
+            savetarjeta.sprite = checkOff;
         }
     }
 
+    public void SavePaypal()
+    {
+        savePaypalState = !savePaypalState;
+        if (savePaypalState)
+        {
+            savepaypal.sprite = checkOn;
+        }
+        else
+        {
+            savepaypal.sprite = checkOff;
+        }
+    }
+
+    public void Comprar()
+    {
+        if(shopList.Count != 0)
+        {
+            int cantidad = 0;
+            foreach(ShopListClass item in shopList)
+            {
+                cantidad += item.cantidad;
+            }
+
+            if(cantidad != 0)
+            {
+                foreach(ShopListClass item in shopList)
+                {
+                    if(item.cantidad != 0)
+                    {
+                        for (int i = 0; i < item.cantidad; i++)
+                        {
+                            Debug.Log("add manga" + i);
+                        }
+                    }
+                }
+                foreach (ShopListClass item in shopList)
+                {
+                    if (item.cantidad != 0)
+                    {
+                        for (int i = 0; i < item.cantidad; i++)
+                        {
+                            Debug.Log("eliminar manga" + i);
+                            string username = FindObjectOfType<HomeInit>().GetUser().username;
+                            FindObjectOfType<FirebasePageController>().ClearShopList(username);
+                        }
+                    }
+                }
+            }
+        }
+    }
         
 
     

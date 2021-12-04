@@ -59,9 +59,7 @@ public class PageController : MonoBehaviour
             case "collectionBiblioteca": library.SetActive(true);
                 firebase.GetCollections(userData.GetUser().username);
                 break;
-            case "llistaCompra":
-                listaCompra.SetActive(true);
-                break;
+
         }
 
         actualPage = name;
@@ -71,7 +69,6 @@ public class PageController : MonoBehaviour
     public void GoListaCompra()
     {
         HideBarsAndShowBack();
-        actualPage = "llistaCompra";
         listaCompra.SetActive(true);
 
         listaCompra.GetComponent<ShopListController>().Init();
