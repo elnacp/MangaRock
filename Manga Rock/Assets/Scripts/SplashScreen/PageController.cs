@@ -74,7 +74,8 @@ public class PageController : MonoBehaviour
         actualPage = "llistaCompra";
         listaCompra.SetActive(true);
 
-        firebase.GetShopList(userData.GetUser().username);
+        listaCompra.GetComponent<ShopListController>().Init();
+
     }
 
     public void GoGenrePage(string category)

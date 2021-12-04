@@ -37,6 +37,8 @@ public class FirebasePageController : MonoBehaviour
     List<ColeccionBibliotecaClass> listMangasBiblioteca = new List<ColeccionBibliotecaClass>();
     List<ColeccionBibliotecaClass> listColeccionesBiblioteca = new List<ColeccionBibliotecaClass>();
     List<ShopListClass> listShopList = new List<ShopListClass>();
+    List<TarjetaClass> tarjetasShopListList = new List<TarjetaClass>();
+    List<PaypalClass> paypalsShopListList = new List<PaypalClass>();
 
     private bool topListFinish = false;
     private bool novedadesFinish = false;
@@ -72,6 +74,9 @@ public class FirebasePageController : MonoBehaviour
     private bool paypalRemoved = false;
     private bool getMangasUserDone = false;
     private bool finishShopList = false;
+    private bool tarjetaShopListFinish = false;
+    private bool paypalShopListFinish = false;
+
 
     private bool isLogged = false;
     private bool ask = false;
@@ -121,6 +126,19 @@ public class FirebasePageController : MonoBehaviour
 
     private void Update()
     {
+
+        if(tarjetaShopListFinish)
+        {
+            FindObjectOfType<ShopListController>().AddTarjeta(tarjetasShopListList);
+            tarjetaShopListFinish = false;
+        }
+
+        if(paypalShopListFinish)
+        {
+            FindObjectOfType<ShopListController>().AddPaypal(paypalsShopListList);
+            paypalShopListFinish = false;
+        }
+
         if(getMangasUserDone)
         {
             FindObjectOfType<AñadirMangasCollectionController>().AddMangas(listMangasBiblioteca);
@@ -515,6 +533,88 @@ public class FirebasePageController : MonoBehaviour
                     Debug.Log("Update");
                 });
             }
+
+        });
+    }
+
+    public void UpdateCantidad(int cantidad)
+    {
+        string username = FindObjectOfType<HomeInit>().GetUser().username;
+
+        db.Collection("ShopList").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith((task) =>
+        {
+            QuerySnapshot querySnapShot = task.Result;
+            foreach (DocumentSnapshot document in querySnapShot.Documents)
+            {
+                document.Reference.UpdateAsync("cantidad", cantidad).ContinueWith(task =>
+                {
+                    Debug.Log("Update cantidad");
+                });
+  
+            }
+
+        });
+    }
+
+    public void GetTarjeta(string username)
+    {
+
+        tarjetasShopListList.Clear();
+
+        db.Collection("Tarjetas").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
+        {
+            QuerySnapshot query = task.Result;
+            List<TarjetaClass> list = new List<TarjetaClass>();
+            foreach (DocumentSnapshot documentSnapshot in query.Documents)
+            {
+                TarjetaFirebase info = documentSnapshot.ConvertTo<TarjetaFirebase>();
+                TarjetaClass element = new TarjetaClass();
+                element.username = info.username;
+                element.number = info.number;
+                element.fechaCaducidad = info.fechaCaducidad;
+                element.cvv = info.cvv;
+
+                list.Add(element);
+
+            }
+
+            foreach (TarjetaClass element in list)
+            {
+                tarjetasShopListList.Add(element);
+            }
+
+            tarjetaShopListFinish = true;
+
+        });
+    }
+
+
+    public void GetPaypal(string username)
+    {
+
+        tarjetasShopListList.Clear();
+
+        db.Collection("Paypal").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
+        {
+            QuerySnapshot query = task.Result;
+            List<PaypalClass> list = new List<PaypalClass>();
+            foreach (DocumentSnapshot documentSnapshot in query.Documents)
+            {
+                Paypal info = documentSnapshot.ConvertTo<Paypal>();
+                PaypalClass element = new PaypalClass();
+                element.username = info.username;
+                element.email = info.email;
+
+                list.Add(element);
+
+            }
+
+            foreach (PaypalClass element in list)
+            {
+                paypalsShopListList.Add(element);
+            }
+
+            paypalShopListFinish = true;
 
         });
     }

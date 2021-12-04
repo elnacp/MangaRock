@@ -60,6 +60,7 @@ public class MangaListCompra : MonoBehaviour
         }
 
         FindObjectOfType<ShopListController>().ChangePrecioFinal(item.precio, true);
+        UpdateCantidad();
     }
 
     public void DecreseCantidad()
@@ -81,11 +82,12 @@ public class MangaListCompra : MonoBehaviour
         }
 
         FindObjectOfType<ShopListController>().ChangePrecioFinal(item.precio, false);
+        UpdateCantidad();
 
     }
 
     private void UpdateCantidad()
     {
-        //FindObjectOfType<FirebasePageController>().UpdateCantidad();
+        FindObjectOfType<FirebasePageController>().UpdateCantidad(item.cantidad);
     }
 }
