@@ -228,6 +228,9 @@ public class ShopListController : MonoBehaviour
 
             if(cantidad != 0)
             {
+
+                AddMetodoPago();
+
                 foreach(ShopListClass item in shopList)
                 {
                     if(item.cantidad != 0)
@@ -253,8 +256,52 @@ public class ShopListController : MonoBehaviour
             }
         }
     }
-        
-
     
+    private void AddMetodoPago()
+    {
+        string username = FindObjectOfType<HomeInit>().GetUser().username;
+
+        if (paypalPanel.activeSelf)
+        {
+            if(savePaypalState)
+            {
+                if(email.text != "")
+                {
+                    Dictionary<string, object> new_paypal = new Dictionary<string, object>
+                    {
+                        {"email", email.text},
+                        {"username", username }
+                    };
+
+                    FindObjectOfType<FirebasePageController>().AddPaypal(new_paypal);
+                }
+                
+            }
+        }
+
+        if (tarjetaPanel.activeSelf)
+        {
+            if (saveTarjetaState)
+            {
+                if(number.text != "" && fechaCaducidad.text != "" && cvv.text != "")
+                {
+                    Dictionary<string, object> new_tarjeta = new Dictionary<string, object>
+                    {
+                        {"cvv", cvv.text},
+                        {"fechaCaducidad", fechaCaducidad.text},
+                        {"number", number.text},
+                        {"username", username }
+                    };
+
+                    FindObjectOfType<FirebasePageController>().AddTarjeta(new_tarjeta);
+                }
+                
+            }
+        }
+    }
+
+
+
+
 
 }

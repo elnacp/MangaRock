@@ -1032,6 +1032,36 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    public void SavePaypal(Dictionary<string, object> paypal)
+    {
+        db.Collection("Paypal").AddAsync(paypal).ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                Debug.Log("paypal is added");
+            }
+            else
+            {
+                Debug.Log("paypal is not added");
+            }
+        });
+    }
+
+    public void SaveTarjeta(Dictionary<string, object> tarjeta)
+    {
+        db.Collection("Tarjetas").AddAsync(tarjeta).ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                Debug.Log("tarjeta is added");
+            }
+            else
+            {
+                Debug.Log("tarjeta is not added");
+            }
+        });
+    }
+
     public void GetAllMangasUser(string username, string nombreColeccion)
     {
         if(listMangasBiblioteca.Count != 0)
