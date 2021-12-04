@@ -110,6 +110,13 @@ public class PopupController : MonoBehaviour
         añadirColeccion.SetActive(true);
     }
 
+    public void GoCancelSub()
+    {
+        popups.SetActive(true);
+        HideAllPopups();
+        CancelarSuscripcion.SetActive(true);
+    }
+
 
 
 

@@ -12,6 +12,8 @@ public class SuscriptionController : MonoBehaviour
     [SerializeField] Button planMensual;
     [SerializeField] Button planAnual;
 
+    [SerializeField] Button cancelarSub;
+
     public void AddData(List<SuscritoClass> list)
     {
         int i = 0;
@@ -26,6 +28,8 @@ public class SuscriptionController : MonoBehaviour
                 else
                 {
                     estadoSuscripcion.text = "NO SUSCRITO";
+                    cancelarSub.interactable = false;
+
                 }
 
                 if (suscripcion.plan == "mensual")
@@ -48,5 +52,10 @@ public class SuscriptionController : MonoBehaviour
             }
             i++;
         }
+    }
+
+    public void CancelSub()
+    {
+        FindObjectOfType<PopupController>().GoCancelSub();
     }
 }

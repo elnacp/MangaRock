@@ -80,8 +80,8 @@ public class ShopListController : MonoBehaviour
         FirebasePageController firebase = FindObjectOfType<FirebasePageController>();
         UserClass userData = FindObjectOfType<HomeInit>().GetUser();
         firebase.GetShopList(userData.username);
-        firebase.GetTarjeta(userData.username);
-        firebase.GetPaypal(userData.username);
+        //firebase.GetTarjeta(userData.username);
+        //firebase.GetPaypal(userData.username);
 
 
         tarjetaPanel.SetActive(true);
@@ -247,7 +247,7 @@ public class ShopListController : MonoBehaviour
                     {
                         for (int i = 0; i < item.cantidad; i++)
                         {
-                            Debug.Log("eliminar manga" + i);
+                            //Debug.Log("eliminar manga" + i);
                             string username = FindObjectOfType<HomeInit>().GetUser().username;
                             FindObjectOfType<FirebasePageController>().ClearShopList(username);
                         }
