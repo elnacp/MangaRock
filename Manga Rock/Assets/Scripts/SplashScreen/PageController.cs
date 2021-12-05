@@ -120,6 +120,8 @@ public class PageController : MonoBehaviour
         autor.SetActive(true);
         autor.GetComponent<AutorController>().AddInformation(nombre, url, followers);
 
+        firebase.GetMangasAutor(nombre);
+        firebase.GetCollectionAutor(nombre);
     }
     
     public void GoCollectionPage(string nameCollection)

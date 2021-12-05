@@ -40,6 +40,8 @@ public class FirebasePageController : MonoBehaviour
     List<TarjetaClass> tarjetasShopListList = new List<TarjetaClass>();
     List<PaypalClass> paypalsShopListList = new List<PaypalClass>();
     List<NotificacionClass> listNotificaciones = new List<NotificacionClass>();
+    List<MangaClass> mangasAutor = new List<MangaClass>();
+    List<ColeccionesClass> collectionAutor = new List<ColeccionesClass>();
 
     private bool topListFinish = false;
     private bool novedadesFinish = false;
@@ -78,6 +80,7 @@ public class FirebasePageController : MonoBehaviour
     private bool tarjetaShopListFinish = false;
     private bool paypalShopListFinish = false;
     private bool notificacionesFinish = false;
+    private bool collectionAutorFinish = false;
 
 
     private bool isLogged = false;
@@ -111,6 +114,7 @@ public class FirebasePageController : MonoBehaviour
     private bool existeMangaShopList = false;
     private bool finishAddMangaShopList = false;
     private bool finishUnSub = false;
+    private bool mangaAutorFinish = false;
 
 
     private void Start()
@@ -132,6 +136,11 @@ public class FirebasePageController : MonoBehaviour
     private void Update()
     {
 
+        if(collectionAutorFinish)
+        {
+            FindObjectOfType<AutorController>().AddCollection(collectionAutor);
+            collectionAutorFinish = false;
+        }
 
         if(notificacionesFinish)
         {
@@ -402,6 +411,12 @@ public class FirebasePageController : MonoBehaviour
         {
             FindObjectOfType<ShopListController>().AddMangaList(listShopList);
             finishShopList = false;
+        }
+
+        if(mangaAutorFinish)
+        {
+            FindObjectOfType<AutorController>().AddMangas(mangasAutor);
+            mangaAutorFinish = false;
         }
 
         
@@ -898,6 +913,47 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+
+
+
+    public void GetMangasAutor(string nombre)
+    {
+        mangasAutor.Clear();
+
+        db.Collection("Manga").WhereEqualTo("autor", nombre).GetSnapshotAsync().ContinueWith(task =>
+        {
+
+            List<MangaClass> new_manga = new List<MangaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Manga info = documentSnapshot.ConvertTo<Manga>();
+                MangaClass element = new MangaClass();
+                element.autor = info.autor;
+                element.genero = info.genero;
+                element.id = info.id;
+                element.idioma = info.idioma;
+                element.paginas = info.paginas;
+                element.precio = info.precio;
+                element.resumen = info.resumen;
+                element.tamaño = info.tamaño;
+                element.titulo = info.titulo;
+                element.url = info.url;
+                element.valoracion = info.valoracion;
+                element.idColeccion = info.idColeccion;
+
+
+                new_manga.Add(element);
+            }
+
+            foreach (MangaClass i in new_manga)
+            {
+                mangasAutor.Add(i);
+            }
+            mangaAutorFinish = true;
+            //Debug.Log(new_manga.getAutor());
+
+        });
+    }
 
     public void UserMangas(string username)
     {
@@ -1764,6 +1820,33 @@ public class FirebasePageController : MonoBehaviour
                 collectionSearch.Add(colection);
             }
             colectionisSearch = true;
+        });
+    }
+
+    public void GetCollectionAutor(string nombre)
+    {
+        collectionAutor.Clear();
+
+        db.Collection("Colecciones").WhereEqualTo("autor", nombre).GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<ColeccionesClass> list = new List<ColeccionesClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Colecciones info = documentSnapshot.ConvertTo<Colecciones>();
+                ColeccionesClass element = new ColeccionesClass();
+                element.autor = info.autor;
+                element.id = info.id;
+                element.nombre = info.nombre;
+                element.url = info.url;
+
+                list.Add(element);
+            }
+
+            foreach (ColeccionesClass colection in list)
+            {
+                collectionAutor.Add(colection);
+            }
+            collectionAutorFinish = true;
         });
     }
 
