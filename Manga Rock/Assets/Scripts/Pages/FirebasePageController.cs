@@ -39,6 +39,7 @@ public class FirebasePageController : MonoBehaviour
     List<ShopListClass> listShopList = new List<ShopListClass>();
     List<TarjetaClass> tarjetasShopListList = new List<TarjetaClass>();
     List<PaypalClass> paypalsShopListList = new List<PaypalClass>();
+    List<NotificacionClass> listNotificaciones = new List<NotificacionClass>();
 
     private bool topListFinish = false;
     private bool novedadesFinish = false;
@@ -76,6 +77,7 @@ public class FirebasePageController : MonoBehaviour
     private bool finishShopList = false;
     private bool tarjetaShopListFinish = false;
     private bool paypalShopListFinish = false;
+    private bool notificacionesFinish = false;
 
 
     private bool isLogged = false;
@@ -129,6 +131,13 @@ public class FirebasePageController : MonoBehaviour
 
     private void Update()
     {
+
+
+        if(notificacionesFinish)
+        {
+            FindObjectOfType<NotificacionesController>().AddNotificaciones(listNotificaciones);
+            notificacionesFinish = false;
+        }
 
         if(finishAddMangaShopList)
         {
@@ -955,6 +964,39 @@ public class FirebasePageController : MonoBehaviour
             }
 
             bibliotecaSearch = true;
+        });
+    }
+
+    public void GetNotificaciones()
+    {
+        if(listNotificaciones.Count != 0)
+        {
+            listNotificaciones.Clear();
+        }
+        db.Collection("Notificaciones").GetSnapshotAsync().ContinueWith(task =>
+        {
+            List<NotificacionClass> list = new List<NotificacionClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Notificacion info = documentSnapshot.ConvertTo<Notificacion>();
+                NotificacionClass element = new NotificacionClass();
+                element.comentarios = info.comentarios;
+                element.dislikes = info.dislikes;
+                element.likes = info.likes;
+                element.text_notis = info.text_notis;
+                element.tipo = info.tipo;
+                element.url = info.url;
+                element.username = info.username;
+
+                list.Add(element);
+            }
+
+            foreach (NotificacionClass i in list)
+            {
+                listNotificaciones.Add(i);
+            }
+
+            notificacionesFinish = true;
         });
     }
 

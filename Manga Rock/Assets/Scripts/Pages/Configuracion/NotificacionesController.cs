@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class NotificacionesController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Transform content;
+    [SerializeField] GameObject prefabnotificaciones;
+
+    public void AddNotificaciones(List<NotificacionClass> notificaciones)
     {
+        DeleteContent();
         
+        if(notificaciones.Count != 0)
+        {
+            foreach(NotificacionClass noti in notificaciones)
+            {
+                GameObject prefab = Instantiate(prefabnotificaciones, content);
+                prefab.GetComponent<PrefabNotificacion>().AddInformation(noti);
+            }
+        }
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DeleteContent()
     {
-        
+        foreach(Transform child in content)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }

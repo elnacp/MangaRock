@@ -49,6 +49,7 @@ public class PageController : MonoBehaviour
             case "search": search.SetActive(true);
                 break;
             case "notifications": notifications.SetActive(true);
+                firebase.GetNotificaciones();
                 break;
             case "profile": profile.SetActive(true);
                 profile.GetComponent<ProfileController>().Setuser(userData.GetUser());
