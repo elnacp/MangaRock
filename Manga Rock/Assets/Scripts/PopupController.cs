@@ -117,6 +117,20 @@ public class PopupController : MonoBehaviour
         CancelarSuscripcion.SetActive(true);
     }
 
+    public void AcceptCancelSub()
+    {
+
+        HidePopup();
+        string username = FindObjectOfType<HomeInit>().GetUser().username;
+        FindObjectOfType<FirebasePageController>().UpdateSub(username, "no", "no");
+        FindObjectOfType<SuscriptionController>().UpdateView("no", "no");
+    }
+
+    public void CancelCancelSub()
+    {
+        HidePopup();
+    }
+
 
 
 

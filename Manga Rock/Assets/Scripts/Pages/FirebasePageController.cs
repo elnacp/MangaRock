@@ -108,6 +108,7 @@ public class FirebasePageController : MonoBehaviour
     private bool collectionRemoved = false;
     private bool existeMangaShopList = false;
     private bool finishAddMangaShopList = false;
+    private bool finishUnSub = false;
 
 
     private void Start()
@@ -393,6 +394,8 @@ public class FirebasePageController : MonoBehaviour
             FindObjectOfType<ShopListController>().AddMangaList(listShopList);
             finishShopList = false;
         }
+
+        
 
     }
 
@@ -1000,6 +1003,42 @@ public class FirebasePageController : MonoBehaviour
             {
                 documentSnapshot.Reference.DeleteAsync();
             }
+        });
+    }
+
+    public void UpdateSub(string username, string plan, string suscrito)
+    {
+        db.Collection("Suscripcion").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
+        {
+            foreach (DocumentSnapshot document in task.Result.Documents)
+            {
+                document.Reference.UpdateAsync("suscrito", suscrito).ContinueWith(task =>
+                {
+                    Debug.Log("Update sub");
+                });
+                document.Reference.UpdateAsync("plan", plan).ContinueWith(task =>
+                {
+                    Debug.Log("Update sub");
+                });
+            }
+            
+        });
+    }
+
+    public void AddSub(Dictionary<string, object> sub)
+    {
+        db.Collection("Suscripcion").AddAsync(sub).ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                Debug.Log("add to sub");
+            }
+            else
+            {
+                Debug.Log("not added to sub");
+            }
+            
+
         });
     }
 
