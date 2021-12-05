@@ -19,6 +19,8 @@ public class PageController : MonoBehaviour
     [SerializeField] GameObject configuracion;
     [SerializeField] GameObject collectionpage;
     [SerializeField] GameObject listaCompra;
+    [SerializeField] GameObject profileOtherUser;
+    [SerializeField] GameObject autor;
 
     [SerializeField] RectTransform parent;
 
@@ -111,6 +113,14 @@ public class PageController : MonoBehaviour
         detallesManga.SetActive(true);
         detallesManga.GetComponent<DetallesMangaPageController>().AddInformation(manga);
     }
+
+    public void GoAutor(string nombre, string url, int followers)
+    {
+        HideBarsAndShowBack();
+        autor.SetActive(true);
+        autor.GetComponent<AutorController>().AddInformation(nombre, url, followers);
+
+    }
     
     public void GoCollectionPage(string nameCollection)
     {
@@ -188,6 +198,8 @@ public class PageController : MonoBehaviour
         configuracion.SetActive(false);
         collectionpage.SetActive(false);
         listaCompra.SetActive(false);
+        autor.SetActive(false);
+        profileOtherUser.SetActive(false);
     }
 
 

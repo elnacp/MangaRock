@@ -69,7 +69,7 @@ public class SearchController : MonoBehaviour
             foreach (AutorClass element in autores)
             {
                 GameObject autor = Instantiate(profilePrefab, contentAutores);
-                autor.GetComponent<ProfilePrefabController>().AddData(element.nombre, element.url);
+                autor.GetComponent<ProfilePrefabController>().AddData(element.nombre, element.url, element.followers, "autor");
             }
         }
     }
@@ -86,7 +86,7 @@ public class SearchController : MonoBehaviour
             foreach(UserClass element in users)
             {
                 GameObject prefab = Instantiate(profilePrefab, contentPerfiles);
-                prefab.GetComponent<ProfilePrefabController>().AddData(element.username, element.imagen);
+                prefab.GetComponent<ProfilePrefabController>().AddData(element.username, element.imagen, element.followers, "profileOther");
             }
         }
     }
