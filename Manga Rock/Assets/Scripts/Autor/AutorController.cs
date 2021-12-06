@@ -53,7 +53,7 @@ public class AutorController : MonoBehaviour
             foreach (MangaClass item in mangas)
             {
                 GameObject prefab = Instantiate(prefabManga, contentManga);
-                prefab.GetComponent<MangaWithNoPercentageControlle>().AddData(item.url, item.titulo, item.autor);
+                prefab.GetComponent<MangaWithNoPercentageControlle>().AddData(item.url, item.titulo, item.autor, 0);
             }
         }
         
@@ -68,7 +68,7 @@ public class AutorController : MonoBehaviour
             foreach(ColeccionesClass item in colecciones)
             {
                 GameObject prefab = Instantiate(prefabManga, contentCollection);
-                prefab.GetComponent<MangaWithNoPercentageControlle>().AddData(item.url, item.nombre, item.autor);
+                prefab.GetComponent<MangaWithNoPercentageControlle>().AddData(item.url, item.nombre, item.autor, 0);
             }
         }
     }

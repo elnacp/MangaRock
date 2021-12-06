@@ -21,19 +21,31 @@ public class PageController : MonoBehaviour
     [SerializeField] GameObject listaCompra;
     [SerializeField] GameObject profileOtherUser;
     [SerializeField] GameObject autor;
+    [SerializeField] GameObject lectorManga;
 
     [SerializeField] RectTransform parent;
 
     [SerializeField] MenuSlider menuController;
     [SerializeField] GameObject navigationBar;
     [SerializeField] GameObject actionBarMenu;
-    [SerializeField] GameObject actionBarBackWhite;
+    [SerializeField] GameObject actionBarLector;
     [SerializeField] GameObject actionBarBackBlack;
+    [SerializeField] GameObject bottomBarLector;
+
 
     [SerializeField] FirebasePageController firebase;
     [SerializeField] HomeInit userData;
 
     private string actualPage;
+
+    private void Start()
+    {
+        actionBarMenu.SetActive(true);
+        actionBarLector.SetActive(false);
+        bottomBarLector.SetActive(false);
+        navigationBar.SetActive(true);
+        actionBarBackBlack.SetActive(false);
+    }
 
     public void ChangePage(string name)
     {
@@ -156,6 +168,14 @@ public class PageController : MonoBehaviour
         firebase.GetSuscripcion(userData.GetUser().username);
     }
 
+    public void GoLectorMangas(int pages)
+    {
+        HideBarsAndAddLector();
+        lectorManga.SetActive(true);
+        lectorManga.GetComponent<LectorMangaControlelr>().AddPages(pages);
+        
+    }
+
     public void GoConfiguracion()
     {
         menuController.Menu();
@@ -175,6 +195,8 @@ public class PageController : MonoBehaviour
         navigationBar.SetActive(true);
         actionBarMenu.SetActive(true);
         actionBarBackBlack.SetActive(false);
+        actionBarLector.SetActive(false);
+        bottomBarLector.SetActive(false);
 
         parent.offsetMin = new Vector2(parent.offsetMin.x, 65);
 
@@ -186,9 +208,24 @@ public class PageController : MonoBehaviour
         actionBarMenu.SetActive(false);
         navigationBar.SetActive(false);
         actionBarBackBlack.SetActive(true);
+        actionBarLector.SetActive(false);
+        bottomBarLector.SetActive(false);
+
 
         parent.offsetMin = new Vector2(parent.offsetMin.x, 0);
         
+    }
+
+    private void HideBarsAndAddLector()
+    {
+        HidePages();
+        actionBarMenu.SetActive(false);
+        navigationBar.SetActive(false);
+        actionBarBackBlack.SetActive(false);
+        actionBarLector.SetActive(true);
+        bottomBarLector.SetActive(true);
+
+
     }
 
     public void HidePages()
@@ -209,6 +246,7 @@ public class PageController : MonoBehaviour
         listaCompra.SetActive(false);
         autor.SetActive(false);
         profileOtherUser.SetActive(false);
+        lectorManga.SetActive(false);
     }
 
 

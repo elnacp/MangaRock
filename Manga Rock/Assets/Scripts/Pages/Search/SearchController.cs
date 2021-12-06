@@ -129,7 +129,7 @@ public class SearchController : MonoBehaviour
         foreach(MangaClass element in mangas)
         { 
             GameObject manga = Instantiate(obj, content);
-            manga.GetComponent<MangaWithNoPercentageControlle>().AddData(element.url, element.titulo, element.autor);
+            manga.GetComponent<MangaWithNoPercentageControlle>().AddData(element.url, element.titulo, element.autor, 0);
         }
     }
 

@@ -52,7 +52,7 @@ public class ProfileOtherUserController : MonoBehaviour
             foreach (MangaClass item in mangas)
             {
                 GameObject prefab = Instantiate(prefabManga, contentManga);
-                prefab.GetComponent<MangaWithNoPercentageControlle>().AddData(item.url, item.titulo, item.autor);
+                prefab.GetComponent<MangaWithNoPercentageControlle>().AddData(item.url, item.titulo, item.autor, 0);
             }
         }
 

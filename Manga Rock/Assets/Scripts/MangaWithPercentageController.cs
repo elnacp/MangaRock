@@ -10,12 +10,16 @@ public class MangaWithPercentageController : MonoBehaviour
     [SerializeField] Text author;
     [SerializeField] Text percentageRead;
 
-    public void AddData(string url, string title, string author, float percentage)
+    private int pages;
+
+    public void AddData(string url, string title, string author, float percentage, int pages)
     {
         this.title.text = title;
         this.author.text = author;
         StartCoroutine(GetImage(url));
         this.percentageRead.text = percentage+"%";
+
+        this.pages = pages;
     }
 
     IEnumerator GetImage(string url)
@@ -25,4 +29,8 @@ public class MangaWithPercentageController : MonoBehaviour
         image.texture = www.texture;
     }
 
+    public void OpenLector()
+    {
+        FindObjectOfType<PageController>().GoLectorMangas(pages);
+    }
 }

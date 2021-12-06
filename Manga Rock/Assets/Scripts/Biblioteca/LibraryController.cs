@@ -59,11 +59,11 @@ public class LibraryController : MonoBehaviour
     {
         if(percentage)
         {
-            prefab.GetComponent<MangaWithPercentageController>().AddData(element.url, element.titulo, element.autor, element.percentage);
+            prefab.GetComponent<MangaWithPercentageController>().AddData(element.url, element.titulo, element.autor, element.percentage, element.paginas);
         }
         else
         {
-            prefab.GetComponent<MangaWithNoPercentageControlle>().AddData(element.url, element.titulo, element.autor);
+            prefab.GetComponent<MangaWithNoPercentageControlle>().AddData(element.url, element.titulo, element.autor, element.paginas);
         }
     }
 
@@ -120,7 +120,7 @@ public class LibraryController : MonoBehaviour
                 if(nombre == element.nombreColeccion)
                 {
                     GameObject prefab = Instantiate(prefabManga, content.transform.GetChild(0).GetChild(0).transform);
-                    prefab.GetComponent<MangaWithNoPercentageControlle>().AddData(element.url, element.titulo, element.titulo);
+                    prefab.GetComponent<MangaWithNoPercentageControlle>().AddData(element.url, element.titulo, element.titulo, element.paginas);
                 }
             }
 

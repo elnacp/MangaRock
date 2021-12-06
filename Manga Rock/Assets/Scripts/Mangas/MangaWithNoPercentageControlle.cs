@@ -9,11 +9,13 @@ public class MangaWithNoPercentageControlle : MonoBehaviour
     [SerializeField] Text title;
     [SerializeField] Text author;
 
-    public void AddData(string url, string title, string author)
+    private int pages;
+    public void AddData(string url, string title, string author, int pages)
     {
         this.title.text = title;
         this.author.text = author;
         StartCoroutine(GetImage(url));
+        this.pages = pages;
     }
 
     IEnumerator GetImage(string url)
@@ -23,4 +25,12 @@ public class MangaWithNoPercentageControlle : MonoBehaviour
         image.texture = www.texture;
     }
 
+    public void OpenLector()
+    {
+        if(pages != 0)
+        {
+            FindObjectOfType<PageController>().GoLectorMangas(pages);
+
+        }
+    }
 }

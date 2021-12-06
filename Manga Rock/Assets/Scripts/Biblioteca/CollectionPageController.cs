@@ -71,7 +71,7 @@ public class CollectionPageController : MonoBehaviour
             if(f < 3)
             {
                 GameObject prefab = Instantiate(prefabManga, containers[indexContent].transform);
-                prefab.GetComponent<MangaWithNoPercentageControlle>().AddData(element.url, element.titulo, element.autor);
+                prefab.GetComponent<MangaWithNoPercentageControlle>().AddData(element.url, element.titulo, element.autor, element.paginas);
                 f++;
             }
             if(f == 3)

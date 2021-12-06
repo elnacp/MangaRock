@@ -80,7 +80,7 @@ public class ProfileController : MonoBehaviour
             if(element.percentage != 0 && element.percentage != 100)
             {
                 GameObject prefab = Instantiate(prefabMangas, contentMangas);
-                prefab.GetComponent<MangaWithPercentageController>().AddData(element.url, element.titulo, element.autor, element.percentage);
+                prefab.GetComponent<MangaWithPercentageController>().AddData(element.url, element.titulo, element.autor, element.percentage, element.paginas);
             }
         }
     }
