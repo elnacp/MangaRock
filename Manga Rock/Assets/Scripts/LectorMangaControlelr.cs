@@ -14,10 +14,12 @@ public class LectorMangaControlelr : MonoBehaviour
     [SerializeField] Button leftArrow;
     [SerializeField] Button rightArrow;
 
+    [SerializeField] Text[] textManga;
 
-    [SerializeField] Button whiteBackground;
-    [SerializeField] Button brownBackground;
-    [SerializeField] Button blackbrackground;
+
+    [SerializeField] Slider textSize;
+
+
 
     [SerializeField] Image background;
 
@@ -86,6 +88,8 @@ public class LectorMangaControlelr : MonoBehaviour
             directionPage.SetActive(true);
         }
 
+
+
     }
 
     public void ChangeColor()
@@ -123,6 +127,35 @@ public class LectorMangaControlelr : MonoBehaviour
        
     }
 
+
+    public void SizeLetter()
+    {
+        
+        foreach(Text item in textManga)
+        {
+            switch (textSize.value)
+            {
+                case 1: 
+                    item.fontSize = 14;
+                    break;
+                case 2:
+                    item.fontSize = 16;
+                    break;
+                case 3:
+                    item.fontSize = 18;
+                    break;
+                case 4:
+                    item.fontSize = 20;
+                    break;
+                case 5:
+                    item.fontSize = 22;
+                    break;
+            }
+        }
+        
+
+    }
+
     public void ChangeSizeLetter()
     {
         HidePages();
@@ -131,6 +164,8 @@ public class LectorMangaControlelr : MonoBehaviour
         {
             tamañoLetra.SetActive(true);
         }
+
+        
 
     }
 
