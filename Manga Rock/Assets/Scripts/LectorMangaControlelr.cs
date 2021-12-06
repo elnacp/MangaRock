@@ -9,17 +9,18 @@ public class LectorMangaControlelr : MonoBehaviour
     [SerializeField] GameObject colorPage;
     [SerializeField] GameObject directionPage;
 
-    [SerializeField] Text paginasFinal;
-    [SerializeField] Text paginaActual;
+    [SerializeField] Text textRight;
+    [SerializeField] Text textLeft;
     [SerializeField] Button leftArrow;
     [SerializeField] Button rightArrow;
 
+    [SerializeField] Image directionImage;
+    [SerializeField] Sprite right;
+    [SerializeField] Sprite left;
+
     [SerializeField] Text[] textManga;
 
-
     [SerializeField] Slider textSize;
-
-
 
     [SerializeField] Image background;
 
@@ -27,6 +28,7 @@ public class LectorMangaControlelr : MonoBehaviour
 
     private int actualPage = 1;
     private int finalPage = 0;
+    private bool isLeftRight = true;
 
     private void Start()
     {
@@ -35,49 +37,98 @@ public class LectorMangaControlelr : MonoBehaviour
 
     public void AddPages(int pages)
     {
-        paginasFinal.text = pages.ToString();
+        isLeftRight = true;
+        textRight.text = pages.ToString();
+        textLeft.text = 1.ToString();
         finalPage = pages;
     }
 
     public void StatePage()
     {
-        if (actualPage == 1)
+        if (isLeftRight)
         {
-            leftArrow.interactable = false;
+            if(actualPage == finalPage)
+            {
+                rightArrow.interactable = false;
+            }
+            else
+            {
+                rightArrow.interactable = true;
+            }
+            if(actualPage == 1)
+            {
+                leftArrow.interactable = false;
+            }
+            else
+            {
+                leftArrow.interactable = true;
+            }
         }
         else
         {
-            leftArrow.interactable = true;
-        }
-
-        if (actualPage == finalPage)
-        {
-            rightArrow.interactable = false;
-        }
-        else
-        {
-            rightArrow.interactable = true;
+            if (actualPage == finalPage)
+            {
+                leftArrow.interactable = false;
+            }
+            else
+            {
+                leftArrow.interactable = true;
+            }
+            if (actualPage == 1)
+            {
+                rightArrow.interactable = false;
+            }
+            else
+            {
+                rightArrow.interactable = true;
+            }
         }
     }
 
     public void RightArrow()
-    {
-        if(actualPage != finalPage)
+    {       
+        if(isLeftRight)
         {
-            actualPage++;
+            if(actualPage != finalPage)
+            {
+                actualPage++;
+            }
+            textLeft.text = actualPage.ToString();
+            StatePage();
         }
-        paginaActual.text = actualPage.ToString();
-        StatePage();
+        else
+        {
+            if(actualPage != 1)
+            {
+                actualPage--;
+            }
+            textRight.text = actualPage.ToString();
+            StatePage();
+        } 
     }
 
     public void LeftArrow()
     {
-        if(actualPage != 1)
+        if (isLeftRight)
         {
-            actualPage--;
+            if (actualPage != 1)
+            {
+                actualPage--;
+            }
+            textLeft.text = actualPage.ToString();
+            StatePage();
+
         }
-        paginaActual.text = actualPage.ToString();
-        StatePage();
+        else
+        {
+            if (actualPage != finalPage)
+            {
+                actualPage++;
+            }
+            textRight.text = actualPage.ToString();
+            StatePage();
+        }
+
     }
 
     public void ChangeDirection()
@@ -88,8 +139,21 @@ public class LectorMangaControlelr : MonoBehaviour
             directionPage.SetActive(true);
         }
 
+    }
 
+    public void RightDirection()
+    {
+        isLeftRight = true;
+        textLeft.text = actualPage.ToString();
+        textRight.text = finalPage.ToString();
 
+    }
+
+    public void LeftDirection()
+    {
+        isLeftRight = false;
+        textLeft.text = finalPage.ToString();
+        textRight.text = actualPage.ToString();
     }
 
     public void ChangeColor()
