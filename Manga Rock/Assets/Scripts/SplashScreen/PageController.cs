@@ -123,6 +123,13 @@ public class PageController : MonoBehaviour
         firebase.GetMangasAutor(nombre);
         firebase.GetCollectionAutor(nombre);
     }
+
+    public void GoProfileOther(string nombre, string url, int followers)
+    {
+        HideBarsAndShowBack();
+        profileOtherUser.SetActive(true);
+        profileOtherUser.GetComponent<ProfileOtherUserController>().AddInformation(nombre, url, followers);
+    }
     
     public void GoCollectionPage(string nameCollection)
     {

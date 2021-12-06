@@ -41,7 +41,7 @@ public class ProfilePrefabController : MonoBehaviour
         }
         else
         {
-            //FindObjectOfType<PageController>().GoAutor(nombre);
+            FindObjectOfType<PageController>().GoProfileOther(nombre, url, followers);
         }
     }
 }
