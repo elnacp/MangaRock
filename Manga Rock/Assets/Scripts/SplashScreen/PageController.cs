@@ -101,6 +101,7 @@ public class PageController : MonoBehaviour
     {
 
         actualPage = "collectionBiblioteca";
+        Debug.Log(userData.GetUser().username);
         firebase.GetCollections(userData.GetUser().username);
 
     }

@@ -28,6 +28,8 @@ public class LibraryController : MonoBehaviour
 
     public void AddInformationBiblioteca(List<BibliotecaClass> list)
     {
+        Debug.Log("cOUNT"+ list.Count);
+
         ClearContent(leyendo);
         ClearContent(porLeer);
         ClearContent(finalizado);

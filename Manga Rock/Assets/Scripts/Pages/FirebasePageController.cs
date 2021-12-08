@@ -1066,6 +1066,8 @@ public class FirebasePageController : MonoBehaviour
 
         db.Collection("Colecciones Biblioteca").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
         {
+            Debug.Log(task.Result.Count);
+
             List<ColeccionBibliotecaClass> list = new List<ColeccionBibliotecaClass>();
             foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
             {
