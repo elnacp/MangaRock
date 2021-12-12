@@ -13,6 +13,7 @@ public class SplashScreenAnimation : MonoBehaviour
     private bool isLogged = false;
     private bool ask = false;
 
+    //Animate the logo
     IEnumerator Start()
     {
         db = FirebaseFirestore.DefaultInstance;
@@ -27,6 +28,7 @@ public class SplashScreenAnimation : MonoBehaviour
 
     }
 
+    //Validate if exist a user or not
     private void Update()
     {
         if(ask)
@@ -42,6 +44,7 @@ public class SplashScreenAnimation : MonoBehaviour
         }
     }
 
+    //If user is loggead - Navegate to home
     private void SomeUserIsLogged()
     {
         db.Collection("User").WhereEqualTo("loggeado", "yes").GetSnapshotAsync().ContinueWith((task) =>
@@ -63,11 +66,13 @@ public class SplashScreenAnimation : MonoBehaviour
         });
     }
 
+    //Animation Fade in for the logo
     void FadeIn()
     {
         splashImage.CrossFadeAlpha(1.0f, 1.5f, false);
     }
 
+    //Animation Fade out for the logo
     void FadeOut()
     {
         splashImage.CrossFadeAlpha(0.0f, 2.5f, false);
