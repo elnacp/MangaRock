@@ -7,6 +7,7 @@ public class SlideLogin : MonoBehaviour
 
     public GameObject loginpanel;
 
+    //Animate the card
     public void ShowHideMenu()
     {
         if(loginpanel != null)
