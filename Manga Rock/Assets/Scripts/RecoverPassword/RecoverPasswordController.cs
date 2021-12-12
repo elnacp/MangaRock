@@ -15,6 +15,7 @@ public class RecoverPasswordController : MonoBehaviour
         ResetRecoverPassword();
     }
 
+    //Button recover have been clicked (Validate the data)
     public void RecoverPassoword()
     {
         if(email.text == "")
@@ -29,6 +30,7 @@ public class RecoverPasswordController : MonoBehaviour
         }
     }
 
+    //Reset the inputfields
     public void ResetRecoverPassword()
     {
         message.text = "";

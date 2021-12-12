@@ -29,6 +29,7 @@ public class RegisterController : MonoBehaviour
         
     }
 
+    //Button register been clicked - Validate the form and try to register
     public void Register()
     {
 
@@ -78,36 +79,42 @@ public class RegisterController : MonoBehaviour
 
     }
 
+    //Show message error in the form
     private void ShowErrorForm()
     {
         loading.SetActive(false);
         message.text = "Error: Hay algún campo del formulario vacío.";
     }
 
+    //Show error different password
     private void ShowErrorDifferentPassword()
     {
         loading.SetActive(false);
         message.text = "Error: Error las dos contraseñas no coinciden.";
     }
 
+    //Show error email exist
     public void ErrorMailExist()
     {
         loading.SetActive(false);
         message.text = "Error: El email que estas usando ya existe en otra cuenta.";
     }
 
+    //Show error username exists
     public void ErrorUsernameExist()
     {
         loading.SetActive(false);
         message.text = "Error: El usuario que estas usando ya existe, prueba hacer uso de otro.";
     }
 
+    //Exit on register - Navegate to login
     public void ExitRegister()
     {
         loading.SetActive(false);
         message.text = "";
     }
 
+    //Reset inputs from register form
     public void ResetInputField()
     {
         username.text = "";

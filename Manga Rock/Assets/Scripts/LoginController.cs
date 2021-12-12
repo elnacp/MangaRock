@@ -41,6 +41,7 @@ public class LoginController : MonoBehaviour
            
     }
 
+    //Show error message
     public void ErrorLogin()
     {
         loading.SetActive(false);
@@ -49,6 +50,7 @@ public class LoginController : MonoBehaviour
         message.color = Color.red;
     }
 
+    //When firebase return okay on login change scene
     public void ExitOnLogin()
     {
         //Change scene
@@ -56,6 +58,7 @@ public class LoginController : MonoBehaviour
         firebase_controller.Loggear(email.text);
     }
 
+    //Button login click
     public void LogIn()
     {
         string _email = email.text;
@@ -67,18 +70,21 @@ public class LoginController : MonoBehaviour
              
     }
 
+    //Abre registro
     public void OpenRegister()
     {
         ResetLogin();
         StartCoroutine(GoToRegister());
     }
 
+    //Back button
     public void BackButton()
     {
         StartCoroutine(GoBackToLogin());
         registerController.ResetInputField();
     }
 
+    //Vuelve del registro
     public void ReturnFromRegister()
     {
         message.text = "Se ha creado tu cuenta con exito! Prueba a loggearte";
@@ -86,6 +92,7 @@ public class LoginController : MonoBehaviour
         registerController.ResetInputField();
     }
 
+    //Vuelve de recuperar contraseña
     public void ReturnFromRecoverPassword()
     {
         message.text = "Se ha enviado un correo para recuperar tu contraseña.";
@@ -93,12 +100,14 @@ public class LoginController : MonoBehaviour
         BackButton();
     }
 
+    //Abre Recuperar contraseña
     public void OpenRecoverPassword()
     {
         ResetLogin();
         StartCoroutine(GoToRecoverPassword());
     }
 
+    //hide login menu an open recover password
     IEnumerator GoToRecoverPassword()
     {
         loginPanel.ShowHideMenu();
@@ -116,6 +125,7 @@ public class LoginController : MonoBehaviour
         back.gameObject.SetActive(true);
     }
 
+    //Hide panels when back
     IEnumerator GoBackToLogin()
     {
         if(registerPanel.PanelState() == true)
@@ -135,6 +145,7 @@ public class LoginController : MonoBehaviour
         back.gameObject.SetActive(false);
     }
 
+    //Reset login panel
     public void ResetLogin()
     {
         email.text = "";

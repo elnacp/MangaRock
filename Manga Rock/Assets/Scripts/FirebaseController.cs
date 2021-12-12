@@ -78,8 +78,8 @@ public class FirebaseController : MonoBehaviour
 
     }
 
-    
 
+    //Search is user that tries to log in exist and user and password are right
     public void UserLogIn(string email, string password)
     {
         this.verify_password = password;
@@ -113,7 +113,12 @@ public class FirebaseController : MonoBehaviour
                         }
                     }
 
+
                     //exitonlogin = true;
+                }
+                if(!exitonlogin)
+                {
+                    error = true;
                 }
             }
             else
@@ -124,6 +129,7 @@ public class FirebaseController : MonoBehaviour
 
     }
 
+    //Search if user doesnt exist and validate
     public void UserRegister(string username, string email, string password)
     {
 
@@ -135,6 +141,7 @@ public class FirebaseController : MonoBehaviour
 
     }
 
+    //Try the log for the user
     public void Loggear(string email)
     {
         db.Collection("User").WhereEqualTo("email", email).GetSnapshotAsync().ContinueWith((task) =>
@@ -150,6 +157,7 @@ public class FirebaseController : MonoBehaviour
         });
     }
 
+    //Validate the mail if exist or not for the register
     public void EmailValidation()
     {
         db.Collection("User").WhereEqualTo("email", email).GetSnapshotAsync().ContinueWith((task) =>
@@ -174,6 +182,7 @@ public class FirebaseController : MonoBehaviour
         });
     }
 
+    //Validate the username if exist or not for the register
     public void UsernameValidation()
     {
         db.Collection("User").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith((task) =>
@@ -198,6 +207,7 @@ public class FirebaseController : MonoBehaviour
         });
     }
 
+    //Register the new user to firestore
     public void RegisterUser()
     {
         user = new Dictionary<string, object>
@@ -230,6 +240,7 @@ public class FirebaseController : MonoBehaviour
 
     }
 
+    //Make the return to the login
     public void ReturnToLogin()
     {
         logincontroller.BackButton();
