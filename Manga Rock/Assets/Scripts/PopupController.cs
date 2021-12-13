@@ -38,20 +38,6 @@ public class PopupController : MonoBehaviour
         eliminarUsuario.SetActive(false);
     }
 
-    //Activate the popup page
-    public void ActivatePopup(string page)
-    {
-        //popups.enabled = true;
-
-        HideAllPopups();
-
-        switch(page)
-        {
-            case "deleteUser": eliminarUsuario.SetActive(true);
-                break;
-
-        }
-    }
 
     //Hide the pop up panel
     public void HidePopup()
@@ -62,7 +48,9 @@ public class PopupController : MonoBehaviour
     //Open the popup to delete user
     public void  PopupDeleteUser()
     {
-        ActivatePopup("deleteUser");
+        popups.SetActive(true);
+        HideAllPopups();
+        eliminarUsuario.SetActive(true);
     }
 
     //Asj firebase to delete user

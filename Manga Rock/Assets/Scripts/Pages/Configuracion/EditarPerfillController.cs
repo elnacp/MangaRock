@@ -21,6 +21,7 @@ public class EditarPerfillController : MonoBehaviour
         email.placeholder.GetComponent<Text>().text = user.email;
     }
 
+    //Edit the user information
     public void EditarUsernameOrEmail()
     {
         message.text = "";
@@ -41,7 +42,7 @@ public class EditarPerfillController : MonoBehaviour
     }
 
 
-
+    //Cancel the update of both inputs
     public void CancelUpdate()
     {
         username.placeholder.GetComponent<Text>().text = user.username;
