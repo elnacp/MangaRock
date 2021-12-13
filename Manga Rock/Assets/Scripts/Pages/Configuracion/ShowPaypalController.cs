@@ -10,6 +10,7 @@ public class ShowPaypalController : MonoBehaviour
 
     PaypalClass data = new PaypalClass();
 
+    //Add all the information of the paypal account
     public void AddInformation(PaypalClass paypal)
     {
         data = paypal;
@@ -17,6 +18,7 @@ public class ShowPaypalController : MonoBehaviour
         email.placeholder.GetComponent<Text>().text = paypal.email;
     }
 
+    //update the email of the paypal in firebase
     public void UpdateEmail()
     {
         if(email.text == "")
@@ -32,19 +34,21 @@ public class ShowPaypalController : MonoBehaviour
         }
     }
 
+    //Show error message
     public void MessageErrorEdit()
     {
         message.text = "Error: no se ha guardado el email, porque no ha sido modificado.";
         message.color = Color.red;
     }
 
-
+    //Show message correct added
     public void MessageUpdatePaypal()
     {
         message.text = "Se ha guardado tus cambios de la cuenta paypal";
         message.color = Color.black;
     }
     
+    //Ask firebase to remove the paypal account
     public void DeletePaypal()
     {
         FindObjectOfType<FirebasePageController>().DeletePaypal(data);
