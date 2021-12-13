@@ -2041,4 +2041,5 @@ public class FirebasePageController : MonoBehaviour
             mangasSameCategoryState = true;
         });
     }
+
 }

@@ -11,6 +11,7 @@ public class WishlistPrefab : MonoBehaviour
     [SerializeField] Text autor;
     [SerializeField] Text valoracio;
     [SerializeField] Text price;
+    [SerializeField] Button addCard;
 
     WishlistClass manga;
 
@@ -65,6 +66,26 @@ public class WishlistPrefab : MonoBehaviour
         new_manga.idColeccion = manga.idColeccion;
         FindObjectOfType<PageController>().GoDetallesManga(new_manga);
     }
+
+    //Add manga to shoplist
+    public void AddMangaToCar()
+    {
+        string username = FindObjectOfType<HomeInit>().GetUser().username;
+
+        Dictionary<string, object> new_manga = new Dictionary<string, object>
+        {
+            {"titulo", manga.titulo },
+            {"autor", manga.autor },
+            {"precio", manga.precio },
+            {"cantidad", 1 },
+            {"url", manga.url },
+            {"username", username  },
+        };
+        FindObjectOfType<FirebasePageController>().AddToShopList(new_manga);
+        addCard.interactable = false;
+    }
+
+
 
 
 }
