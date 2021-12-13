@@ -14677,6 +14677,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 353696231075840725, guid: a3db271830c191a4a8c1c73559b20c9e, type: 3}
   m_PrefabInstance: {fileID: 570056417}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &572477616 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 353696231075840726, guid: a3db271830c191a4a8c1c73559b20c9e, type: 3}
+  m_PrefabInstance: {fileID: 1436769205}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &573729779
 GameObject:
   m_ObjectHideFlags: 0
@@ -24154,10 +24165,10 @@ RectTransform:
   m_Father: {fileID: 1459242699}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 30, y: -290}
+  m_SizeDelta: {x: 302.24442, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &938345972
 MonoBehaviour:
@@ -24179,6 +24190,7 @@ MonoBehaviour:
   fechaCaducidad: {fileID: 963837102}
   cvv: {fileID: 372343888}
   message: {fileID: 720265557}
+  addButton: {fileID: 572477616}
   firebase: {fileID: 921228427}
 --- !u!114 &938345973
 MonoBehaviour:

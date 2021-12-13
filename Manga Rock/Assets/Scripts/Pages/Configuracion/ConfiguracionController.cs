@@ -24,6 +24,7 @@ public class ConfiguracionController : MonoBehaviour
 
     private string positionActual = "";
 
+    //Show metodo the pago panel
     public void GoMetodoPago()
     {
         HideNormalActionBar();
@@ -34,8 +35,7 @@ public class ConfiguracionController : MonoBehaviour
         firebase.AskPaypal(userData.GetUser().username);
     }
 
-    
-
+    //Show notifications panel
     public void GoNotificaciones()
     {
         HideNormalActionBar();
@@ -44,6 +44,7 @@ public class ConfiguracionController : MonoBehaviour
         positionActual = "notificaciones";
     }
 
+    //Show edit profile panel
     public void GoEditarPerfil()
     {
         HideAllPanels();
@@ -53,6 +54,7 @@ public class ConfiguracionController : MonoBehaviour
 
     }
 
+    //Go Back button depending in where the user is
     public void GoBack()
     {
         HideAllPanels();
@@ -85,6 +87,7 @@ public class ConfiguracionController : MonoBehaviour
         }
     }
 
+    //Show Change password panel
     public void GoChangePasswordPanel()
     {
         HideNormalActionBar();
@@ -93,6 +96,7 @@ public class ConfiguracionController : MonoBehaviour
         positionActual = "editarContraseña";
     }
 
+    //Show add tarjeta panel
     public void GoAddTarjeta()
     {
         HideNormalActionBar();
@@ -101,6 +105,7 @@ public class ConfiguracionController : MonoBehaviour
         positionActual = "addTarjeta";
     }
 
+    //Show add paypal panel
     public void GoAddPaypal()
     {
         HideNormalActionBar();
@@ -109,6 +114,7 @@ public class ConfiguracionController : MonoBehaviour
         positionActual = "addPaypal";
     }
 
+    // Show tarjeta panel
     public void GoShowTarjeta(TarjetaClass tarjeta)
     {
         HideNormalActionBar();
@@ -118,7 +124,7 @@ public class ConfiguracionController : MonoBehaviour
         showTarjetaPanel.GetComponent<ShowTarjetaController>().AddInformation(tarjeta);
     }
 
-
+    //Show paypal panel
     public void GoShowPaypal(PaypalClass paypal)
     {
         HideNormalActionBar();
@@ -128,6 +134,7 @@ public class ConfiguracionController : MonoBehaviour
         showPaypalPanel.GetComponent<ShowPaypalController>().AddInformation(paypal);
     }
 
+    //Show configuration panel
     public void GoConfiguracionPanel()
     {
         HideAllPanels();
@@ -135,8 +142,7 @@ public class ConfiguracionController : MonoBehaviour
         configuracionPanel.SetActive(true);
     }
 
-
-
+    //Hide all the panels
     private void HideAllPanels()
     {
         configuracionPanel.SetActive(false);
@@ -151,12 +157,14 @@ public class ConfiguracionController : MonoBehaviour
         showPaypalPanel.SetActive(false);
     }
 
+    //Hide action bar with shoplist and menu
     private void HideNormalActionBar()
     {
         actionBarNormal.SetActive(false);
         actionBarconfiguracion.SetActive(true);
     }
 
+    //Activate action bar with shoplist and menu
     private void ActivateNormalActionBar()
     {
         actionBarNormal.SetActive(true);

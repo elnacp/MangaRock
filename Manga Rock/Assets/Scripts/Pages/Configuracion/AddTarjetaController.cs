@@ -16,6 +16,8 @@ public class AddTarjetaController : MonoBehaviour
 
     [SerializeField] Text message;
 
+    [SerializeField] Button addButton;
+
     [SerializeField] FirebasePageController firebase;
 
     private void Start()
@@ -24,7 +26,7 @@ public class AddTarjetaController : MonoBehaviour
         message.text = "";
     }
 
-
+    //Show from part of the card
     public void Delante()
     {
         delanteTarjeta.SetActive(true);
@@ -33,14 +35,16 @@ public class AddTarjetaController : MonoBehaviour
         buttonDetras.SetActive(true);
     }
 
+    //Show back part of the card
     public void Detras()
     {
         delanteTarjeta.SetActive(false);
         buttonDelante.SetActive(true);
         detrasTarjeta.SetActive(true);
-        buttonDetras.SetActive(true);
+        buttonDetras.SetActive(false);
     }
 
+    //Add card if all the information is correct
     public void AddNewTarjeta()
     {
         if( numero.text != "" && fechaCaducidad.text != "" && cvv.text != "")
@@ -56,6 +60,8 @@ public class AddTarjetaController : MonoBehaviour
             };
 
             firebase.AddTarjeta(new_tarjeta);
+
+            addButton.interactable = false;
         }
         else
         {
@@ -66,12 +72,14 @@ public class AddTarjetaController : MonoBehaviour
 
     }
 
+    //Show error message
     public void AddMessageError()
     {
         message.text = "Error: parece que no se ha podido guardar la tarjeta.";
         message.color = Color.red;
     }
 
+    //Show correct message
     public void AddMessageDone()
     {
         message.text = "Se ha guardado la tarjeta con exito";
