@@ -11,12 +11,15 @@ public class AddPaypalController : MonoBehaviour
 
     [SerializeField] FirebasePageController firebase;
 
+    [SerializeField] Button addPaypal;
+
 
     private void Start()
     {
         message.text = "";
     }
 
+    //Add paypal account to firebase
     public void AddPaypal()
     {
         if(email.text == "")
@@ -37,15 +40,19 @@ public class AddPaypalController : MonoBehaviour
 
             firebase.AddPaypal(new_paypal);
 
+            addPaypal.interactable = false;
+
         }
     }
-
+     
+    //Show message error
     public void AddMessageError()
     {
         message.text = "Error: parece que no se ha podido guardar la tarjeta.";
         message.color = Color.red;
     }
 
+    //Show message correct added
     public void AddMessageDone()
     {
         message.text = "Se ha guardado la tarjeta con exito";
