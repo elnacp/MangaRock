@@ -13,6 +13,7 @@ public class MetododePago : MonoBehaviour
     [SerializeField] Button añadirTarjeta;
     [SerializeField] Button añadirCuenta;
 
+    //Add all the card in the list
     public void AddTarjetas(List<TarjetaClass> tarjetaslist)
     {
         ClearContent(contentTarjetas);
@@ -33,6 +34,7 @@ public class MetododePago : MonoBehaviour
         }
     }
 
+    //Add all the paypal accounts in the list
     public void AddPaypal(List<PaypalClass> paypallist)
     {
         ClearContent(contentPaypal);
@@ -52,6 +54,7 @@ public class MetododePago : MonoBehaviour
         
     }
 
+    //Clear both contents
     private void ClearContent(Transform content)
     {
         foreach(Transform child in content)

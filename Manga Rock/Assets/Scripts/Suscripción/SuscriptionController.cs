@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+
 public class SuscriptionController : MonoBehaviour
 {
     [SerializeField] Text estadoSuscripcion;
@@ -18,8 +19,11 @@ public class SuscriptionController : MonoBehaviour
     private string planActualSelected = "";
     private bool noSuscrito = false;
 
+    //Add all the information in relation with the suscription
     public void AddData(List<SuscritoClass> list)
     {
+        Debug.Log(list.Count);
+
         int i = 0;
         foreach(SuscritoClass suscripcion in list)
         {
@@ -70,11 +74,13 @@ public class SuscriptionController : MonoBehaviour
         comprarSub.interactable = false;
     }
 
+    //Cancel the suscription (button action)
     public void CancelSub()
     {
         FindObjectOfType<PopupController>().GoCancelSub();
     }
 
+    //Select the plan that the player have
     public void PlanSelected(string plan)
     {
         if(plan == "mensual")
@@ -88,6 +94,7 @@ public class SuscriptionController : MonoBehaviour
         comprarSub.interactable = true;
     }
 
+    //Buy the sub - Send to firebase
     public void ComprarSub()
     {
         string username = FindObjectOfType<HomeInit>().GetUser().username;
@@ -114,6 +121,7 @@ public class SuscriptionController : MonoBehaviour
 
     }
 
+    //Update the panel view, when user buy the sub
     public void UpdateView(string plan, string suscrito)
     {
         if(suscrito == "si")
