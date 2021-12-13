@@ -22,6 +22,7 @@ public class ShowTarjetaController : MonoBehaviour
     {
     }
 
+    //Add all the information in relation with the card
     public void AddInformation(TarjetaClass tarjeta)
     {
         data = tarjeta;
@@ -29,6 +30,7 @@ public class ShowTarjetaController : MonoBehaviour
         Delante();
     }
 
+    //Show the front information of the card
     public void Delante()
     {
         delanteTarjeta.SetActive(true);
@@ -41,6 +43,7 @@ public class ShowTarjetaController : MonoBehaviour
         fechaCaducidad.placeholder.GetComponent<Text>().text = data.fechaCaducidad;
     }
 
+    //Show the back information of the card
     public void Detras()
     {
         delanteTarjeta.SetActive(false);
@@ -52,18 +55,20 @@ public class ShowTarjetaController : MonoBehaviour
         cvv.placeholder.GetComponent<Text>().text = data.cvv;
     }
 
+    //Ask firebase controller to delete the card
     public void DeleteTarjeta()
     {
         FindObjectOfType<FirebasePageController>().DeleteTarjeta(data);
     }
 
-
+    //Show message Add card
     public void MessageAddTarjeta()
     {
         message.text = "La tarjeta se ha guardado correctamente.";
         message.color = Color.black;
     }
 
+    //update the information in relation with the new card
     public void UpdateTarjeta()
     {
         string new_number = "";
