@@ -18,6 +18,7 @@ public class EditarContraseñaController : MonoBehaviour
         user = userData.GetUser();
     }
 
+    //
     public void UpdatePassword()
     {
         message.text = "";
