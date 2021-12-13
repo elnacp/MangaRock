@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class WishlistPrefab : MonoBehaviour
 {
     [SerializeField] Text number;
+    [SerializeField] Text title;
     [SerializeField] RawImage image;
     [SerializeField] Text autor;
     [SerializeField] Text valoracio;
@@ -13,8 +14,10 @@ public class WishlistPrefab : MonoBehaviour
 
     WishlistClass manga;
 
+    //Include all the information
     public void AddInformation(WishlistClass manga, int index)
     {
+        title.text = manga.titulo;
         number.text = index.ToString();
         StartCoroutine(GetImage(manga.url));
         autor.text = manga.autor;
@@ -24,6 +27,7 @@ public class WishlistPrefab : MonoBehaviour
         this.manga = manga;
     }
 
+    //Get the image from url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
@@ -31,17 +35,19 @@ public class WishlistPrefab : MonoBehaviour
         image.texture = www.texture;
     }
 
+    //Ask to delete the manga (open the popup)
     public void DeleteManga()
     {
-        FirebasePageController firebase = FindObjectOfType<FirebasePageController>();
-        firebase.DeleteMangaWishlist(manga);      
+        FindObjectOfType<PopupController>().DeleteMangaWishlistPopup(manga);
     }
-
+    
+    //Return the title 
     public string GetTitleManga()
     {
         return manga.titulo;
     }
 
+    //Goes to manga details
     public void MangaDetail()
     {
         MangaClass new_manga = new MangaClass();
@@ -59,5 +65,6 @@ public class WishlistPrefab : MonoBehaviour
         new_manga.idColeccion = manga.idColeccion;
         FindObjectOfType<PageController>().GoDetallesManga(new_manga);
     }
+
 
 }

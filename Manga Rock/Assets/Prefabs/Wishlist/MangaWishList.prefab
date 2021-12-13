@@ -437,6 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: {fileID: 5907199449994470583}
+  title: {fileID: 5907199450807589188}
   image: {fileID: 5900020764282946674}
   autor: {fileID: 5907199450322789906}
   valoracio: {fileID: 5907199451452011940}
@@ -766,6 +767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: {fileID: 0}
+  title: {fileID: 0}
   image: {fileID: 0}
   autor: {fileID: 0}
   valoracio: {fileID: 0}
