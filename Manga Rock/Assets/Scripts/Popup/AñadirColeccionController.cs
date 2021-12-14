@@ -14,13 +14,13 @@ public class AñadirColeccionController : MonoBehaviour
             string username = FindObjectOfType<HomeInit>().GetUser().username;
             Dictionary<string, object> manga = new Dictionary<string, object>
                 {
-                    {"autor", ""},
-                    {"idioma", ""},
+                    {"autor", "Hero"},
+                    {"idioma", "Español"},
                     {"nombreColeccion", nombre.text},
-                    {"paginas", ""},
-                    {"percentage", ""},
-                    {"titulo", ""},
-                    {"url", ""},
+                    {"paginas", 90},
+                    {"percentage", 100},
+                    {"titulo", "horimiya 3"},
+                    {"url", "https://www.normaeditorial.com/upload/media/albumes/0001/06/thumb_5648_albumes_big.jpeg"},
                     {"username", username }
                 };
             FindObjectOfType<FirebasePageController>().AñadirMangaCollection(manga);

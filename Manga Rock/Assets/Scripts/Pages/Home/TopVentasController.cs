@@ -81,17 +81,21 @@ public class TopVentasController : MonoBehaviour
 
     public void AddInformationContent(List<MangaClass> pagoMangas, List<MangaClass> freeMangas)
     {
-        foreach(MangaClass e in pagoMangas)
+        if(pagoMangas.Count != 0 && freeMangas.Count != 0)
         {
-            listMangasPago.Add(e);
-        }
-        foreach(MangaClass e in freeMangas)
-        {
-            listMangasGratis.Add(e);
+            foreach (MangaClass e in pagoMangas)
+            {
+                listMangasPago.Add(e);
+            }
+            foreach (MangaClass e in freeMangas)
+            {
+                listMangasGratis.Add(e);
+            }
+
+            AddInfoPanel(listMangasPago, listpago.ToArray(), contentPago);
+            AddInfoPanel(listMangasGratis, listgratis.ToArray(), contentFree);
         }
 
-        AddInfoPanel(listMangasPago, listpago.ToArray(), contentPago);
-        AddInfoPanel(listMangasGratis, listgratis.ToArray(), contentFree);
     }
 
     private void AddInfoPanel(List<MangaClass> list, TopElement[] orderList, Transform content)

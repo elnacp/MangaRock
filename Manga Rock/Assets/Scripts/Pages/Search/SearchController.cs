@@ -15,6 +15,8 @@ public class SearchController : MonoBehaviour
     [SerializeField] GameObject profilePrefab;
     [SerializeField] Text contentNotFound;
     [SerializeField] GameObject collectionPrefab;
+    [SerializeField] GameObject prefabLastSearch;
+    [SerializeField] Transform contentLastSearch;
 
     [SerializeField] Transform contentMangas;
     [SerializeField] Transform contentColecciones;
@@ -22,7 +24,9 @@ public class SearchController : MonoBehaviour
     [SerializeField] Transform contentPerfiles;
 
     [SerializeField] FirebasePageController db;
-    
+
+    private List<string> ultimasBusquedas = new List<string>();
+    private bool updateDone = false;
 
     void Start()
     {
@@ -34,6 +38,8 @@ public class SearchController : MonoBehaviour
         searchList.SetActive(false);
         lastSearch.SetActive(true);
 
+        UpdateListLastSearch();
+
     }
 
     private void Update()
@@ -41,10 +47,37 @@ public class SearchController : MonoBehaviour
         if(textToSeach.text == "")
         {
             HideSearchList();
+            if(!updateDone)
+            {
+                UpdateListLastSearch();
+            }
+        }
+        else
+        {
+            updateDone = false;
         }
 
     }
 
+    //Update the list with the last search words
+    private void UpdateListLastSearch()
+    {
+        //Clear content
+        foreach(Transform child in contentLastSearch)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach(string element in ultimasBusquedas)
+        {
+            GameObject prefab = Instantiate(prefabLastSearch, contentLastSearch);
+            prefab.GetComponent<Text>().text = element;
+        }
+
+        updateDone = true;
+    }
+
+    //Ask firebase to search
     public void Search()
     {
         HideLastSearch();
@@ -52,11 +85,13 @@ public class SearchController : MonoBehaviour
         if(textToSeach.text != "")
         {
             db.SearchInfo(textToSeach.text);
+
+            ultimasBusquedas.Add(textToSeach.text);
         }
         
     }
 
-
+    //update the author list
     public void UpdateAutor(List<AutorClass> autores)
     {
         DeleteChildList(contentAutores);
@@ -73,7 +108,8 @@ public class SearchController : MonoBehaviour
             }
         }
     }
-
+    
+    //Update the user list
     public void UpdateUsers(List<UserClass> users)
     {
         DeleteChildList(contentPerfiles);
@@ -91,6 +127,7 @@ public class SearchController : MonoBehaviour
         }
     }
 
+    //Update the collection list
     public void UpdateColectionList(List<ColeccionesClass> collection)
     {
         DeleteChildList(contentColecciones);
@@ -107,7 +144,8 @@ public class SearchController : MonoBehaviour
             }
         }
     }
-
+    
+    //Update the manga list
     public void UpdateMangaList(List<MangaClass> mangas)
     {
         DeleteChildList(contentMangas);
@@ -124,6 +162,7 @@ public class SearchController : MonoBehaviour
         }
     }
 
+    //Update the manga list
     private void AddMangaList(GameObject obj, Transform content, List<MangaClass> mangas)
     {
         foreach(MangaClass element in mangas)
@@ -133,6 +172,7 @@ public class SearchController : MonoBehaviour
         }
     }
 
+    //Delete the content mangas/authors/collections/profiles
     private void DeleteChildList(Transform content)
     {
         foreach(Transform child in content)
@@ -141,12 +181,14 @@ public class SearchController : MonoBehaviour
         }
     }
 
+    //Hide panel with last search
     private void HideLastSearch()
     {
         searchList.SetActive(true);
         lastSearch.SetActive(false);
     }
-
+    
+    //Hide search list
     private void HideSearchList()
     {
         searchList.SetActive(false);

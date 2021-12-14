@@ -440,8 +440,6 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
-    
-
     public void AddPaypal(Dictionary<string, object> paypal)
     {
         db.Collection("Paypal").AddAsync(paypal).ContinueWith(task =>
@@ -519,7 +517,6 @@ public class FirebasePageController : MonoBehaviour
 
         });
     }
-
 
     public void GetShopList(string username)
     {
@@ -622,7 +619,6 @@ public class FirebasePageController : MonoBehaviour
 
         });
     }
-
 
     public void GetPaypal(string username)
     {
@@ -828,7 +824,6 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
-
     public void DeleteCollection(string name, string username)
     {
         db.Collection("Colecciones Biblioteca").WhereEqualTo("nombreColeccion", name).GetSnapshotAsync().ContinueWith(task =>
@@ -846,7 +841,6 @@ public class FirebasePageController : MonoBehaviour
 
         });
     }
-
 
     public void GetSuscripcion(string username)
     {
@@ -912,9 +906,6 @@ public class FirebasePageController : MonoBehaviour
 
         });
     }
-
-
-
 
     public void GetMangasAutor(string nombre)
     {
@@ -1059,15 +1050,13 @@ public class FirebasePageController : MonoBehaviour
     public void GetCollections(string username)
     {
 
-        if(listColeccionesBiblioteca.Count != 0)
+        if (listColeccionesBiblioteca.Count != 0)
         {
             listColeccionesBiblioteca.Clear();
         }
 
-        db.Collection("Colecciones Biblioteca").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
+        db.Collection("Colecciones Biblioteca").GetSnapshotAsync().ContinueWith(task =>
         {
-            Debug.Log(task.Result.Count);
-
             List<ColeccionBibliotecaClass> list = new List<ColeccionBibliotecaClass>();
             foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
             {

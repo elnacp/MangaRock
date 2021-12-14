@@ -74,13 +74,15 @@ public class NovedadesController : MonoBehaviour
 
     public void UpdateNovedades(List<MangaClass> list)
     {
-        foreach(MangaClass element in list)
+        if(list.Count != 0)
         {
-            listMangas.Add(element);
+            foreach (MangaClass element in list)
+            {
+                listMangas.Add(element);
+            }
+
+            dotsController.AddDots(listMangas.Count);
         }
-
-        dotsController.AddDots(listMangas.Count);
-
     }
 
     private void MostrarManga()

@@ -14,12 +14,15 @@ public class MangaRecomendaciones : MonoBehaviour
 
     public void AddInfo(MangaClass manga)
     {
-        StartCoroutine(GetImage(manga.url));
-        this.title.text = manga.titulo;
-        this.autor.text = manga.autor;
-        this.precio.text = manga.precio + "€";
+        if(manga != null)
+        {
+            StartCoroutine(GetImage(manga.url));
+            this.title.text = manga.titulo;
+            this.autor.text = manga.autor;
+            this.precio.text = manga.precio + "€";
 
-        this.mangaData = manga;
+            this.mangaData = manga;
+        } 
     }
 
     IEnumerator GetImage(string url)

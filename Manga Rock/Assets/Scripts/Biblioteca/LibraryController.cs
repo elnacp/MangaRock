@@ -28,7 +28,6 @@ public class LibraryController : MonoBehaviour
 
     public void AddInformationBiblioteca(List<BibliotecaClass> list)
     {
-        Debug.Log("cOUNT"+ list.Count);
 
         ClearContent(leyendo);
         ClearContent(porLeer);
@@ -72,8 +71,8 @@ public class LibraryController : MonoBehaviour
 
     public void AddInformationCollection(List<ColeccionBibliotecaClass> list)
     {
-
-        Debug.Log(list);
+        
+        Debug.Log(list.Count);
         foreach(Transform child in contentColecciones)
         {
             if(child.name != "Añadir Coleccion")
