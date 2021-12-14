@@ -1654,6 +1654,9 @@ public class FirebasePageController : MonoBehaviour
 
     public void RecomendationsForUser(string genero)
     {
+
+        recomendaciones.Clear();
+
         db.Collection("Manga").WhereEqualTo("genero", genero).GetSnapshotAsync().ContinueWith(task =>
         {
             List<MangaClass> listMangas = new List<MangaClass>();

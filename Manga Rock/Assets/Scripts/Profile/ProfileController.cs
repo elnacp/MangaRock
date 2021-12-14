@@ -33,14 +33,14 @@ public class ProfileController : MonoBehaviour
         StartCoroutine(GetImage(data.imagen));
         username.text = data.username;
         description.text = data.descripcion;
-        num_mangas.text = data.idMangas.Count.ToString();
+        //num_mangas.text = data.idMangas.Count.ToString();
         //Comentarios
 
         db.ComentariosUser(data.username);
         db.UserMangas(data.username);
 
         num_followers.text = data.followers.ToString();
-        num_following.text = data.following.Count.ToString();
+        num_following.text = 3.ToString();
 
         ClearContentComments();
         ClearMangas();
@@ -83,6 +83,8 @@ public class ProfileController : MonoBehaviour
                 prefab.GetComponent<MangaWithPercentageController>().AddData(element.url, element.titulo, element.autor, element.percentage, element.paginas);
             }
         }
+
+        num_mangas.text = mangas.Count.ToString();
     }
 
     public void ClearContentComments()

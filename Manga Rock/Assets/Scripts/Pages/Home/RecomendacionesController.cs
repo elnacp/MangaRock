@@ -33,6 +33,12 @@ public class RecomendacionesController : MonoBehaviour
 
     public void AddInformation(List<MangaClass> list)
     {
+
+        foreach(Transform child in content)
+        {
+            Destroy(child.gameObject);
+        }
+
         foreach(MangaClass manga in list)
         {
             GameObject prefab = Instantiate(mangaprefab, content);
