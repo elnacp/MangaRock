@@ -35,17 +35,19 @@ public class TopVentasController : MonoBehaviour
 
     }
 
+    //Go to top list page
     public void GoTopList()
     {
         pageController.GoTopList(listpago.ToArray(), listMangasPago, listgratis.ToArray(), listMangasGratis);
     }
 
-   
+    //Ask to firebase the top mangas
     public void GetTopVentas()
     {
         db.AskTopList();
     }
 
+    //Get the top mangas
     public void TopListData(List<TopElement> pago, List<TopElement> gratis)
     {
         //Order list
@@ -57,6 +59,7 @@ public class TopVentasController : MonoBehaviour
         
     }
 
+    //Order the list
     private void OrderList(List<TopElement> list)
     {
         for(int i = 1; i < 11; i++)
@@ -78,7 +81,7 @@ public class TopVentasController : MonoBehaviour
         } 
     }
 
-
+    //Add the information to both contents
     public void AddInformationContent(List<MangaClass> pagoMangas, List<MangaClass> freeMangas)
     {
         if(pagoMangas.Count != 0 && freeMangas.Count != 0)
@@ -98,6 +101,7 @@ public class TopVentasController : MonoBehaviour
 
     }
 
+    //Add info in the panel
     private void AddInfoPanel(List<MangaClass> list, TopElement[] orderList, Transform content)
     {       
         for (int i = 0; i < 3; i++)
@@ -117,7 +121,7 @@ public class TopVentasController : MonoBehaviour
         }
     }
 
-
+    //Add infromation in the prefab
     private void AddInformation(GameObject prefab, MangaClass element, int index)
     {
         prefab.GetComponent<MangasTopListController>().UpdateMangaInfo
@@ -126,10 +130,6 @@ public class TopVentasController : MonoBehaviour
             index.ToString()
         );
     }
-
-
-
-
 
 }
 

@@ -51,11 +51,13 @@ public class NovedadesController : MonoBehaviour
 
     }
 
+    //Get the novedades information
     public void GetNovedades()
     {
         db.GetNovedades();
     }
 
+    //Go to manga detail page
     public void GoDetail()
     {
         int i = index;
@@ -72,6 +74,7 @@ public class NovedadesController : MonoBehaviour
 
     }
 
+    //Update the information in the panel
     public void UpdateNovedades(List<MangaClass> list)
     {
         if(list.Count != 0)
@@ -85,6 +88,7 @@ public class NovedadesController : MonoBehaviour
         }
     }
 
+    //Show the manga
     private void MostrarManga()
     {
         MangaClass[] mangas = listMangas.ToArray();
@@ -107,6 +111,7 @@ public class NovedadesController : MonoBehaviour
 
     }
 
+    //Get the image from url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);

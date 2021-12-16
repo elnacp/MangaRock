@@ -9,7 +9,7 @@ public class HomeController : MonoBehaviour
     [SerializeField] RecomendacionesController p_recomendaciones;
     [SerializeField] TopVentasController p_topventas;
 
-
+    //Ask the information to firebase
     public void AddInformation()
     {
         p_novedades.GetNovedades();

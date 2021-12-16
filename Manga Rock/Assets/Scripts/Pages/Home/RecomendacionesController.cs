@@ -20,17 +20,19 @@ public class RecomendacionesController : MonoBehaviour
     {
         
     }
-
+    //Get recomendations 
     public void GetRecomendaciones()
     {
         db.GetGenreFavUser();
     }
 
+    //Get recomendations with one genre
     public void GetRecomendacion(string genero)
     {
         db.RecomendationsForUser(genero);
     }
 
+    //Add the infromatio
     public void AddInformation(List<MangaClass> list)
     {
 
@@ -47,6 +49,7 @@ public class RecomendacionesController : MonoBehaviour
         }
     }
 
+    //Go to the panel of recomendations
     public void GoRecomendaciones()
     {
         pageController.GoRecomendaciones(recomendaciones);

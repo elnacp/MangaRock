@@ -16,6 +16,7 @@ public class NovedadesDotsAnimation : MonoBehaviour
 
     }
 
+    //Add the dots in the view
     public void AddDots(int numberDots)
     {
         if(content.childCount == 0)
@@ -41,6 +42,7 @@ public class NovedadesDotsAnimation : MonoBehaviour
         
     }
 
+    //Add the dots 
     private void AddDotList(int num)
     {
         for (int i = 0; i < num; i++)
@@ -59,13 +61,13 @@ public class NovedadesDotsAnimation : MonoBehaviour
         SaveAllDots();
     }
 
+    //Get all the dots
     private void SaveAllDots()
     {
         dots = GameObject.FindGameObjectsWithTag("dot");
     }
 
-    
-
+    //Chnage the state of the dot and activate the one
     public void MoveDot(int index)
     {
  
@@ -75,6 +77,7 @@ public class NovedadesDotsAnimation : MonoBehaviour
        
     }
 
+    //Make all the dots deative
     private void MakeAllDotsInactive()
     {
         for(int i = 0; i < dots.Length; i++)

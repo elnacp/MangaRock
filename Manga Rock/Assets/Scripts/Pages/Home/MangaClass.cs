@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Manga Class
 public class MangaClass : MonoBehaviour
 {
     public string autor;
