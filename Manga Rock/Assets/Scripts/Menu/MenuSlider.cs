@@ -13,6 +13,7 @@ public class MenuSlider : MonoBehaviour
         background.SetActive(false);
     }
 
+    //Activate the menu animations
     public void Menu()
     {
         Animator animator = menu.GetComponent<Animator>();

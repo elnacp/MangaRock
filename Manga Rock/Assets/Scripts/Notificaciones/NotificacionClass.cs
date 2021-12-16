@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//NotificationClass
 public class NotificacionClass 
 {
     public string url;

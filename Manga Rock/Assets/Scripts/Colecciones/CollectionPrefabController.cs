@@ -10,6 +10,7 @@ public class CollectionPrefabController : MonoBehaviour
     [SerializeField] Text nombre;
     [SerializeField] Text autor;
 
+    //Add information in the collection prefab
     public void AddData(string url, string title, string author)
     {
         this.nombre.text = title;
@@ -17,6 +18,7 @@ public class CollectionPrefabController : MonoBehaviour
         StartCoroutine(GetImage(url));
     }
 
+    //Get the image with the url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);

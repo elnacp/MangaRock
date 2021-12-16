@@ -10,6 +10,7 @@ public class PrefabNotificacion : MonoBehaviour
     [SerializeField] GameObject comment;
     [SerializeField] Text text;
     
+    //Add information in the notification
     public void AddInformation(NotificacionClass notificacion)
     {
         StartCoroutine(GetImage(notificacion.url));
@@ -38,6 +39,8 @@ public class PrefabNotificacion : MonoBehaviour
 
 
     }
+
+    //Get the image from the link
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);

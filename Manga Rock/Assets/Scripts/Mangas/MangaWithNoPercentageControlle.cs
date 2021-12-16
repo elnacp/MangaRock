@@ -10,6 +10,8 @@ public class MangaWithNoPercentageControlle : MonoBehaviour
     [SerializeField] Text author;
 
     private int pages;
+
+    //Add information related with manga
     public void AddData(string url, string title, string author, int pages)
     {
         this.title.text = title;
@@ -18,6 +20,7 @@ public class MangaWithNoPercentageControlle : MonoBehaviour
         this.pages = pages;
     }
 
+    //get image from url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
@@ -25,6 +28,7 @@ public class MangaWithNoPercentageControlle : MonoBehaviour
         image.texture = www.texture;
     }
 
+    //Open the reader for mangas
     public void OpenLector()
     {
         if(pages != 0)

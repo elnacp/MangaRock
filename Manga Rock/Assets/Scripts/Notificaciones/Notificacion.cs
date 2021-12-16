@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Firestore;
 
+//NotificationClass firebase
+
 [FirestoreData]
 public class Notificacion 
 {
