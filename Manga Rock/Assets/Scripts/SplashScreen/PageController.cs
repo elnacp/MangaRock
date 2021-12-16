@@ -141,6 +141,9 @@ public class PageController : MonoBehaviour
         HideBarsAndShowBack();
         profileOtherUser.SetActive(true);
         profileOtherUser.GetComponent<ProfileOtherUserController>().AddInformation(nombre, url, followers);
+
+        firebase.GetMangasProfile(nombre);
+        firebase.ComentariosProfile(nombre);
     }
     
     public void GoCollectionPage(string nameCollection)

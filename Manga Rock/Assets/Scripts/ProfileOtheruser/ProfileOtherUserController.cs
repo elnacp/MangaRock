@@ -16,8 +16,10 @@ public class ProfileOtherUserController : MonoBehaviour
     [SerializeField] Button seguir;
     [SerializeField] Image image_button;
     [SerializeField] Text text_button;
+    [SerializeField] GameObject prefabComentario;
 
     private bool state = true;
+    private string urlImage = "";
 
     public void AddInformation(string nombre, string url, int followers)
     {
@@ -25,6 +27,7 @@ public class ProfileOtherUserController : MonoBehaviour
         this.followers.text = followers.ToString();
         StartCoroutine(GetImage(url));
         ClickButton();
+        urlImage = url;
     }
 
     public void ClickButton()
@@ -44,18 +47,38 @@ public class ProfileOtherUserController : MonoBehaviour
         }
     }
 
-    public void AddMangas(List<MangaClass> mangas)
+    public void AddMangas(List<BibliotecaClass> mangas)
     {
         ClearContent(contentManga);
         if (mangas.Count != 0)
         {
-            foreach (MangaClass item in mangas)
+            foreach (BibliotecaClass item in mangas)
             {
                 GameObject prefab = Instantiate(prefabManga, contentManga);
                 prefab.GetComponent<MangaWithNoPercentageControlle>().AddData(item.url, item.titulo, item.autor, 0);
             }
         }
 
+    }
+
+    public void AddComentarios(List<ComentarioClass> comentarios)
+    {
+        foreach(Transform child in contentCollection)
+        {
+            if(child.tag == "comment")
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+        if (comentarios.Count != 0)
+        {
+            foreach (ComentarioClass item in comentarios)
+            {
+                GameObject prefab = Instantiate(prefabComentario, contentCollection);
+                prefab.GetComponent<ComentarioController>().AddInformation(item, urlImage);
+            }
+        }
     }
 
     IEnumerator GetImage(string url)

@@ -41,6 +41,8 @@ public class FirebasePageController : MonoBehaviour
     List<PaypalClass> paypalsShopListList = new List<PaypalClass>();
     List<NotificacionClass> listNotificaciones = new List<NotificacionClass>();
     List<MangaClass> mangasAutor = new List<MangaClass>();
+    List<BibliotecaClass> mangasProfile = new List<BibliotecaClass>();
+    List<ComentarioClass> comentariosProfileList = new List<ComentarioClass>();
     List<ColeccionesClass> collectionAutor = new List<ColeccionesClass>();
 
     private bool topListFinish = false;
@@ -81,6 +83,7 @@ public class FirebasePageController : MonoBehaviour
     private bool paypalShopListFinish = false;
     private bool notificacionesFinish = false;
     private bool collectionAutorFinish = false;
+    private bool comentariosProfileListFinish = false;
 
 
     private bool isLogged = false;
@@ -115,6 +118,7 @@ public class FirebasePageController : MonoBehaviour
     private bool finishAddMangaShopList = false;
     private bool finishUnSub = false;
     private bool mangaAutorFinish = false;
+    private bool mangaProfileFinish = false;
 
 
     private void Start()
@@ -179,6 +183,11 @@ public class FirebasePageController : MonoBehaviour
             collectionRemoved = false;
         }
 
+        if(mangaProfileFinish)
+        {
+            FindObjectOfType<ProfileOtherUserController>().AddMangas(mangasProfile);
+            mangaProfileFinish = false;
+        }
 
         if(comentariosMangaState)
         {
@@ -202,6 +211,12 @@ public class FirebasePageController : MonoBehaviour
         {
             wishController.UpdateWishlist(titleWishlistToDelete);
             deleteWishListElement = true;
+        }
+
+        if(comentariosProfileListFinish)
+        {
+            FindObjectOfType<ProfileOtherUserController>().AddComentarios(comentariosProfileList);
+            comentariosProfileListFinish = false;
         }
 
         if(wishlistSearchDone)
@@ -946,6 +961,37 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    public void GetMangasProfile(string nombre)
+    {
+        mangasProfile.Clear();
+
+        db.Collection("Biblioteca").WhereEqualTo("username", nombre).GetSnapshotAsync().ContinueWith(task =>
+        {
+
+            List<BibliotecaClass> new_manga = new List<BibliotecaClass>();
+            foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+            {
+                Manga info = documentSnapshot.ConvertTo<Manga>();
+                BibliotecaClass element = new BibliotecaClass();
+                element.autor = info.autor;
+                element.idioma = info.idioma;
+                element.paginas = info.paginas;
+                element.titulo = info.titulo;
+                element.url = info.url;
+
+                new_manga.Add(element);
+            }
+
+            foreach (BibliotecaClass i in new_manga)
+            {
+                mangasProfile.Add(i);
+            }
+            mangaProfileFinish = true;
+            //Debug.Log(new_manga.getAutor());
+
+        });
+    }
+
     public void UserMangas(string username)
     {
         if (bibliotecaPerfil.Count != 0)
@@ -1426,6 +1472,7 @@ public class FirebasePageController : MonoBehaviour
 
     public void ComentariosUser(string username)
     {
+        listComentarios.Clear();
 
         db.Collection("Comentario").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
         {
@@ -1458,6 +1505,44 @@ public class FirebasePageController : MonoBehaviour
         });
 
     }
+
+    public void ComentariosProfile(string username)
+    {
+
+        comentariosProfileList.Clear();
+
+        db.Collection("Comentario").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
+        {
+            QuerySnapshot query = task.Result;
+            List<ComentarioClass> comentarios = new List<ComentarioClass>();
+            foreach (DocumentSnapshot documentSnapshot in query.Documents)
+            {
+                ComentarioFirebase info = documentSnapshot.ConvertTo<ComentarioFirebase>();
+                ComentarioClass element = new ComentarioClass();
+                element.text = info.Comentario;
+                element.username = info.username;
+                element.idManga = info.idManga;
+                element.likes = info.likes;
+                element.valoracion = info.valoracion;
+                element.dislikes = info.dislikes;
+                element.id = info.IdComentario;
+
+                comentarios.Add(element);
+
+            }
+
+            foreach (ComentarioClass element in comentarios)
+            {
+                comentariosProfileList.Add(element);
+            }
+
+            comentariosProfileListFinish = true;
+
+
+        });
+
+    }
+
 
     public void UserLogOut()
     {
