@@ -11,7 +11,8 @@ public class MangaRecomendaciones : MonoBehaviour
     [SerializeField] Text precio;
 
     private MangaClass mangaData;
-
+    
+    //Add information in the prefab of manga recomendation
     public void AddInfo(MangaClass manga)
     {
         StartCoroutine(GetImage(manga.url));
@@ -23,6 +24,7 @@ public class MangaRecomendaciones : MonoBehaviour
        
     }
 
+    //Get image from url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
@@ -30,6 +32,7 @@ public class MangaRecomendaciones : MonoBehaviour
         image.texture = www.texture;
     }
 
+    //Go to manga detail
     public void MangaDetail()
     {
         FindObjectOfType<PageController>().GoDetallesManga(mangaData);

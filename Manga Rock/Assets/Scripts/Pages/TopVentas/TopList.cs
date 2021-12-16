@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Firestore;
 
+//Top List class firebase
 [FirestoreData]
 public class TopList 
 {

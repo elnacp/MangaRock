@@ -16,6 +16,7 @@ public class MangasTopListController : MonoBehaviour
 
     private MangaClass mangaData;
 
+    //Put information in the prefab of top list manga
     public void UpdateMangaInfo(MangaClass manga, string number)
     {
         this.title.text = manga.titulo;
@@ -45,6 +46,7 @@ public class MangasTopListController : MonoBehaviour
         this.mangaData = manga;
     }
 
+    //Get the image from url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
@@ -52,6 +54,7 @@ public class MangasTopListController : MonoBehaviour
         image.texture = www.texture;
     }
 
+    //Show the manga details
     public void MangaDetail()
     {
         FindObjectOfType<PageController>().GoDetallesManga(mangaData);
