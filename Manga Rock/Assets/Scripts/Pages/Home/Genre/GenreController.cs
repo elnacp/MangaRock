@@ -16,6 +16,7 @@ public class GenreController : MonoBehaviour
         ClearContent();
     }
 
+    //Ask to firebase the collection of that specific category
     public void GoCategory(string category)
     {
         ClearContent();
@@ -25,6 +26,7 @@ public class GenreController : MonoBehaviour
         
     }
 
+    //Add the mangas
     public void AddInformation(List<MangaClass> list)
     {
         int index = 1;
@@ -41,6 +43,7 @@ public class GenreController : MonoBehaviour
 
     }
 
+    //Clear the contents
     private void ClearContent()
     {
         GameObject[] mangas = GameObject.FindGameObjectsWithTag("manga");

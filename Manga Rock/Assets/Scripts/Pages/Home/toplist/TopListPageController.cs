@@ -9,6 +9,7 @@ public class TopListPageController : MonoBehaviour
     [SerializeField] Transform contentPago;
     [SerializeField] Transform contentGratuito;
     
+    //Print the list
     public void PrintList(TopElement[] orderListPago, List<MangaClass> listMangasPago, TopElement[] orderListFree, List<MangaClass> listMangasFree)
     {
 
@@ -41,12 +42,14 @@ public class TopListPageController : MonoBehaviour
 
     }
 
+    //Add information to the list
     private void AddInformationElement(GameObject element, MangaClass info, int index)
     {
         element.GetComponent<MangaWithPriceController>().AddInformation(
             info, index.ToString());
     }
 
+    //Clear the content 
     private void ClearContent()
     {
         foreach (Transform child in contentPago)
