@@ -16,6 +16,7 @@ public class MangaAddToCollectionList : MonoBehaviour
     private bool statelist = false;
     private ColeccionBibliotecaClass data = new ColeccionBibliotecaClass();
 
+    //Add information to the manga collection list
     public void AddManga(ColeccionBibliotecaClass manga, bool state)
     {
         title.text = manga.titulo;
@@ -42,6 +43,7 @@ public class MangaAddToCollectionList : MonoBehaviour
         data = manga;
     }
 
+    //Get image from url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
@@ -49,6 +51,7 @@ public class MangaAddToCollectionList : MonoBehaviour
         image.texture = www.texture;
     }
 
+    //Go to detail manga
     public void ClickManga()
     {
         statelist = !statelist;

@@ -13,6 +13,7 @@ public class EditarCollection : MonoBehaviour
     private List<ColeccionBibliotecaClass> listCollection = new List<ColeccionBibliotecaClass>();
     private List<ColeccionBibliotecaClass> removeItems = new List<ColeccionBibliotecaClass>();
 
+    //Add information
     public void AddMangas(List<ColeccionBibliotecaClass> list, string name)
     {
         ClearContent();
@@ -35,6 +36,7 @@ public class EditarCollection : MonoBehaviour
 
     }
 
+    //Clear the content
     private void ClearContent()
     {
         foreach(Transform child in content)
@@ -43,16 +45,19 @@ public class EditarCollection : MonoBehaviour
         }
     }
 
+    //Add manga to delete list
     public void AddDeleteList(ColeccionBibliotecaClass element)
     {
         removeItems.Add(element);
     }
 
+    //Remove manga from collection
     public void RemoveFromDeleteList(ColeccionBibliotecaClass element)
     {
         removeItems.Remove(element);
     }
   
+    //Accept button
     public void AcceptRemove()
     {
         foreach(ColeccionBibliotecaClass element in removeItems)
@@ -68,6 +73,7 @@ public class EditarCollection : MonoBehaviour
         FindObjectOfType<CollectionPageController>().AddInformation(listCollection);
     }
 
+    //Cancel button
     public void Cancel()
     {
         FindObjectOfType<PopupController>().HidePopup();

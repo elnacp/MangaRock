@@ -7,6 +7,7 @@ public class AñadirColeccionController : MonoBehaviour
 {
     [SerializeField] InputField nombre;
 
+    //Add collection
     public void AñadirColeccion()
     {
         if(nombre.text != "")

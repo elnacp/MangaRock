@@ -13,6 +13,7 @@ public class AñadirMangasCollectionController : MonoBehaviour
     private List<ColeccionBibliotecaClass> listMangasInCollection = new List<ColeccionBibliotecaClass>();
     private List<ColeccionBibliotecaClass> mangasAñadir = new List<ColeccionBibliotecaClass>();
 
+    //Add mangas
     public void AddMangas(List<ColeccionBibliotecaClass> list)
     {
 
@@ -48,17 +49,20 @@ public class AñadirMangasCollectionController : MonoBehaviour
 
     }
 
+    //Add list
     public void AddList(List<ColeccionBibliotecaClass> list)
     {
         listMangasInCollection.Clear();
         listMangasInCollection = list;
     }
 
+    //Add title to the popup
     public void AddTitle(string name)
     {
         title.text = name;
     }
 
+    //clear content
     private void ClearContent()
     {
         foreach (Transform child in content)
@@ -67,11 +71,13 @@ public class AñadirMangasCollectionController : MonoBehaviour
         }
     }
 
+    //Add the mangas to the list
     public void AddMangaList(ColeccionBibliotecaClass manga)
     {
         mangasAñadir.Add(manga);
     }
 
+    //delete the manga list
     public void DeleteMangaList(ColeccionBibliotecaClass manga)
     {
         Debug.Log("delete");

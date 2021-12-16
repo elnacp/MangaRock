@@ -14,6 +14,7 @@ public class MangaDeleteCollection : MonoBehaviour
 
     private bool isDelete = false;
 
+    //Add mangas in the list
     public void AddManga(ColeccionBibliotecaClass manga)
     {
         title.text = manga.titulo;
@@ -25,6 +26,7 @@ public class MangaDeleteCollection : MonoBehaviour
         isDelete = false;
     }
 
+    //Get image from url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
@@ -32,6 +34,7 @@ public class MangaDeleteCollection : MonoBehaviour
         image.texture = www.texture;
     }
 
+    //Delete manga
     public void DeleteManga()
     {
         isDelete = !isDelete;
