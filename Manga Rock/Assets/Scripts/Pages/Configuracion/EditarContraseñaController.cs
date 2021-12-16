@@ -18,7 +18,7 @@ public class EditarContraseñaController : MonoBehaviour
         user = userData.GetUser();
     }
 
-    //
+    //User click to update the password
     public void UpdatePassword()
     {
         message.text = "";
@@ -43,7 +43,7 @@ public class EditarContraseñaController : MonoBehaviour
         }
     }
 
-
+    //User cancel the update
     public void CancelUpdate()
     {
         password.text = "";

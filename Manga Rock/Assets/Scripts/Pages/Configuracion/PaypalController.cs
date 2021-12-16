@@ -9,12 +9,14 @@ public class PaypalController : MonoBehaviour
 
     PaypalClass data;
 
+    //Add paypal information
     public void AddInformation(PaypalClass paypal)
     {
         email.text = "Email: "+paypal.email;
         data = paypal;
     }
 
+    //Open the paypal information
     public void MostrarPaypal()
     {
         FindObjectOfType<ConfiguracionController>().GoShowPaypal(data);

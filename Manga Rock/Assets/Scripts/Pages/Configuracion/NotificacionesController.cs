@@ -7,6 +7,7 @@ public class NotificacionesController : MonoBehaviour
     [SerializeField] Transform content;
     [SerializeField] GameObject prefabnotificaciones;
 
+    //Add the notifications in the content
     public void AddNotificaciones(List<NotificacionClass> notificaciones)
     {
         DeleteContent();
@@ -22,6 +23,7 @@ public class NotificacionesController : MonoBehaviour
 
     }
 
+    //Delete the content 
     public void DeleteContent()
     {
         foreach(Transform child in content)

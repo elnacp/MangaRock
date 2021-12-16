@@ -16,6 +16,7 @@ public class MangaWithPriceController : MonoBehaviour
 
     MangaClass mangaData;
 
+    //Add information 
     public void AddInformation(MangaClass manga, string number)
     {
         StartCoroutine(GetImage(manga.url));
@@ -44,6 +45,7 @@ public class MangaWithPriceController : MonoBehaviour
         this.mangaData = manga;
     }
 
+    //Get image from url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
@@ -51,6 +53,7 @@ public class MangaWithPriceController : MonoBehaviour
         image.texture = www.texture;
     }
 
+    //Go to manga details when manga is clicked
     public void MangaDetail()
     {
         FindObjectOfType<PageController>().GoDetallesManga(mangaData);

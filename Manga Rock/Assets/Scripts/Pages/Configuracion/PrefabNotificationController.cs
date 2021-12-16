@@ -11,6 +11,7 @@ public class PrefabNotificationController : MonoBehaviour
 
     private bool stateButton = true;
 
+    //Change the state of the notification to ON
     private void NotificationOn()
     {
         title.color = Color.white;
@@ -19,6 +20,7 @@ public class PrefabNotificationController : MonoBehaviour
         background.color = Color.black;
     }
 
+    //Change the state of the notification to Off
     private void NotificationOff()
     {
         title.color = Color.black;
@@ -26,7 +28,8 @@ public class PrefabNotificationController : MonoBehaviour
         state.text = "OFF";
         background.color = Color.white;
     }
-
+    
+    //Click the notification and change the state
     public void ClickNotification()
     {
         stateButton = !stateButton;
