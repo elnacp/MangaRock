@@ -15,11 +15,13 @@ public class CollectionPageController : MonoBehaviour
 
     private List<ColeccionBibliotecaClass> listCollection = new List<ColeccionBibliotecaClass>();
 
+    //Change the name of the collection
     public void ChangeName(string nombre)
     {
         nombreColeccion.text = nombre;
     }
 
+    //Add the list of mangas from the collection
     public void AddInformation(List<ColeccionBibliotecaClass> list)
     {
         ClearContent();
@@ -87,6 +89,7 @@ public class CollectionPageController : MonoBehaviour
 
     }
 
+    //Clear the content of the view
     public void ClearContent()
     {
         foreach(Transform child in content)
@@ -95,17 +98,20 @@ public class CollectionPageController : MonoBehaviour
         }
     }
 
+    //Click the button and open the pop-up to edit mangas
     public void EditCollection()
     {
         popupController.GoEditarCollection(listCollection, nombreColeccion.text);
 
     }
 
+    //Click the button and open the pop-up to delete collection
     public void DeleteCollection()
     {
         popupController.GoEliminarCollection(nombreColeccion.text);
     }
 
+    //Click the button and open the pop-up to add manga 
     public void AñadirManga()
     {
         popupController.GoAñadirCollection(listCollection, nombreColeccion.text);

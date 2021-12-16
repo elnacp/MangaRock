@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Collection Class
 public class ColeccionBibliotecaClass
 {
     public string nombreColeccion;

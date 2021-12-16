@@ -7,6 +7,7 @@ public class CollectionTitleController : MonoBehaviour
 {
     [SerializeField] Text title;
 
+    //Button to access to delete of the collection
     public void VerMasCollection()
     {
         FindObjectOfType<PageController>().GoCollectionPage(title.text);

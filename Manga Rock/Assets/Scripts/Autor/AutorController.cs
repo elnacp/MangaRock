@@ -19,7 +19,7 @@ public class AutorController : MonoBehaviour
 
     private bool state = true;
 
-
+    //Add all the information in the UI
     public void AddInformation(string nombre, string url, int followers)
     {
         username.text = nombre;
@@ -28,6 +28,7 @@ public class AutorController : MonoBehaviour
         ClickButton();
     }
 
+    //Change the state of the follow button
     public void ClickButton()
     {
         state = !state;
@@ -45,6 +46,7 @@ public class AutorController : MonoBehaviour
         }
     }
 
+    //Add author mangas
     public void AddMangas(List<MangaClass> mangas)
     {
         ClearContent(contentManga);
@@ -59,6 +61,7 @@ public class AutorController : MonoBehaviour
         
     }
 
+    //Add collections from author
     public void AddCollection(List<ColeccionesClass> colecciones)
     {
         Debug.Log(colecciones.Count);
@@ -73,6 +76,7 @@ public class AutorController : MonoBehaviour
         }
     }
 
+    //Make the url image a image
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
@@ -80,6 +84,7 @@ public class AutorController : MonoBehaviour
         image.texture = www.texture;
     }
 
+    //Clear the content
     private void ClearContent(Transform content)
     {
         foreach(Transform child in content)

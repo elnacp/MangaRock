@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Firestore;
 
+//Biblioteca Class firebase
 [FirestoreData]
 public class Biblioteca 
 {

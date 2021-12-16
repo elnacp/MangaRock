@@ -25,7 +25,7 @@ public class LibraryController : MonoBehaviour
 
     [SerializeField] HomeInit userData;
 
-
+    //Add information from library
     public void AddInformationBiblioteca(List<BibliotecaClass> list)
     {
 
@@ -56,6 +56,7 @@ public class LibraryController : MonoBehaviour
         }
     }
 
+    //Add information in the prefab
     public void AddPrefabtoContent(GameObject prefab, bool percentage, BibliotecaClass element) 
     {
         if(percentage)
@@ -68,7 +69,7 @@ public class LibraryController : MonoBehaviour
         }
     }
 
-
+    //Add information related with collections
     public void AddInformationCollection(List<ColeccionBibliotecaClass> list)
     {
         
@@ -129,8 +130,7 @@ public class LibraryController : MonoBehaviour
 
     }
 
-    
-
+    //Change the panel collection to library
     public void GoBiblioteca()
     {
         ButtonSelected(button_biblioteca);
@@ -140,6 +140,7 @@ public class LibraryController : MonoBehaviour
         buttonAddCollection.SetActive(false);
     }
 
+    //Change the panel library to collection
     public void GoCollection()
     {
         buttonAddCollection.SetActive(true);
@@ -151,18 +152,21 @@ public class LibraryController : MonoBehaviour
         
     }
 
+    //Change the style of the button on top
     public void ButtonSelected(GameObject button)
     {
         button.GetComponent<Image>().color = Color.black;
         button.transform.GetChild(0).GetComponent<Text>().color = Color.white;
     }
 
+    //Change the style of the button on top
     public void ButtonDeselected(GameObject button)
     {
         button.GetComponent<Image>().color = Color.white;
         button.transform.GetChild(0).GetComponent<Text>().color = Color.black;
     }
 
+    //Clear the content
     private void ClearContent(Transform content)
     {
         foreach(Transform child in content)

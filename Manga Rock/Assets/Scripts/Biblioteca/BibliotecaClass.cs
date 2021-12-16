@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Biblioteca class
 public class BibliotecaClass 
 {
     public string username;
