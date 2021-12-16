@@ -21,6 +21,7 @@ public class ProfileOtherUserController : MonoBehaviour
     private bool state = true;
     private string urlImage = "";
 
+    //add the information
     public void AddInformation(string nombre, string url, int followers)
     {
         username.text = nombre;
@@ -30,6 +31,7 @@ public class ProfileOtherUserController : MonoBehaviour
         urlImage = url;
     }
 
+    //click the button in the profile
     public void ClickButton()
     {
         state = !state;
@@ -47,6 +49,7 @@ public class ProfileOtherUserController : MonoBehaviour
         }
     }
 
+    //add mangas
     public void AddMangas(List<BibliotecaClass> mangas)
     {
         ClearContent(contentManga);
@@ -61,6 +64,7 @@ public class ProfileOtherUserController : MonoBehaviour
 
     }
 
+    //add comments
     public void AddComentarios(List<ComentarioClass> comentarios)
     {
         foreach(Transform child in contentCollection)
@@ -81,6 +85,7 @@ public class ProfileOtherUserController : MonoBehaviour
         }
     }
 
+    //get image from url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
@@ -88,6 +93,7 @@ public class ProfileOtherUserController : MonoBehaviour
         image.texture = www.texture;
     }
 
+    //Clear the content
     private void ClearContent(Transform content)
     {
         foreach (Transform child in content)

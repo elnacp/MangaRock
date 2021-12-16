@@ -39,6 +39,7 @@ public class ShopListController : MonoBehaviour
     private bool saveTarjetaState = false;
     private bool savePaypalState = false;
 
+    //Add mangas in the list
     public void AddMangaList(List<ShopListClass> list)
     {
 
@@ -60,6 +61,7 @@ public class ShopListController : MonoBehaviour
 
     }
 
+    //show tarjeta - hide paypal
     public void ShowTarjeta()
     {
         tarjetaPanel.SetActive(true);
@@ -67,6 +69,7 @@ public class ShopListController : MonoBehaviour
         ShowFront();
     }
 
+    //show paypal - hide tarjeta
     public void ShowPaypal()
     {
         tarjetaPanel.SetActive(false);
@@ -88,6 +91,7 @@ public class ShopListController : MonoBehaviour
         paypalPanel.SetActive(false);
     }
 
+    //Change the final price
     public void ChangePrecioFinal(float precio, bool increase)
     { 
         if(increase)
@@ -102,6 +106,7 @@ public class ShopListController : MonoBehaviour
         }
     }
 
+    //Add tarjeta content
     public void AddTarjeta(List<TarjetaClass> listTarjetas)
     {
         if(listTarjetas.Count != 0)
@@ -113,6 +118,7 @@ public class ShopListController : MonoBehaviour
         }
     }
 
+    //Add front tarjeta content
     private void AddTarjetaDatosFront()
     {
 
@@ -131,6 +137,7 @@ public class ShopListController : MonoBehaviour
         }
     }
 
+    //Add back tarjeta content
     private void AddTarjetaDatosBack()
     {
 
@@ -142,6 +149,7 @@ public class ShopListController : MonoBehaviour
 
     }
 
+    //Show the back part of the card
     public void ShowBack()
     {
         FrontTarjeta.SetActive(false);
@@ -152,6 +160,7 @@ public class ShopListController : MonoBehaviour
         AddTarjetaDatosBack();
     }
 
+    //Show the front part of the card
     public void ShowFront()
     {
         FrontTarjeta.SetActive(true);
@@ -162,6 +171,7 @@ public class ShopListController : MonoBehaviour
         AddTarjetaDatosFront();
     }
 
+    //Add paypal
     public void AddPaypal(List<PaypalClass> listPaypal)
     {
         if (listPaypal.Count != 0)
@@ -173,6 +183,7 @@ public class ShopListController : MonoBehaviour
         }
     }
 
+    //Add paypal data
     private void AddPaypalDatos()
     {
        
@@ -190,6 +201,7 @@ public class ShopListController : MonoBehaviour
 
     }
 
+    //Save tarjeta
     public void SaveTarjeta()
     {
         saveTarjetaState = !saveTarjetaState;
@@ -203,6 +215,7 @@ public class ShopListController : MonoBehaviour
         }
     }
 
+    //Save paypal
     public void SavePaypal()
     {
         savePaypalState = !savePaypalState;
@@ -216,6 +229,7 @@ public class ShopListController : MonoBehaviour
         }
     }
 
+    //Buy
     public void Comprar()
     {
         if(shopList.Count != 0)
@@ -257,6 +271,7 @@ public class ShopListController : MonoBehaviour
         }
     }
     
+    //Add metodo de pago
     private void AddMetodoPago()
     {
         string username = FindObjectOfType<HomeInit>().GetUser().username;

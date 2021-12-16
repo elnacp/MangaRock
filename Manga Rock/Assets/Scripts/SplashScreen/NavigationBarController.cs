@@ -46,42 +46,49 @@ public class NavigationBarController : MonoBehaviour
         bar.position = Vector3.MoveTowards(bar.position, destination, speed * Time.deltaTime);
     }
  
+    //Go Init
     public void GoInit()
     {
         MoveNavigationBar(6);
         pageController.ChangePage("home");
     }
 
+    //Navigate to Home
     public void GoHome()
     {
         MoveNavigationBar(1);
         pageController.ChangePage("home");
     }
 
+    //Navigate to Library
     public void GoLibrary()
     {
         MoveNavigationBar(2);
         pageController.ChangePage("library");
     }
 
+    //Navigate to Search
     public void GoSearch()
     {
         MoveNavigationBar(3);
         pageController.ChangePage("search");
     }
 
+    //Navigate to Notification
     public void GoNotifications()
     {
         MoveNavigationBar(4);
         pageController.ChangePage("notifications");
     }
 
+    //Navigate to Profile
     public void GoProfile()
     {
         MoveNavigationBar(5);
         pageController.ChangePage("profile");
     }
 
+    //Move Navigation Bar
     public void MoveNavigationBar(int num)
     {
 
@@ -116,6 +123,7 @@ public class NavigationBarController : MonoBehaviour
         }
     }
 
+    //Disable all the buttons in the navigation bar
     public void AllDisable()
     {
         home.GetComponent<StateButtonNavigationBar>().DisableButton();

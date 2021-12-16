@@ -19,6 +19,7 @@ public class MangaListCompra : MonoBehaviour
 
     private ShopListClass item;
 
+    //Add information of the manga 
     public void AddInformation(ShopListClass manga)
     {
         StartCoroutine(GetImage(manga.url));
@@ -34,6 +35,7 @@ public class MangaListCompra : MonoBehaviour
         item = manga;
     }
 
+    //get the image from url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
@@ -41,6 +43,7 @@ public class MangaListCompra : MonoBehaviour
         image.texture = www.texture;
     }
 
+    //Add cantidad in the shoplist
     public void AddCantidad()
     {
         item.cantidad++;
@@ -63,6 +66,7 @@ public class MangaListCompra : MonoBehaviour
         UpdateCantidad();
     }
 
+    //decrease cantidad in the shoplist
     public void DecreseCantidad()
     {
         item.cantidad--;
@@ -86,6 +90,7 @@ public class MangaListCompra : MonoBehaviour
 
     }
 
+    //update the quantity
     private void UpdateCantidad()
     {
         FindObjectOfType<FirebasePageController>().UpdateCantidad(item.cantidad);

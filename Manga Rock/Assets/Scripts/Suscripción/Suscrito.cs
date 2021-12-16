@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Firestore;
 
+//Suscrito class firebase
 [FirestoreData]
 public class Suscrito 
 {

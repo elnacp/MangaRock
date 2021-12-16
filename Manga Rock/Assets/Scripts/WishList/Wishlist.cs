@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Firestore;
 
+//Wishlist Class firebase
 [FirestoreData]
 public class Wishlist 
 {

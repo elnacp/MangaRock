@@ -9,7 +9,7 @@ public class WishlistController : MonoBehaviour
     [SerializeField] FirebasePageController firebase;
     [SerializeField] HomeInit userData;
    
-
+    //Add the information of the mangas in the wishlist
     public void AddMangas(List<WishlistClass> wishlist)
     {
         DeleteContent();
@@ -22,6 +22,7 @@ public class WishlistController : MonoBehaviour
         }
     }
 
+    //update the wishlist
     public void UpdateWishlist(string title)
     {
         foreach(Transform child in content.transform)
@@ -37,6 +38,7 @@ public class WishlistController : MonoBehaviour
 
     }
 
+    //delete the content
     public void DeleteContent()
     {
         foreach (Transform child in content.transform)

@@ -27,6 +27,7 @@ public class ProfileController : MonoBehaviour
        
     }
 
+    //Set the user
     public void Setuser(UserClass data)
     {
         user = data;
@@ -47,7 +48,7 @@ public class ProfileController : MonoBehaviour
 
     }
 
-
+    //get the image from url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
@@ -55,6 +56,7 @@ public class ProfileController : MonoBehaviour
         image.texture = www.texture;
     }
 
+    //add the comments of the user
     public void AddComentarios(List<ComentarioClass> comentarios)
     {
 
@@ -73,6 +75,8 @@ public class ProfileController : MonoBehaviour
         }
         
     }
+
+    //add the mangas from the library
     public void AddMangas(List<BibliotecaClass> mangas)
     {
         foreach(BibliotecaClass element in mangas)
@@ -87,6 +91,7 @@ public class ProfileController : MonoBehaviour
         num_mangas.text = mangas.Count.ToString();
     }
 
+    //clear content mangas
     public void ClearContentComments()
     {
         foreach(Transform child in contentComments)
@@ -98,6 +103,7 @@ public class ProfileController : MonoBehaviour
         }
     }
 
+    //clear mangas
     private void ClearMangas()
     {
         foreach (Transform child in contentMangas)

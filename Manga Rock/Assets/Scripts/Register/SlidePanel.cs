@@ -6,6 +6,7 @@ public class SlidePanel : MonoBehaviour
 {
     public GameObject panel;
 
+    //slide the panel
     public void PanelSlide()
     {
         if(panel != null)
@@ -19,6 +20,7 @@ public class SlidePanel : MonoBehaviour
         }
     }
 
+    //state of the panel
     public bool PanelState()
     {
         return panel.GetComponent<Animator>().GetBool("show");
