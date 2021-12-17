@@ -438,6 +438,7 @@ public class FirebasePageController : MonoBehaviour
 
     }
 
+    //Add credit card
     public void AddTarjeta(Dictionary<string, object> tarjeta)
     {
         db.Collection("Tarjetas").AddAsync(tarjeta).ContinueWith(task =>
@@ -455,6 +456,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //Add paypal
     public void AddPaypal(Dictionary<string, object> paypal)
     {
         db.Collection("Paypal").AddAsync(paypal).ContinueWith(task =>
@@ -472,6 +474,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //ask for credit card
     public void AskTarjeta(string username)
     {
         listTarjeta.Clear();
@@ -503,6 +506,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //ask for paypal
     public void AskPaypal(string username)
     {
 
@@ -533,6 +537,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //get shoplist
     public void GetShopList(string username)
     {
         listShopList.Clear();
@@ -563,6 +568,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //update profile
     public void UpdateProfile(string username, string email)
     {
         db.Collection("User").WhereEqualTo("loggeado", "yes").GetSnapshotAsync().ContinueWith((task) =>
@@ -584,6 +590,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //update cantidad product in shoplist
     public void UpdateCantidad(int cantidad)
     {
         string username = FindObjectOfType<HomeInit>().GetUser().username;
@@ -603,6 +610,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //get credit card
     public void GetTarjeta(string username)
     {
 
@@ -635,6 +643,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //get paypal
     public void GetPaypal(string username)
     {
 
@@ -665,6 +674,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //clear shoplist
     public void ClearShopList(string username)
     {
         db.Collection("ShopList").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith((task) =>
@@ -677,6 +687,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //update password
     public void UpdatePassword(string password)
     {
         db.Collection("User").WhereEqualTo("loggeado", "yes").GetSnapshotAsync().ContinueWith((task) =>
@@ -694,6 +705,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //update tarjeta
     public void UpdateTarjeta(TarjetaClass tarjeta)
     {
         Debug.Log("update tarjeta");
@@ -725,6 +737,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //update paypal
     public void UpdatePaypal(PaypalClass paypal)
     {
         db.Collection("Paypal").WhereEqualTo("username", paypal.username).GetSnapshotAsync().ContinueWith((task) =>
@@ -744,6 +757,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //delete user
     public void DeleteUser()
     {
         db.Collection("User").WhereEqualTo("loggeado", "yes").GetSnapshotAsync().ContinueWith((task) =>
@@ -758,6 +772,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //Delete tarjeta
     public void DeleteTarjeta(TarjetaClass tarjeta)
     {
         db.Collection("Tarjetas").WhereEqualTo("username", tarjeta.username).GetSnapshotAsync().ContinueWith((task) =>
@@ -771,6 +786,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //ask if is in shoplist or not
     public void IsInShopList(string titulo, string username)
     {
         db.Collection("ShopList").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith((task) =>
@@ -789,6 +805,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //Delete Paypal
     public void DeletePaypal(PaypalClass paypal)
     {
         db.Collection("Paypal").WhereEqualTo("username", paypal.username).GetSnapshotAsync().ContinueWith((task) =>
@@ -802,6 +819,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //delete manga from collection
     public void DeleteMangaFromCollection(ColeccionBibliotecaClass element, string username, string nombrecoleccion)
     {
         db.Collection("Colecciones Biblioteca").WhereEqualTo("nombreColeccion", nombrecoleccion).GetSnapshotAsync().ContinueWith(task =>
@@ -822,6 +840,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //delete manga from collection
     public void DeleteCollectionMangas(string nombreColeccion, string username)
     {
         db.Collection("Colecciones Biblioteca").WhereEqualTo("nombreColeccion", nombreColeccion).GetSnapshotAsync().ContinueWith(task =>
@@ -838,7 +857,8 @@ public class FirebasePageController : MonoBehaviour
 
         });
     }
-
+    
+    //delete collection
     public void DeleteCollection(string name, string username)
     {
         db.Collection("Colecciones Biblioteca").WhereEqualTo("nombreColeccion", name).GetSnapshotAsync().ContinueWith(task =>
@@ -857,6 +877,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //get suscription
     public void GetSuscripcion(string username)
     {
         suscritoList.Clear();
@@ -887,6 +908,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //get comments from manga
     public void GetCommentsOfManga(int id)
     {
         comentariosManga.Clear();
@@ -922,6 +944,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //get mangas from author
     public void GetMangasAutor(string nombre)
     {
         mangasAutor.Clear();
@@ -961,6 +984,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //get mangas from a profile user
     public void GetMangasProfile(string nombre)
     {
         mangasProfile.Clear();
@@ -992,6 +1016,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //user mangas
     public void UserMangas(string username)
     {
         if (bibliotecaPerfil.Count != 0)
@@ -1026,6 +1051,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //get biblioteca
     public void GetBiblioteca(string username)
     {
         if (bibliotecalist.Count != 0)
@@ -1060,6 +1086,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //get notifications from user
     public void GetNotificaciones()
     {
         if(listNotificaciones.Count != 0)
@@ -1093,6 +1120,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //get collectiones
     public void GetCollections(string username)
     {
 
@@ -1129,6 +1157,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //delete manga from collection
     public void DeleteMangaCollection(ColeccionBibliotecaClass manga)
     {
         db.Collection("Colecciones Biblioteca").WhereEqualTo("titulo", manga.titulo).GetSnapshotAsync().ContinueWith(task =>
@@ -1141,6 +1170,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //update suscription
     public void UpdateSub(string username, string plan, string suscrito)
     {
         db.Collection("Suscripcion").WhereEqualTo("username", username).GetSnapshotAsync().ContinueWith(task =>
@@ -1160,6 +1190,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //add suscription
     public void AddSub(Dictionary<string, object> sub)
     {
         db.Collection("Suscripcion").AddAsync(sub).ContinueWith(task =>
@@ -1177,6 +1208,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //add manga to shoplist
     public void AddToShopList(Dictionary<string, object> manga)
     {
         db.Collection("ShopList").AddAsync(manga).ContinueWith(task =>
@@ -1191,6 +1223,8 @@ public class FirebasePageController : MonoBehaviour
             }
         });
     }
+    
+    //add manga to collection
     public void AñadirMangaCollection(Dictionary<string, object> manga)
     {
         db.Collection("Colecciones Biblioteca").AddAsync(manga).ContinueWith(task =>
@@ -1206,6 +1240,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //save paypal account
     public void SavePaypal(Dictionary<string, object> paypal)
     {
         db.Collection("Paypal").AddAsync(paypal).ContinueWith(task =>
@@ -1221,6 +1256,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //save credit card
     public void SaveTarjeta(Dictionary<string, object> tarjeta)
     {
         db.Collection("Tarjetas").AddAsync(tarjeta).ContinueWith(task =>
@@ -1236,6 +1272,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //get all mangas from user
     public void GetAllMangasUser(string username, string nombreColeccion)
     {
         if(listMangasBiblioteca.Count != 0)
@@ -1271,7 +1308,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
-    
+    //ask for a collection with name
     public void AskCollection(string name)
     {
         listCollectionName.Clear();
@@ -1304,6 +1341,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //show wishlist
     public void ShowWishList(string username)
     {
         wishlist.Clear();
@@ -1343,6 +1381,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //delete mangawishlist
     public void DeleteMangaWishlist(WishlistClass manga)
     {
         db.Collection("Wishlist").WhereEqualTo("titulo", manga.titulo).GetSnapshotAsync().ContinueWith(task =>
@@ -1362,6 +1401,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //add to wishlist
     public void AddToWishlist(WishlistClass manga)
     {
         //db.Collection("Wishlist").AddAsync(manga);
@@ -1394,6 +1434,8 @@ public class FirebasePageController : MonoBehaviour
         });
 
     }
+
+    //delete manga from wishlist
     public void DeleteMangaFromWishlist(WishlistClass manga)
     {
         db.Collection("Wishlist").WhereEqualTo("titulo", manga.titulo).GetSnapshotAsync().ContinueWith(task =>
@@ -1410,6 +1452,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //wishlist
     public void InfoWishlist(WishlistClass manga)
     {
         wishlistMangaexist = false;
@@ -1432,6 +1475,7 @@ public class FirebasePageController : MonoBehaviour
 
     }
 
+    //ask user is logged
     private void UserLogged()
     {
         db.Collection("User").WhereEqualTo("loggeado", "yes").GetSnapshotAsync().ContinueWith((task) =>
@@ -1470,6 +1514,7 @@ public class FirebasePageController : MonoBehaviour
 
     }
 
+    //coments from user
     public void ComentariosUser(string username)
     {
         listComentarios.Clear();
@@ -1506,6 +1551,7 @@ public class FirebasePageController : MonoBehaviour
 
     }
 
+    //comentarios from profile
     public void ComentariosProfile(string username)
     {
 
@@ -1543,7 +1589,7 @@ public class FirebasePageController : MonoBehaviour
 
     }
 
-
+    //logout user
     public void UserLogOut()
     {
 
@@ -1560,6 +1606,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //get genre favourite from user
     public void GetGenreFavUser()
     {
         genreFav = "";
@@ -1577,6 +1624,8 @@ public class FirebasePageController : MonoBehaviour
 
         });
     }
+
+    //get novedades
     public void GetNovedades()
     {
         db.Collection("Novedades").GetSnapshotAsync().ContinueWith(task =>
@@ -1599,6 +1648,7 @@ public class FirebasePageController : MonoBehaviour
         });        
     }
 
+    //get mangas novedades
     public void GetMangaNovedades(int id)
     {
         db.Collection("Manga").WhereEqualTo("id", id).GetSnapshotAsync().ContinueWith(task =>
@@ -1636,6 +1686,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //get mangas for novedades
     public void MangasForNovedades()
     {
         foreach(int id in mangasIds)
@@ -1644,6 +1695,7 @@ public class FirebasePageController : MonoBehaviour
         }
     }
 
+    //ask for top list
     public void AskTopList()
     {
 
@@ -1679,6 +1731,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //get mangas from top list
     public void GetMangaTop(int id, string categoria)
     {
         db.Collection("Manga").WhereEqualTo("id", id).GetSnapshotAsync().ContinueWith(task =>
@@ -1722,6 +1775,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //ask for mangas info
     public void AskMangasInfoTop(List<TopElement> list)
     {
         foreach(TopElement element in list)
@@ -1737,6 +1791,7 @@ public class FirebasePageController : MonoBehaviour
         }
     }
 
+    //recomendations for the user
     public void RecomendationsForUser(string genero)
     {
 
@@ -1774,7 +1829,8 @@ public class FirebasePageController : MonoBehaviour
             //Debug.Log(new_manga.getAutor());
         });
     }
-
+    
+    //get favourite genre
     public void GenreFav()
     {
         db.Collection("Users").WhereEqualTo("email", "elnacp@gmail.com").GetSnapshotAsync().ContinueWith(task =>
@@ -1785,6 +1841,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //Ask mangas from categories
     public void AskForCategoryMangas(string category)
     {
         if (listCategoria.Count != 0)
@@ -1825,6 +1882,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //search information (mangas/collections/authors/profiles)
     public void SearchInfo(string search)
     {
         AskForMangas(search);
@@ -1833,6 +1891,7 @@ public class FirebasePageController : MonoBehaviour
         AskForUsersSearch(search);
     }
 
+    //ask for mangas
     private void AskForMangas(string title)
     {
 
@@ -1875,6 +1934,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //ask for collections
     private void AskForCollections(string nombre)
     {
         collectionSearch.Clear();
@@ -1902,6 +1962,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //get collections from author
     public void GetCollectionAutor(string nombre)
     {
         collectionAutor.Clear();
@@ -1929,6 +1990,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //ask for author in search
     private void AskForAuthors(string name)
     {
 
@@ -1961,6 +2023,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //Ask for user in search
     private void AskForUsersSearch(string username)
     {
 
@@ -1997,7 +2060,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
-
+    //mangas same author
     public void MangasSameAutor(string autor)
     {
         //Clear List
@@ -2039,6 +2102,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //mangas from same collection
     public void MangasSameColection(int idColeccion)
     {
         //Clear List
@@ -2079,6 +2143,7 @@ public class FirebasePageController : MonoBehaviour
         });
     }
 
+    //mangas same category
     public void MangasSameCategory(string genero)
     {
         //Clear List

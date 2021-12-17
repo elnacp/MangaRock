@@ -47,6 +47,7 @@ public class PageController : MonoBehaviour
         actionBarBackBlack.SetActive(false);
     }
 
+    //change page
     public void ChangePage(string name)
     {
         HidePages();
@@ -80,7 +81,7 @@ public class PageController : MonoBehaviour
         actualPage = name;
     }
 
-
+    //go shoplist
     public void GoListaCompra()
     {
         HideBarsAndShowBack();
@@ -89,7 +90,8 @@ public class PageController : MonoBehaviour
         listaCompra.GetComponent<ShopListController>().Init();
 
     }
-
+    
+    //go genre page
     public void GoGenrePage(string category)
     {
         HideBarsAndShowBack();
@@ -97,6 +99,7 @@ public class PageController : MonoBehaviour
         genre.GetComponent<GenreController>().GoCategory(category);
     }
 
+    //go collection in library
     public void GoCollectionBiblioteca()
     {
 
@@ -105,6 +108,7 @@ public class PageController : MonoBehaviour
 
     }
 
+    //go top list page
     public void GoTopList(TopElement[] orderListPago, List<MangaClass> listMangasPago, TopElement[] orderListFree, List<MangaClass> listMangasFree)
     {
         HideBarsAndShowBack();
@@ -112,6 +116,7 @@ public class PageController : MonoBehaviour
         topVentas.GetComponent<TopListPageController>().PrintList(orderListPago, listMangasPago,orderListFree, listMangasFree);
     }
 
+    //go recomendaciones
     public void GoRecomendaciones(List<MangaClass> recomendaciones)
     {
         HideBarsAndShowBack();
@@ -119,13 +124,15 @@ public class PageController : MonoBehaviour
         recomendacionesPage.GetComponent<RecomendacionesPageController>().PrintList(recomendaciones);
     }
 
+    //go detail manga
     public void GoDetallesManga(MangaClass manga)
     {
         HideBarsAndShowBack();
         detallesManga.SetActive(true);
         detallesManga.GetComponent<DetallesMangaPageController>().AddInformation(manga);
     }
-
+    
+    //go author page
     public void GoAutor(string nombre, string url, int followers)
     {
         HideBarsAndShowBack();
@@ -136,6 +143,7 @@ public class PageController : MonoBehaviour
         firebase.GetCollectionAutor(nombre);
     }
 
+    //go profile other
     public void GoProfileOther(string nombre, string url, int followers)
     {
         HideBarsAndShowBack();
@@ -146,6 +154,7 @@ public class PageController : MonoBehaviour
         firebase.ComentariosProfile(nombre);
     }
     
+    //go collection page
     public void GoCollectionPage(string nameCollection)
     {
         HideBarsAndShowBack();
@@ -155,6 +164,7 @@ public class PageController : MonoBehaviour
         actualPage = "collection";
     }
 
+    //go wishlist
     public void GoWishList()
     {
         HideBarsAndShowBack();
@@ -163,6 +173,7 @@ public class PageController : MonoBehaviour
         firebase.ShowWishList(userData.GetUser().username);
     }
     
+    //go suscription
     public void GoSuscription()
     {
         HideBarsAndShowBack();
@@ -171,6 +182,7 @@ public class PageController : MonoBehaviour
         firebase.GetSuscripcion(userData.GetUser().username);
     }
 
+    //go lector mangas
     public void GoLectorMangas(int pages)
     {
         HideBarsAndAddLector();
@@ -179,6 +191,7 @@ public class PageController : MonoBehaviour
         
     }
 
+    //go configuration page
     public void GoConfiguracion()
     {
         menuController.Menu();
@@ -187,11 +200,13 @@ public class PageController : MonoBehaviour
         configuracion.GetComponent<ConfiguracionController>().GoConfiguracionPanel();
     }
 
+    //click back button on bar
     public void BackButton()
     {
         ShowBarAndHideSubPages();
     }
 
+    //hide bars and show sub pages
     private void ShowBarAndHideSubPages()
     {
         ChangePage(actualPage);
@@ -205,6 +220,7 @@ public class PageController : MonoBehaviour
 
     }
 
+    //hide bars and add back bar
     private void HideBarsAndShowBack()
     {
         HidePages();
@@ -219,6 +235,7 @@ public class PageController : MonoBehaviour
         
     }
 
+    //hide bars and add lector bar
     private void HideBarsAndAddLector()
     {
         HidePages();
@@ -231,6 +248,7 @@ public class PageController : MonoBehaviour
 
     }
 
+    //hide all the pages
     public void HidePages()
     {
         home.SetActive(false);
