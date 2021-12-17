@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Firestore;
 
+
+//User class firebase
 [FirestoreData]
 public class Users
 {

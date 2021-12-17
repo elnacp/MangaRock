@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Firestore;
 
+//autor class firebase
 [FirestoreData]
 public class Autor 
 {

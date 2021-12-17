@@ -15,7 +15,7 @@ public class ProfilePrefabController : MonoBehaviour
     private string tipo;
     private string url;
 
-
+    //Add the information
     public void AddData(string nombre, string url, int followers, string tipo)
     {
         this.name.text = nombre;
@@ -26,6 +26,7 @@ public class ProfilePrefabController : MonoBehaviour
         this.url = url;
     }
 
+    //get image from url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
@@ -33,6 +34,7 @@ public class ProfilePrefabController : MonoBehaviour
         image.texture = www.texture;
     }
 
+    //open the profile of the user
     public void OpenProfile()
     {
         if(tipo == "autor")

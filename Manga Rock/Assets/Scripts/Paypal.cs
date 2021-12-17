@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Firestore;
 
+// paypal firebase
 [FirestoreData]
 public class Paypal 
 {

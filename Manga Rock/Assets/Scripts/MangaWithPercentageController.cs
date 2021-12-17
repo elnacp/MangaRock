@@ -12,6 +12,7 @@ public class MangaWithPercentageController : MonoBehaviour
 
     private int pages;
 
+    //Add information
     public void AddData(string url, string title, string author, float percentage, int pages)
     {
         this.title.text = title;
@@ -22,6 +23,7 @@ public class MangaWithPercentageController : MonoBehaviour
         this.pages = pages;
     }
 
+    //Get image from url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
@@ -29,6 +31,7 @@ public class MangaWithPercentageController : MonoBehaviour
         image.texture = www.texture;
     }
 
+    //Open lector
     public void OpenLector()
     {
         FindObjectOfType<PageController>().GoLectorMangas(pages);

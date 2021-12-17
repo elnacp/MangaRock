@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ComentarioClass
 public class ComentarioClass : MonoBehaviour
 {
     public string text;

@@ -12,6 +12,7 @@ public class MangaWithPricePrefab : MonoBehaviour
 
     MangaClass mangaData;
 
+    //Add information
     public void AddInformation(MangaClass manga)
     {
         StartCoroutine(GetImage(manga.url));
@@ -21,6 +22,8 @@ public class MangaWithPricePrefab : MonoBehaviour
 
         this.mangaData = manga;
     }
+
+    //Get image from url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
@@ -28,6 +31,7 @@ public class MangaWithPricePrefab : MonoBehaviour
         image.texture = www.texture;
     }
 
+    //Go to manga detail
     public void MangaDetail()
     {
         FindObjectOfType<PageController>().GoDetallesManga(mangaData);

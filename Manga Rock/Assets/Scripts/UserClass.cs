@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//userclass
 public class UserClass 
 {
     public string contraseña;

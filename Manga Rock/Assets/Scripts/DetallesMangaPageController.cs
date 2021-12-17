@@ -39,6 +39,7 @@ public class DetallesMangaPageController : MonoBehaviour
     WishlistClass mangaWishlist;
     private bool isAdded = false;
 
+    //Add to shoplist
     public void AddShopList()
     {
         payButton.interactable = false;
@@ -56,6 +57,7 @@ public class DetallesMangaPageController : MonoBehaviour
 
     }
 
+    //can buy the manga
     public void CanBuy(bool isInShopList)
     {
         if(isInShopList == true)
@@ -68,6 +70,7 @@ public class DetallesMangaPageController : MonoBehaviour
         }
     }
 
+    //Add the infroamtion
     public void AddInformation(MangaClass manga)
     {
         StartCoroutine(GetImage(manga.url));
@@ -123,6 +126,7 @@ public class DetallesMangaPageController : MonoBehaviour
 
     }
 
+    //get the image from url
     IEnumerator GetImage(string url)
     {
         WWW www = new WWW(url);
@@ -130,6 +134,7 @@ public class DetallesMangaPageController : MonoBehaviour
         image.texture = www.texture;
     }
 
+    //Save the comments
     public void SaveComments(List<ComentarioClass> list)
     {
         foreach(ComentarioClass comentario in list)
@@ -138,6 +143,7 @@ public class DetallesMangaPageController : MonoBehaviour
         }
     }
 
+    //show or hide the comments panel
     public void ShowOrHideComentarios()
     {
         ClearComments();
@@ -158,7 +164,7 @@ public class DetallesMangaPageController : MonoBehaviour
 
     }
 
-    
+    //clear the comments content
     private void ClearComments()
     {
         foreach(Transform child in contentCommentarios)
@@ -170,6 +176,7 @@ public class DetallesMangaPageController : MonoBehaviour
         }
     }
 
+    //list mangas from same author
     public void ListMangasSameAutor(List<MangaClass> mangas)
     {
         DeleteContent(contentMangasSameAutor);
@@ -180,6 +187,7 @@ public class DetallesMangaPageController : MonoBehaviour
         }
     }
 
+    //stat of wishbutton
     public void StateWishButton(bool state)
     {
         if(state)
@@ -194,6 +202,7 @@ public class DetallesMangaPageController : MonoBehaviour
         }
     }
 
+    //list mangas from same collection
     public void ListMangasSameColection(List<MangaClass> mangas)
     {
         DeleteContent(contentMangasSameColection);
@@ -204,6 +213,7 @@ public class DetallesMangaPageController : MonoBehaviour
         }
     }
 
+    //list mangas same category
     public void ListMangasSameCategory(List<MangaClass> mangas)
     {
         DeleteContent(contentMangasSameCategory);
@@ -214,11 +224,13 @@ public class DetallesMangaPageController : MonoBehaviour
         }
     }
 
+    //add information prefab
     private void AddInformationPrefab(GameObject prefab, MangaClass manga)
     {
         prefab.GetComponent<MangaWithPricePrefab>().AddInformation(manga);
     }
 
+    //delete content
     private void DeleteContent(Transform content)
     {
         foreach(Transform child in content)
@@ -227,6 +239,7 @@ public class DetallesMangaPageController : MonoBehaviour
         }
     }
 
+    //add or remove from wishlist
     public void AddOrRemove()
     {
         if( isAdded )
@@ -250,12 +263,14 @@ public class DetallesMangaPageController : MonoBehaviour
         }
     }
 
+    //add to wishlist
     private void AddToWishlist()
     {
         firebase.AddToWishlist(mangaWishlist);
         wishlist_button.GetComponent<WishlistButtonAnimation>().WishListButtonActive();
     }
 
+    //delete from wishlist
     private void DeleteFromWishlist()
     {
         firebase.DeleteMangaFromWishlist(mangaWishlist);

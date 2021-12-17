@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Actual time status bar
 public class ActualTime : MonoBehaviour
 {
     int sysHour = System.DateTime.Now.Hour;

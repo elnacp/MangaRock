@@ -35,6 +35,7 @@ public class LectorMangaControlelr : MonoBehaviour
         panels.SetActive(false);
     }
 
+    //Add num of pages
     public void AddPages(int pages)
     {
         isLeftRight = true;
@@ -43,6 +44,7 @@ public class LectorMangaControlelr : MonoBehaviour
         finalPage = pages;
     }
 
+    //State of the page buttons
     public void StatePage()
     {
         if (isLeftRight)
@@ -85,6 +87,7 @@ public class LectorMangaControlelr : MonoBehaviour
         }
     }
 
+    //click right arrow
     public void RightArrow()
     {       
         if(isLeftRight)
@@ -107,6 +110,7 @@ public class LectorMangaControlelr : MonoBehaviour
         } 
     }
 
+    //click left arrowe
     public void LeftArrow()
     {
         if (isLeftRight)
@@ -131,6 +135,7 @@ public class LectorMangaControlelr : MonoBehaviour
 
     }
 
+    //change direction of the lector
     public void ChangeDirection()
     {
         HidePages();
@@ -141,6 +146,7 @@ public class LectorMangaControlelr : MonoBehaviour
 
     }
 
+    //Right direction
     public void RightDirection()
     {
         isLeftRight = true;
@@ -149,6 +155,7 @@ public class LectorMangaControlelr : MonoBehaviour
 
     }
 
+    //left direction
     public void LeftDirection()
     {
         isLeftRight = false;
@@ -156,6 +163,7 @@ public class LectorMangaControlelr : MonoBehaviour
         textRight.text = actualPage.ToString();
     }
 
+    //change the color of the background
     public void ChangeColor()
     {
         HidePages();
@@ -166,6 +174,7 @@ public class LectorMangaControlelr : MonoBehaviour
         }
     }
 
+    //change the background with the color of the button
     public void ChangeBackground(int number)
     {
         Color color = new Color();
@@ -191,7 +200,7 @@ public class LectorMangaControlelr : MonoBehaviour
        
     }
 
-
+    //change the size of the letter
     public void SizeLetter()
     {
         
@@ -220,6 +229,7 @@ public class LectorMangaControlelr : MonoBehaviour
 
     }
 
+    //change the size
     public void ChangeSizeLetter()
     {
         HidePages();
@@ -233,6 +243,7 @@ public class LectorMangaControlelr : MonoBehaviour
 
     }
 
+    //hide the pages
     private void HidePages()
     {
         if(panels.activeSelf)
